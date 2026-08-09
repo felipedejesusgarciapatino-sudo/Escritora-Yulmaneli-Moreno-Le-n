@@ -55,7 +55,8 @@
       left: 0;
       width: var(--sidebar-width);
       height: 100vh;
-      background: var(--paper);
+      background: rgba(253, 251, 247, 0.85);
+      backdrop-filter: blur(8px);
       border-right: 1px solid var(--line);
       box-shadow: 4px 0 20px rgba(0,0,0,0.03);
       padding: 2.5rem 1.2rem;
@@ -126,30 +127,66 @@
       padding-top: 1rem;
     }
 
-    /* --- CONTENEDOR PRINCIPAL (DESPLAZADO A LA DERECHA EN DESKTOP) --- */
+    /* --- CONTENEDOR PRINCIPAL --- */
     .main-wrapper {
       margin-left: var(--sidebar-width);
       width: calc(100% - var(--sidebar-width));
       min-height: 100vh;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* --- HEADER --- */
-    header {
-      padding: 4.5rem 0 2.5rem;
-      text-align: center;
       position: relative;
+    }
+
+    /* --- HEADER HERO: IMAGEN PANTALLA COMPLETA CON TRANSPARENCIA A LA IZQUIERDA --- */
+    header.hero-header {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    /* Imagen de fondo abarcando toda la pantalla y enfocada en el rostro */
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* ENFOQUE DEL ROSTRO: ajusta el encuadre superior/centrado */
+      object-position: center 20%;
+      z-index: 1;
+    }
+
+    /* Degradado de transparencia (Oscurecido/Marfil a la izquierda, claro/transparente a la derecha) */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(253, 251, 247, 0.98) 0%,
+        rgba(253, 251, 247, 0.85) 35%,
+        rgba(253, 251, 247, 0.3) 70%,
+        rgba(253, 251, 247, 0.05) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 650px;
+      padding: 0 3rem;
+      text-align: left;
     }
 
     .header-script {
       font-family: var(--font-script);
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       color: var(--accent);
       margin-bottom: -0.5rem;
       display: block;
@@ -157,77 +194,54 @@
 
     h1 {
       font-family: var(--font-title);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 500;
       color: var(--text);
       letter-spacing: 0.02em;
-      margin-bottom: 0.8rem;
-      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      line-height: 1.15;
     }
 
     .alias {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .tagline {
-      font-size: 0.92rem;
+      font-size: 1rem;
       font-style: italic;
-      color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 1.5rem;
-      padding: 1.2rem 1.5rem;
-      background: var(--paper);
-      border-left: 2px solid var(--accent);
-      border-right: 2px solid var(--accent);
-      border-radius: 4px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      color: var(--text);
       line-height: 1.7;
+      padding: 1.2rem 1.5rem;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(4px);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
     }
 
-    /* FOTOGRAFÍA PRINCIPAL */
-    .portrait-wrapper {
-      display: flex;
-      justify-content: center;
-      margin: 0 auto 2rem;
-    }
-
-    .portrait-container {
-      position: relative;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      padding: 5px;
-      background: linear-gradient(135deg, var(--accent), var(--rose));
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      transition: transform 0.4s ease;
-    }
-
-    .portrait-container:hover {
-      transform: translateY(-4px);
-    }
-
-    .portrait {
+    /* SECCIONES Y CONTENEDOR CONTENIDO */
+    .container {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      display: block;
-      background: var(--paper);
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    /* SECCIONES */
     section {
-      padding: 4rem 0;
+      padding: 5rem 0;
       border-top: 1px solid var(--line);
+      position: relative;
+      background: var(--bg);
+      z-index: 4;
     }
 
     section h2 {
       font-family: var(--font-title);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 500;
       color: var(--text);
       margin-bottom: 2rem;
@@ -516,6 +530,9 @@
       font-size: 0.72rem;
       color: var(--text-muted);
       border-top: 1px solid var(--line);
+      background: var(--bg);
+      position: relative;
+      z-index: 4;
     }
 
     .btn-top {
@@ -547,7 +564,6 @@
     /* --- ADAPTATIVIDAD ESPECÍFICA PARA DISPOSITIVOS MÓVILES --- */
     /* ========================================================= */
     @media (max-width: 820px) {
-      /* La barra pasa de lateral fijo a barra superior de navegación inteligente */
       nav.sidebar {
         position: relative;
         width: 100%;
@@ -588,38 +604,40 @@
         border-radius: 20px;
       }
 
-      .sidebar-menu a:hover {
-        transform: none;
-      }
-
       .sidebar-footer {
-        display: none; /* Ocultamos el copyright duplicado del menú en móviles */
+        display: none;
       }
 
-      /* El contenido ocupa todo el ancho */
       .main-wrapper {
         margin-left: 0;
         width: 100%;
+      }
+
+      header.hero-header {
+        height: 85vh;
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(253, 251, 247, 0.95) 0%,
+          rgba(253, 251, 247, 0.75) 50%,
+          rgba(253, 251, 247, 0.3) 100%
+        );
+      }
+
+      .hero-content {
+        padding: 0 1.5rem;
       }
 
       .container {
         padding: 0 1.2rem;
       }
 
-      header {
-        padding: 3rem 0 2rem;
-      }
-
-      .tagline {
-        padding: 1rem 1.2rem;
-        font-size: 0.88rem;
-      }
-
       .about-card, .comment-form, .contact-card {
         padding: 1.5rem;
       }
 
-      /* Reescalar el carrusel circular para pantallas móviles angostas */
       .carousel-orbit-wrapper {
         max-width: 320px;
         height: 380px;
@@ -680,7 +698,7 @@
 </head>
 <body>
 
-  <!-- NAVEGACIÓN (VERTICAL EN DESKTOP / SUPERIOR BOTONES EN MÓVIL) -->
+  <!-- NAVEGACIÓN -->
   <nav class="sidebar">
     <div class="sidebar-brand">
       <span class="monogram">S Y</span>
@@ -701,18 +719,16 @@
 
   <!-- CONTENIDO PRINCIPAL -->
   <div class="main-wrapper">
-    <header>
-      <div class="container">
+    
+    <!-- HERO HEADER CON FOTO DE PANTALLA COMPLETA Y TRANSPARENCIA -->
+    <header class="hero-header">
+      <img src="Code_Generated_Image.jpg" alt="Silvia Yulmaneli Moreno León" class="hero-bg">
+      <div class="hero-overlay"></div>
+      
+      <div class="hero-content">
         <span class="header-script">Escritora & Filósofa</span>
         <h1>Silvia Yulmaneli Moreno León</h1>
         <p class="alias">Zolotepec, Estado de México, 1993</p>
-        
-        <div class="portrait-wrapper">
-          <div class="portrait-container">
-            <img src="Code_Generated_Image.jpg" alt="Silvia Yulmaneli Moreno León" class="portrait">
-          </div>
-        </div>
-
         <p class="tagline">«Explorando los rincones de la memoria, el ensayo filosófico y los matices de la narrativa contemporánea.»</p>
       </div>
     </header>
@@ -777,7 +793,7 @@
 
               <!-- Círculo 5 -->
               <div class="orbit-item" style="--i: 4;">
-                <a href="https://www.youtube.com/watch?v=E8DdgVhxXZQ" target="_blank" class="circle-link" data-tooltip="Entrevista Televisiva">
+                <a href="https://www.youtube.com/watch?v=E8DdgVhxZXQ" target="_blank" class="circle-link" data-tooltip="Entrevista Televisiva">
                   <span class="circle-icon">🎙️</span>
                   <span class="circle-title">Tertulia</span>
                 </a>
