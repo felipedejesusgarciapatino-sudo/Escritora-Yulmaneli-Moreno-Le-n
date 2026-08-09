@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silvia Yulmaneli Moreno León — Escritora</title>
+  
+  <!-- Tipografías elegantes para sitio literario -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FDFBF7;                 /* Marfil suave / Papel artesanal */
+      --paper: #FFFFFF;              /* Blanco puro para tarjetas */
+      --text: #2B2523;               /* Grafito cálido oscuro */
+      --text-muted: #6C625D;         /* Café taupe para subtítulos */
+      --accent: #D4A373;             /* Dorado antiguo sutil */
+      --accent-soft: #F4ECE1;        /* Crema dorado muy claro */
+      --rose: #E8D3CE;               /* Rosa empolvado tenue */
+      --rose-light: #F9F3F1;         /* Fondo suave rosa empolvado */
+      --line: #E2D7CE;               /* Líneas divisoras finas */
+      
+      --font-title: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lora', Serif;
+      --font-script: 'Alex Brush', cursive;
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* --- HEADER --- */
+    header {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-script {
+      font-family: var(--font-script);
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: -0.5rem;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.8rem;
+    }
+
+    .alias {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      padding: 1.2rem 1.8rem;
+      background: var(--paper);
+      border-left: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      line-height: 1.7;
+    }
+
+    /* FOTOGRAFÍA PRINCIPAL */
+    .portrait-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 2.5rem;
+    }
+
+    .portrait-container {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(135deg, var(--accent), var(--rose));
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease;
+    }
+
+    .portrait-container:hover {
+      transform: translateY(-4px);
+    }
+
+    .portrait {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      background: var(--paper);
+    }
+
+    /* NAVEGACIÓN */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: var(--rose-light);
+    }
+
+    /* SECCIONES */
+    section {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    section h2 {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "✦";
+      display: block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.4rem;
+    }
+
+    /* --- SOBRE LA AUTORA --- */
+    .about-card {
+      background: var(--paper);
+      padding: 2.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .about-text p {
+      margin-bottom: 1.2rem;
+      text-align: justify;
+      color: var(--text);
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- CARRUSEL ORBITAL EN CÍRCULOS (OBRAS) --- */
+    .carousel-orbit-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      height: 500px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-orbit-center {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 25px rgba(212, 163, 115, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .carousel-orbit-center .monogram {
+      font-family: var(--font-script);
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .carousel-orbit-center span {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .orbit-ring {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      border: 1px dashed var(--rose);
+      animation: rotateOrbit 40s linear infinite;
+    }
+
+    .carousel-orbit-wrapper:hover .orbit-ring {
+      animation-play-state: paused;
+    }
+
+    .orbit-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 85px;
+      height: 85px;
+      margin-top: -42.5px;
+      margin-left: -42.5px;
+      transform: rotate(calc(var(--i) * 45deg)) translate(180px);
+    }
+
+    .circle-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      color: var(--text);
+      text-decoration: none;
+      text-align: center;
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+      animation: counterRotate 40s linear infinite;
+      position: relative;
+    }
+
+    .carousel-orbit-wrapper:hover .circle-link {
+      animation-play-state: paused;
+    }
+
+    .circle-link:hover {
+      transform: scale(1.2) !important;
+      border-color: var(--accent);
+      background: var(--rose-light);
+      box-shadow: 0 10px 25px rgba(212, 163, 115, 0.25);
+      z-index: 20;
+    }
+
+    .circle-icon {
+      font-size: 1rem;
+      margin-bottom: 2px;
+      color: var(--accent);
+    }
+
+    .circle-title {
+      font-size: 0.65rem;
+      font-family: var(--font-title);
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .circle-link::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -26px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: #fff;
+      font-size: 0.58rem;
+      padding: 2px 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      border-radius: 10px;
+    }
+
+    .circle-link:hover::after {
+      opacity: 1;
+    }
+
+    /* --- FORMULARIO DE COMENTARIOS --- */
+    .comment-form {
+      max-width: 580px;
+      margin: 0 auto;
+      background: var(--paper);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .comment-form label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .comment-form input, .comment-form textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .comment-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .comment-form input:focus, .comment-form textarea:focus {
+      border-color: var(--accent);
+      background: #FFF;
+    }
+
+    .comment-form button {
+      align-self: center;
+      background: var(--text);
+      color: #FFF;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .comment-form button:hover {
+      background: var(--accent);
+      box-shadow: 0 6px 18px rgba(212, 163, 115, 0.4);
+    }
+
+    /* --- CONTACTO & PIE --- */
+    .contact-card {
+      text-align: center;
+      background: var(--paper);
+      padding: 3rem 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-email {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-email:hover {
+      color: var(--text);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .socials a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .btn-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+    }
+
+    .btn-top:hover {
+      background: var(--accent);
+      color: #FFF;
+      border-color: var(--accent);
+    }
+
+    /* KEYFRAMES */
+    @keyframes rotateOrbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes counterRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <span class="header-script">Escritora & Filósofa</span>
+      <h1>Silvia Yulmaneli Moreno León</h1>
+      <p class="alias">Zolotepec, Estado de México, 1993</p>
+      
+      <div class="portrait-wrapper">
+        <div class="portrait-container">
+          <img src="Code_Generated_Image.jpg" alt="Silvia Yulmaneli Moreno León" class="portrait">
+        </div>
+      </div>
+
+      <p class="tagline">«Explorando los rincones de la memoria, el ensayo filosófico y los matices de la narrativa contemporánea.»</p>
+      
+      <nav>
+        <a href="#sobre">Sobre la Autora</a>
+        <a href="#obras">Obras & Textos</a>
+        <a href="#comentarios">Mensajes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- SOBRE LA AUTORA -->
+    <section id="sobre">
+      <div class="container">
+        <h2>Sobre la Autora</h2>
+        <div class="about-card">
+          <div class="about-text">
+            <p><strong>Silvia Yulmaneli Moreno León</strong> es Licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex). Se ha desarrollado activamente como narradora, ensayista y ponente académica en congresos internacionales de literatura e historia.</p>
+            <p>Es autora de la novela corta <em>Cluster B</em> (Colección Invitación al Incendio, Grafógrafxs) y del libro <em>Rincones</em> (publicado dentro de la colección Jóvenes. Pasión y Libertad por el Fondo Editorial del Estado de México, FOEM). Compiló el poemario <em>Pizarnik: el frenesí hecho poesía</em> y sus textos han aparecido en suplementos y revistas literarias como <em>Grafógrafxs</em> y <em>Pérgola de Humo</em>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBRAS CON CARRUSEL ORBITAL GIRATORIO -->
+    <section id="obras">
+      <div class="container">
+        <h2>Obras & Publicaciones</h2>
+        
+        <div class="carousel-orbit-wrapper">
+          <div class="carousel-orbit-center">
+            <div class="monogram">Y</div>
+            <span>Obras</span>
+          </div>
+
+          <div class="orbit-ring">
+            <!-- Círculo 1 -->
+            <div class="orbit-item" style="--i: 0;">
+              <a href="https://grafografxs.uaemex.mx/images/grafografxs/COLECCIN%20INVITACIN%20AL%20INCENDIO/cluster_b.pdf" target="_blank" class="circle-link" data-tooltip="PDF Novela Completa">
+                <span class="circle-icon">📖</span>
+                <span class="circle-title">Cluster B</span>
+              </a>
+            </div>
+
+            <!-- Círculo 2 -->
+            <div class="orbit-item" style="--i: 1;">
+              <a href="https://foem.edomex.gob.mx/jovenes-pasion-libertad" target="_blank" class="circle-link" data-tooltip="Fondo Editorial FOEM">
+                <span class="circle-icon">📚</span>
+                <span class="circle-title">Rincones</span>
+              </a>
+            </div>
+
+            <!-- Círculo 3 -->
+            <div class="orbit-item" style="--i: 2;">
+              <a href="https://grafografxs.uaemex.mx/component/content/article/silvia-yulmaneli-moreno-le%C3%B3n-suministro-de-servicios.html" target="_blank" class="circle-link" data-tooltip="Cuento en Grafógrafxs">
+                <span class="circle-icon">✍️</span>
+                <span class="circle-title">Servicios</span>
+              </a>
+            </div>
+
+            <!-- Círculo 4 -->
+            <div class="orbit-item" style="--i: 3;">
+              <a href="https://pergoladehumo.wixsite.com/website/post/voces-y-cantos-de-la-melancol%C3%ADa" target="_blank" class="circle-link" data-tooltip="Ensayo Filosófico">
+                <span class="circle-icon">🥀</span>
+                <span class="circle-title">Melancolía</span>
+              </a>
+            </div>
+
+            <!-- Círculo 5 -->
+            <div class="orbit-item" style="--i: 4;">
+              <a href="https://www.youtube.com/watch?v=E8DdgVhxXZQ" target="_blank" class="circle-link" data-tooltip="Entrevista Televisiva">
+                <span class="circle-icon">🎙️</span>
+                <span class="circle-title">Tertulia</span>
+              </a>
+            </div>
+
+            <!-- Círculo 6 -->
+            <div class="orbit-item" style="--i: 5;">
+              <a href="#sobre" class="circle-link" data-tooltip="Ed. Norte/Sur">
+                <span class="circle-icon">🖤</span>
+                <span class="circle-title">Pizarnik</span>
+              </a>
+            </div>
+
+            <!-- Círculo 7 -->
+            <div class="orbit-item" style="--i: 6;">
+              <a href="#sobre" class="circle-link" data-tooltip="Ponencia Alemania">
+                <span class="circle-icon">📜</span>
+                <span class="circle-title">Rulfo</span>
+              </a>
+            </div>
+
+            <!-- Círculo 8 -->
+            <div class="orbit-item" style="--i: 7;">
+              <a href="https://grafografxs.uaemex.mx/" target="_blank" class="circle-link" data-tooltip="Editorial Grafógrafxs">
+                <span class="circle-icon">📜</span>
+                <span class="circle-title">Ensayos</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENSAJES -->
+    <section id="comentarios">
+      <div class="container">
+        <h2>Dejar un Mensaje</h2>
+        <form class="comment-form" action="#" method="POST">
+          <div>
+            <label for="nombre">Nombre o Seudónimo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre..." required>
+          </div>
+          <div>
+            <label for="mensaje">Mensaje o comentario de lectura</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Escribe tus palabras para la autora..." required></textarea>
+          </div>
+          <button type="submit">Enviar Comentario</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="container">
+        <h2>Contacto</h2>
+        <div class="contact-card">
+          <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.85rem;">Para lecturas, presentaciones y colaboraciones literarias:</p>
+          <a href="mailto:yulmaneli.leon@gmail.com" class="contact-email">yulmaneli.leon@gmail.com</a>
+          
+          <div class="socials">
+            <a href="https://grafografxs.uaemex.mx" target="_blank">Grafógrafxs</a>
+            <a href="https://foem.edomex.gob.mx" target="_blank">FOEM Edomex</a>
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© Silvia Yulmaneli Moreno León — Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="#" class="btn-top" title="Subir">↑</a>
+
+</body>
+</html>
