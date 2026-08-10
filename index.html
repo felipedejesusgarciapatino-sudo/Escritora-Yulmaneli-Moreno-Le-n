@@ -40,6 +40,7 @@
       display: flex;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
     /* --- NAVEGACIÓN Y PANEL LATERAL (DESKTOP) --- */
@@ -197,11 +198,14 @@
       flex: 1;
       padding: 60px;
       max-width: 1100px;
+      position: relative;
     }
 
     section {
       margin-bottom: 100px;
       scroll-margin-top: 80px;
+      position: relative;
+      z-index: 2;
     }
 
     .section-title {
@@ -221,6 +225,31 @@
       width: 60px;
       height: 2px;
       background-color: var(--borde-dorado);
+    }
+
+    /* --- SECCIÓN BIOGRAFÍA (CON IMAGEN YU.JPEG) --- */
+    .bio-container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      margin-top: 25px;
+    }
+
+    .bio-image-wrapper {
+      flex: 0 0 260px;
+    }
+
+    .bio-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--borde-dorado);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      object-fit: cover;
+    }
+
+    .bio-text-wrapper {
+      flex: 1;
     }
 
     /* --- SECCIÓN HERO --- */
@@ -372,6 +401,20 @@
       background-color: var(--acento-dorado);
     }
 
+    /* --- IMAGEN YUL.JPEG (DECORATIVA, DIFUMINADA Y CON TRANSPARENCIA) --- */
+    .bg-image-yul {
+      position: absolute;
+      right: -20px;
+      bottom: -40px;
+      width: 480px;
+      height: auto;
+      opacity: 0.18;
+      filter: blur(5px);
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+    }
+
     /* --- ANIMACIÓN --- */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-5px); }
@@ -399,6 +442,16 @@
         padding: 80px 20px 40px 20px;
       }
 
+      .bio-container {
+        flex-direction: column;
+      }
+
+      .bio-image-wrapper {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
       .hero-title {
         font-size: 2.2rem;
       }
@@ -421,6 +474,12 @@
         width: 55px;
         height: 55px;
         font-size: 0.65rem;
+      }
+
+      .bg-image-yul {
+        width: 280px;
+        right: -10px;
+        bottom: -20px;
       }
     }
   </style>
@@ -524,27 +583,37 @@
       </div>
     </section>
 
-    <!-- SECCIÓN BIOGRAFÍA / SEMBLANZA -->
+    <!-- SECCIÓN BIOGRAFÍA / SEMBLANZA (INCLUYE YU.JPEG) -->
     <section id="biografia">
       <h2 class="section-title">Biografía & Semblanza</h2>
-      <div id="semblanza" style="margin-top: 25px;">
-        <p>
-          Silvia Yulmaneli Moreno León es una escritora y gestora cultural cuya obra aborda la memoria, la estética de la palabra y la reflexión sobre el entorno contemporáneo. Ha colaborado en múltiples publicaciones literarias y proyectos editoriales independientes.
-        </p>
-      </div>
 
-      <div id="reconocimientos" style="margin-top: 35px;">
-        <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 10px;">Reconocimientos</h3>
-        <p>
-          Su trabajo ha sido distinguido en diversos certámenes de creación literaria y antologías poéticas a nivel regional e internacional.
-        </p>
-      </div>
+      <div class="bio-container">
+        <!-- Imagen de Biografía (yu.jpeg) -->
+        <div class="bio-image-wrapper">
+          <img src="yu.jpeg" alt="Silvia Yulmaneli Moreno León" class="bio-image">
+        </div>
 
-      <div id="trayectoria" style="margin-top: 35px;">
-        <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 10px;">Trayectoria</h3>
-        <p>
-          Participante activa en talleres literarios, mesas de diálogo, ferias del libro y recitales poéticos centrados en la difusión de nuevas voces literarias.
-        </p>
+        <div class="bio-text-wrapper">
+          <div id="semblanza">
+            <p>
+              Silvia Yulmaneli Moreno León es una escritora y gestora cultural cuya obra aborda la memoria, la estética de la palabra y la reflexión sobre el entorno contemporáneo. Ha colaborado en múltiples publicaciones literarias y proyectos editoriales independientes.
+            </p>
+          </div>
+
+          <div id="reconocimientos" style="margin-top: 25px;">
+            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Reconocimientos</h3>
+            <p>
+              Su trabajo ha sido distinguido en diversos certámenes de creación literaria y antologías poéticas a nivel regional e internacional.
+            </p>
+          </div>
+
+          <div id="trayectoria" style="margin-top: 25px;">
+            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Trayectoria</h3>
+            <p>
+              Participante activa en talleres literarios, mesas de diálogo, ferias del libro y recitales poéticos centrados en la difusión de nuevas voces literarias.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -581,7 +650,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN CONTACTO -->
+    <!-- SECCIÓN CONTACTO Y DECORACIÓN INFERIOR (YUL.JPEG) -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
       <p style="margin-bottom: 25px; color: var(--texto-suave);">
@@ -603,6 +672,9 @@
         </div>
         <button type="submit" class="btn-submit">Enviar Mensaje</button>
       </form>
+
+      <!-- Imagen decorativa difuminada y transparente al fondo derecho (yul.jpeg) -->
+      <img src="yul.jpeg" alt="" class="bg-image-yul" aria-hidden="true">
     </section>
 
   </main>
