@@ -391,6 +391,117 @@
       text-align: justify;
     }
 
+    /* --- COMPONENTE DESPLEGABLE EN PÁGINA (ACORDEÓN DE GALERÍA) --- */
+    .gallery-accordion {
+      margin-top: 15px;
+      border: 1px solid var(--borde-dorado);
+      border-radius: 6px;
+      background-color: #ffffff;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .gallery-accordion-btn {
+      width: 100%;
+      padding: 15px 20px;
+      background-color: var(--bg-secundario);
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--fuente-titulo);
+      font-size: 1rem;
+      color: var(--texto-principal);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: left;
+    }
+
+    .gallery-accordion-btn:hover {
+      background-color: rgba(184, 134, 11, 0.15);
+      color: var(--acento-dorado);
+    }
+
+    .gallery-accordion-btn .accordion-icon {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-accordion.open .gallery-accordion-btn .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .gallery-accordion-content {
+      display: none;
+      padding: 25px 20px;
+      background-color: #ffffff;
+      border-top: 1px dashed var(--borde-dorado);
+    }
+
+    .gallery-accordion.open .gallery-accordion-content {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    /* CUADRÍCULA Y MARCOS VACÍOS PARA IMÁGENES */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .photo-placeholder {
+      aspect-ratio: 4 / 5;
+      background-color: var(--bg-principal);
+      border: 2px dashed var(--borde-dorado);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      text-align: center;
+      color: var(--texto-suave);
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-placeholder:hover {
+      border-style: solid;
+      border-color: var(--acento-dorado);
+      background-color: var(--bg-secundario);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    }
+
+    .photo-placeholder .icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: var(--acento-dorado);
+      opacity: 0.7;
+    }
+
+    .photo-placeholder span {
+      font-weight: 600;
+      font-family: var(--fuente-titulo);
+      margin-top: 4px;
+      color: var(--texto-principal);
+    }
+
+    /* En caso de que cargues una foto en el marco */
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     /* --- FORMULARIO Y CONTACTO --- */
     .contact-form {
       display: grid;
@@ -414,7 +525,7 @@
     .form-group input, .form-group textarea {
       padding: 12px;
       border: 1px solid var(--borde-dorado);
-      background-color: rgba(255, 255, 255, 0.85); /* Ligera transparencia para integrarse */
+      background-color: rgba(255, 255, 255, 0.85);
       border-radius: 4px;
       font-family: var(--fuente-cuerpo);
       color: var(--texto-principal);
@@ -451,8 +562,8 @@
       bottom: -30px;
       width: 420px;
       height: auto;
-      opacity: 0.65;             /* Aumentado para mayor visibilidad y claridad */
-      filter: blur(0px);          /* Sin desenfoque para mantener nitidez */
+      opacity: 0.65;
+      filter: blur(0px);
       border-radius: 8px;
       box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.05);
       pointer-events: none;
@@ -526,6 +637,11 @@
         width: 260px;
         opacity: 0.45;
         bottom: -10px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
       }
     }
   </style>
@@ -694,13 +810,80 @@
     <!-- SECCIÓN GALERÍA -->
     <section id="galeria">
       <h2 class="section-title">Galería & Medios</h2>
+      
+      <!-- SUBSECCIÓN REGISTRO FOTOGRÁFICO CON DROPDOWN/ACORDEÓN DE ESPACIOS VACÍOS -->
       <div id="fotografias" style="margin-top: 25px;">
-        <p style="color: var(--texto-suave);">Registro fotográfico de eventos, lecturas y congresos.</p>
+        <p style="color: var(--texto-suave); margin-bottom: 15px;">
+          Registro fotográfico de eventos, lecturas y congresos académicos en los que ha participado la autora.
+        </p>
+
+        <!-- DROPDOWN / ACORDEÓN DESPLEGABLE DE GALERÍA -->
+        <div class="gallery-accordion">
+          <button class="gallery-accordion-btn" id="galleryAccordionBtn">
+            <span>📷 Ver Galería de Eventos & Lecturas</span>
+            <span class="accordion-icon">▾</span>
+          </button>
+          
+          <div class="gallery-accordion-content">
+            <p style="font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 15px;">
+              Haz clic o añade tus imágenes dentro de los siguientes contenedores vacíos:
+            </p>
+            
+            <div class="photo-grid">
+              <!-- Espacio 1 -->
+              <div class="photo-placeholder">
+                <div class="icon">🖼️</div>
+                <p>Congreso Internacional</p>
+                <span>Imagen 1</span>
+                <!-- Para agregar foto: <img src="ruta/foto1.jpg" alt="Congreso"> -->
+              </div>
+
+              <!-- Espacio 2 -->
+              <div class="photo-placeholder">
+                <div class="icon">📖</div>
+                <p>Lectura de Poesía/Narrativa</p>
+                <span>Imagen 2</span>
+              </div>
+
+              <!-- Espacio 3 -->
+              <div class="photo-placeholder">
+                <div class="icon">🏛️</div>
+                <p>Ponencia UAEMex</p>
+                <span>Imagen 3</span>
+              </div>
+
+              <!-- Espacio 4 -->
+              <div class="photo-placeholder">
+                <div class="icon">🎙️</div>
+                <p>Presentación de Novela</p>
+                <span>Imagen 4</span>
+              </div>
+
+              <!-- Espacio 5 -->
+              <div class="photo-placeholder">
+                <div class="icon">✒️</div>
+                <p>Firma de Libros</p>
+                <span>Imagen 5</span>
+              </div>
+
+              <!-- Espacio 6 -->
+              <div class="photo-placeholder">
+                <div class="icon">👥</div>
+                <p>Mesa de Creadoras</p>
+                <span>Imagen 6</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="presentaciones" style="margin-top: 25px;">
+
+      <div id="presentaciones" style="margin-top: 35px;">
+        <h3 style="font-family: var(--fuente-titulo); font-size: 1.2rem; color: var(--texto-principal);">Presentaciones</h3>
         <p style="color: var(--texto-suave);">Presentaciones de libros y conferencias filosóficas.</p>
       </div>
+
       <div id="prensa" style="margin-top: 25px;">
+        <h3 style="font-family: var(--fuente-titulo); font-size: 1.2rem; color: var(--texto-principal);">Prensa</h3>
         <p style="color: var(--texto-suave);">Entrevistas, artículos de prensa y colaboraciones en medios.</p>
       </div>
     </section>
@@ -738,7 +921,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      // --- 1. MENÚS DESPLEGABLES ---
+      // --- 1. MENÚS DESPLEGABLES DEL SIDEBAR ---
       const dropdowns = document.querySelectorAll('.dropdown');
 
       dropdowns.forEach(dropdown => {
@@ -755,7 +938,17 @@
         });
       });
 
-      // --- 2. POSICIONAMIENTO MATEMÁTICO DE LOS NODOS ORBITALES ---
+      // --- 2. ACORDEÓN DESPLEGABLE EN PÁGINA (GALERÍA FOTOGRÁFICA) ---
+      const galleryBtn = document.getElementById('galleryAccordionBtn');
+      const galleryAccordion = galleryBtn ? galleryBtn.closest('.gallery-accordion') : null;
+
+      if (galleryBtn && galleryAccordion) {
+        galleryBtn.addEventListener('click', () => {
+          galleryAccordion.classList.toggle('open');
+        });
+      }
+
+      // --- 3. POSICIONAMIENTO MATEMÁTICO DE LOS NODOS ORBITALES ---
       const items = document.querySelectorAll('.orbit-item');
       const totalItems = items.length;
 
@@ -775,7 +968,7 @@
       positionOrbitItems();
       window.addEventListener('resize', positionOrbitItems);
 
-      // --- 3. MENÚ RESPONSIVO (MÓVIL) ---
+      // --- 4. MENÚ RESPONSIVO (MÓVIL) ---
       const menuToggle = document.getElementById('menuToggle');
       const sidebar = document.getElementById('sidebar');
 
