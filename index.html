@@ -754,7 +754,7 @@
     }
 
     .video-thumb {
-      flex: 0 0 100px;
+      flex: 0 0 120px;
       height: 60px;
       border-radius: 4px;
       border: 1px solid #444;
@@ -923,7 +923,7 @@
     </div>
 
     <div class="sidebar-footer">
-      <p>&copy; 2026 Silvia Y. Moreno León  (acuerdate del css javas... en código sup con el dropdown para redes soc... 21:16 09/08/2026 fell.</p>
+      <p>&copy; 2026 Silvia Y. Moreno León.</p>
     </div>
   </aside>
 
@@ -1009,12 +1009,12 @@
           </button>
           <div class="gallery-accordion-content">
             <div class="photo-grid">
-              <div class="photo-placeholder"><div class="icon">?</div><p>Congreso Internacional</p><span>Imagen 1</span></div>
-              <div class="photo-placeholder"><div class="icon">?</div><p>Lectura de Poesía</p><span>Imagen 2</span></div>
-              <div class="photo-placeholder"><div class="icon">?</div><p>Ponencia UAEMex</p><span>Imagen 3</span></div>
-              <div class="photo-placeholder"><div class="icon">?</div><p>Presentación Novela</p><span>Imagen 4</span></div>
-              <div class="photo-placeholder"><div class="icon">?</div><p>Firma de Libros</p><span>Imagen 5</span></div>
-              <div class="photo-placeholder"><div class="icon">?</div><p>Mesa de Creadoras</p><span>Imagen 6</span></div>
+              <div class="photo-placeholder"><div class="icon">🖼️</div><p>Congreso Internacional</p><span>Imagen 1</span></div>
+              <div class="photo-placeholder"><div class="icon">📖</div><p>Lectura de Poesía</p><span>Imagen 2</span></div>
+              <div class="photo-placeholder"><div class="icon">🏛️</div><p>Ponencia UAEMex</p><span>Imagen 3</span></div>
+              <div class="photo-placeholder"><div class="icon">🎙️</div><p>Presentación Novela</p><span>Imagen 4</span></div>
+              <div class="photo-placeholder"><div class="icon">✒️</div><p>Firma de Libros</p><span>Imagen 5</span></div>
+              <div class="photo-placeholder"><div class="icon">👥</div><p>Mesa de Creadoras</p><span>Imagen 6</span></div>
             </div>
           </div>
         </div>
@@ -1024,7 +1024,7 @@
     <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
-      <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones: (Acuérdate de inssrtar enlaces a redes soc..</p>
+      <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
 
       <form class="contact-form" action="#" method="POST">
         <div class="form-group">
@@ -1059,7 +1059,7 @@
       <div class="modal-header">
         <div>
           <h3 style="font-size: 1.1rem; color: #63b3ed;">Carrusel de Vídeos</h3>
-          <span id="videoSlideCounter" style="font-size: 0.85rem; color: #aaa;">Vídeo 1 de 2</span>
+          <span id="videoSlideCounter" style="font-size: 0.85rem; color: #aaa;">Vídeo 1 de 3</span>
         </div>
         <button class="modal-close" id="closeVideoCarouselBtn">&times;</button>
       </div>
@@ -1153,6 +1153,7 @@
 
       // --- 5. CARRUSEL DE VÍDEOS EN EL BOTÓN TRIANGULAR AZUL ---
       const videoList = [
+        { title: 'The Cleaners from Venus - Wivenhoe Bells (II)', embedUrl: 'https://www.youtube.com/embed/MAvEHIX-4ic' },
         { title: 'Interpol - Obstacle 1', embedUrl: 'https://www.youtube.com/embed/haW_ruZ_Be8' },
         { title: 'Interpol - Evil', embedUrl: 'https://www.youtube.com/embed/eqfiHfDmUrw' }
       ];
@@ -1201,7 +1202,7 @@
 
       closeVideoBtn.addEventListener('click', () => {
         videoModal.classList.remove('active');
-        videoFrame.innerHTML = ''; // Detener la reproducción al cerrar
+        videoFrame.innerHTML = ''; // Detener reproducción al cerrar
       });
 
       nextVideoBtn.addEventListener('click', () => {
