@@ -3,874 +3,678 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Silvia Yulmaneli Moreno León — Escritora</title>
+  <title>Silvia Yulmaneli Moreno León | Escritora & Creativa</title>
   
-  <!-- Tipografías  -->
+  <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
   <style>
+    /* --- VARIABLES GLOBALES Y PALETA DE COLORES --- */
     :root {
-      --bg: #FDFBF7;               /* Marfil suave / Papel artesanal */
-      --paper: #FFFFFF;            /* Blanco puro para tarjetas */
-      --text: #2B2523;             /* Grafito cálido oscuro */
-      --text-muted: #6C625D;       /* Café taupe para subtítulos */
-      --accent: #D4A373;           /* Dorado antiguo sutil */
-      --accent-soft: #F4ECE1;     /* Crema dorado muy claro */
-      --rose: #E8D3CE;             /* Rosa empolvado tenue */
-      --rose-light: #F9F3F1;       /* Fondo suave rosa empolvado */
-      --line: #E2D7CE;             /* Líneas divisoras finas */
-      
-      --sidebar-width: 240px;      /* Ancho del panel vertical en desktop */
-      --font-title: 'Playfair Display', Georgia, serif;
-      --font-body: 'Lora', Serif;
-      --font-script: 'Alex Brush', cursive;
+      --bg-principal: #faf8f5;     /* Marfil / Crema */
+      --bg-secundario: #f2ebe4;   /* Taupe suave */
+      --texto-principal: #3a3231;  /* Café oscuro neutro */
+      --texto-suave: #6e625f;      /* Taupe medio */
+      --acento-dorado: #b8860b;    /* Dorado antiguo */
+      --acento-rosa: #d8a7a1;      /* Rosa empolvado */
+      --borde-dorado: #d4af37;     /* Borde dorado */
+      --fuente-titulo: 'Playfair Display', serif;
+      --fuente-cuerpo: 'Lora', serif;
+      --fuente-firma: 'Alex Brush', cursive;
+      --sidebar-width: 280px;
     }
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
-
-    html { 
-      scroll-behavior: smooth; 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      line-height: 1.8;
+      background-color: var(--bg-principal);
+      color: var(--texto-principal);
+      font-family: var(--fuente-cuerpo);
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
       overflow-x: hidden;
-      width: 100%;
     }
 
-    /* --- NAVEGACIÓN LATERAL (ESCRITORIO: RECTÁNGULO VERTICAL A LA IZQUIERDA) --- */
-    nav.sidebar {
+    /* --- NAVEGACIÓN Y PANEL LATERAL (DESKTOP) --- */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-secundario);
+      border-right: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 40px 25px;
       position: fixed;
       top: 0;
+      bottom: 0;
       left: 0;
-      width: var(--sidebar-width);
-      height: 100vh;
-      background: rgba(253, 251, 247, 0.85);
-      backdrop-filter: blur(8px);
-      border-right: 1px solid var(--line);
-      box-shadow: 4px 0 20px rgba(0,0,0,0.03);
-      padding: 2.5rem 1.2rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 2rem;
-      z-index: 1000;
+      justify-content: space-between;
+      z-index: 100;
+      overflow-y: auto;
     }
 
-    .sidebar-brand {
+    .brand {
       text-align: center;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.2rem;
+      margin-bottom: 40px;
     }
 
-    .sidebar-brand .monogram {
-      font-family: var(--font-script);
-      font-size: 2.5rem;
-      color: var(--accent);
-      line-height: 1;
-      display: block;
+    .brand h1 {
+      font-family: var(--fuente-titulo);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--texto-principal);
+      letter-spacing: 1px;
     }
 
-    .sidebar-brand span {
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .brand p {
+      font-family: var(--fuente-firma);
+      font-size: 1.8rem;
+      color: var(--acento-dorado);
+      margin-top: -5px;
     }
 
-    .sidebar-menu {
+    .sidebar-nav .nav-list {
+      list-style: none;
+    }
+
+    .nav-item {
+      margin-bottom: 8px;
+    }
+
+    .nav-item > a, .dropdown-btn {
       display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
-    }
-
-    .sidebar-menu a {
-      color: var(--text-muted);
+      padding: 10px 14px;
+      color: var(--texto-principal);
       text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.75rem 0.9rem;
-      border-radius: 6px;
+      font-family: var(--fuente-titulo);
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      border-radius: 4px;
       transition: all 0.3s ease;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      border: 1px solid transparent;
-    }
-
-    .sidebar-menu a:hover {
-      color: var(--text);
-      background: var(--rose-light);
-      border-color: var(--rose);
-      transform: translateX(4px);
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      text-align: center;
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--line);
-      padding-top: 1rem;
-    }
-
-    /* --- CONTENEDOR PRINCIPAL --- */
-    .main-wrapper {
-      margin-left: var(--sidebar-width);
-      width: calc(100% - var(--sidebar-width));
-      min-height: 100vh;
-      position: relative;
-    }
-
-    /* --- HEADER HERO: IMAGEN PANTALLA COMPLETA CON TRANSPARENCIA A LA IZQUIERDA --- */
-    header.hero-header {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      overflow: hidden;
-    }
-
-    /* Imagen de fondo  */
-    .hero-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* ENFOQUE DEL ROSTRO: ajusta el encuadre superior/centrado */
-      object-position: center 20%;
-      z-index: 1;
-    }
-
-    /* Degradado de transparencia (Oscurecido/Marfil a la izquierda, claro/transparente a la derecha) */
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to right,
-        rgba(253, 251, 247, 0.98) 0%,
-        rgba(253, 251, 247, 0.85) 35%,
-        rgba(253, 251, 247, 0.3) 70%,
-        rgba(253, 251, 247, 0.05) 100%
-      );
-      z-index: 2;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      max-width: 650px;
-      padding: 0 3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
       text-align: left;
     }
 
-    .header-script {
-      font-family: var(--font-script);
-      font-size: 2.8rem;
-      color: var(--accent);
-      margin-bottom: -0.5rem;
+    .nav-item > a:hover, .dropdown-btn:hover {
+      background-color: rgba(184, 134, 11, 0.1);
+      color: var(--acento-dorado);
+    }
+
+    .arrow {
+      font-size: 0.75rem;
+      transition: transform 0.3s ease;
+    }
+
+    /* --- DROPDOWN (SUBMENÚS) --- */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      list-style: none;
+      padding-left: 15px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .dropdown-content li a {
       display: block;
+      padding: 6px 12px;
+      color: var(--texto-suave);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-family: var(--fuente-cuerpo);
+      transition: all 0.3s ease;
+      border-left: 2px solid transparent;
     }
 
-    h1 {
-      font-family: var(--font-title);
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 500;
-      color: var(--text);
-      letter-spacing: 0.02em;
-      margin-bottom: 0.6rem;
-      line-height: 1.15;
+    .dropdown-content li a:hover {
+      color: var(--acento-dorado);
+      border-left-color: var(--acento-dorado);
+      padding-left: 18px;
     }
 
-    .alias {
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
+    .dropdown.active .dropdown-content {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
     }
 
-    .tagline {
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1.7;
-      padding: 1.2rem 1.5rem;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(4px);
-      border-left: 3px solid var(--accent);
-      border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    .dropdown.active .arrow {
+      transform: rotate(180deg);
     }
 
-    /* SECCIONES Y CONTENEDOR CONTENIDO */
-    .container {
-      width: 100%;
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 0 2rem;
+    .sidebar-footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+      margin-top: 30px;
+    }
+
+    /* --- BOTÓN HAMBURGUESA MÓVIL --- */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: var(--bg-secundario);
+      border-bottom: 1px solid var(--borde-dorado);
+      padding: 0 20px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 200;
+    }
+
+    .mobile-header h2 {
+      font-family: var(--fuente-titulo);
+      font-size: 1.1rem;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--texto-principal);
+      cursor: pointer;
+    }
+
+    /* --- CONTENIDO PRINCIPAL --- */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 60px;
+      max-width: 1100px;
     }
 
     section {
-      padding: 5rem 0;
-      border-top: 1px solid var(--line);
-      position: relative;
-      background: var(--bg);
-      z-index: 4;
+      margin-bottom: 100px;
+      scroll-margin-top: 80px;
     }
 
-    section h2 {
-      font-family: var(--font-title);
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 2rem;
+    .section-title {
+      font-family: var(--fuente-titulo);
+      font-size: 2.2rem;
+      color: var(--texto-principal);
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background-color: var(--borde-dorado);
+    }
+
+    /* --- SECCIÓN HERO --- */
+    .hero {
       text-align: center;
-      position: relative;
+      padding: 60px 0;
     }
 
-    section h2::after {
-      content: "✦";
-      display: block;
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin-top: 0.4rem;
+    .hero-title {
+      font-family: var(--fuente-titulo);
+      font-size: 3rem;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
     }
 
-    /* --- SOBRE LA AUTORA --- */
-    .about-card {
-      background: var(--paper);
-      padding: 2.2rem;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-      max-width: 720px;
-      margin: 0 auto;
+    .hero-subtitle {
+      font-family: var(--fuente-firma);
+      font-size: 2.5rem;
+      color: var(--acento-dorado);
+      margin-bottom: 25px;
     }
 
-    .about-text p {
-      margin-bottom: 1.2rem;
-      text-align: justify;
-      color: var(--text);
+    .hero-text {
+      max-width: 650px;
+      margin: 0 auto 30px auto;
+      color: var(--texto-suave);
+      font-size: 1.1rem;
     }
 
-    .about-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* --- CARRUSEL ORBITAL EN CÍRCULOS (OBRAS) --- */
-    .carousel-orbit-wrapper {
+    /* --- CARRUSEL ORBITAL --- */
+    .orbital-container {
       position: relative;
       width: 100%;
-      max-width: 500px;
       height: 480px;
-      margin: 0 auto;
       display: flex;
-      align-items: center;
       justify-content: center;
-    }
-
-    .carousel-orbit-center {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: var(--paper);
-      border: 1px solid var(--accent);
-      box-shadow: 0 0 25px rgba(212, 163, 115, 0.2);
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      z-index: 10;
-      text-align: center;
-      padding: 0.5rem;
-    }
-
-    .carousel-orbit-center .monogram {
-      font-family: var(--font-script);
-      font-size: 2rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .carousel-orbit-center span {
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      margin: 40px 0;
     }
 
     .orbit-ring {
       position: absolute;
-      width: 320px;
-      height: 320px;
+      width: 360px;
+      height: 360px;
+      border: 1px dashed var(--borde-dorado);
       border-radius: 50%;
-      border: 1px dashed var(--rose);
-      animation: rotateOrbit 40s linear infinite;
+      opacity: 0.5;
     }
 
-    .carousel-orbit-wrapper:hover .orbit-ring {
-      animation-play-state: paused;
+    .orbit-center {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background-color: var(--bg-secundario);
+      border: 2px solid var(--borde-dorado);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      z-index: 5;
+    }
+
+    .orbit-center span {
+      font-family: var(--fuente-titulo);
+      font-size: 0.9rem;
+      color: var(--texto-principal);
+      font-weight: 600;
     }
 
     .orbit-item {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80px;
-      height: 80px;
-      margin-top: -40px;
-      margin-left: -40px;
-      transform: rotate(calc(var(--i) * 45deg)) translate(160px);
-    }
-
-    .circle-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
-      color: var(--text);
-      text-decoration: none;
+      background-color: var(--bg-principal);
+      border: 1.5px solid var(--borde-dorado);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 0.4rem;
-      transition: all 0.3s ease;
-      animation: counterRotate 40s linear infinite;
-      position: relative;
+      font-size: 0.75rem;
+      font-family: var(--fuente-titulo);
+      color: var(--texto-principal);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+      text-decoration: none;
+      padding: 5px;
     }
 
-    .carousel-orbit-wrapper:hover .circle-link {
-      animation-play-state: paused;
+    .orbit-item:hover {
+      transform: scale(1.2);
+      background-color: var(--acento-rosa);
+      color: #ffffff;
+      border-color: var(--acento-rosa);
     }
 
-    .circle-link:hover {
-      transform: scale(1.15) !important;
-      border-color: var(--accent);
-      background: var(--rose-light);
-      box-shadow: 0 10px 25px rgba(212, 163, 115, 0.25);
-      z-index: 20;
+    /* --- FORMULARIO Y CONTACTO --- */
+    .contact-form {
+      display: grid;
+      gap: 20px;
+      max-width: 600px;
     }
 
-    .circle-icon {
-      font-size: 0.95rem;
-      margin-bottom: 2px;
-      color: var(--accent);
-    }
-
-    .circle-title {
-      font-size: 0.62rem;
-      font-family: var(--font-title);
-      line-height: 1.1;
-      color: var(--text);
-    }
-
-    .circle-link::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: -24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--text);
-      color: #fff;
-      font-size: 0.58rem;
-      padding: 2px 8px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      border-radius: 10px;
-    }
-
-    .circle-link:hover::after {
-      opacity: 1;
-    }
-
-    /* --- FORMULARIO DE COMENTARIOS --- */
-    .comment-form {
-      max-width: 580px;
-      margin: 0 auto;
-      background: var(--paper);
-      padding: 2.2rem;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    .form-group {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
     }
 
-    .comment-form label {
-      display: block;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
+    .form-group label {
+      font-family: var(--fuente-titulo);
+      margin-bottom: 6px;
+      font-size: 0.95rem;
     }
 
-    .comment-form input, .comment-form textarea {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      padding: 0.8rem 1rem;
+    .form-group input, .form-group textarea {
+      padding: 12px;
+      border: 1px solid var(--borde-dorado);
+      background-color: #ffffff;
       border-radius: 4px;
+      font-family: var(--fuente-cuerpo);
+      color: var(--texto-principal);
       outline: none;
       transition: border-color 0.3s ease;
     }
 
-    .comment-form textarea {
-      min-height: 110px;
-      resize: vertical;
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--acento-dorado);
+      box-shadow: 0 0 5px rgba(184, 134, 11, 0.2);
     }
 
-    .comment-form input:focus, .comment-form textarea:focus {
-      border-color: var(--accent);
-      background: #FFF;
-    }
-
-    .comment-form button {
-      align-self: center;
-      background: var(--text);
-      color: #FFF;
+    .btn-submit {
+      padding: 12px 25px;
+      background-color: var(--texto-principal);
+      color: var(--bg-principal);
       border: none;
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.9rem 2.2rem;
-      border-radius: 25px;
+      border-radius: 4px;
+      font-family: var(--fuente-titulo);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease;
+      align-self: start;
     }
 
-    .comment-form button:hover {
-      background: var(--accent);
-      box-shadow: 0 6px 18px rgba(212, 163, 115, 0.4);
+    .btn-submit:hover {
+      background-color: var(--acento-dorado);
     }
 
-    /* --- CONTACTO & PIE --- */
-    .contact-card {
-      text-align: center;
-      background: var(--paper);
-      padding: 2.5rem 1.5rem;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      max-width: 600px;
-      margin: 0 auto;
+    /* --- ANIMACIÓN --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .contact-email {
-      font-family: var(--font-title);
-      font-size: 1.05rem;
-      color: var(--accent);
-      text-decoration: none;
-      word-break: break-all;
-      transition: color 0.3s ease;
-    }
-
-    .contact-email:hover {
-      color: var(--text);
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-top: 1.8rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid var(--line);
-      flex-wrap: wrap;
-    }
-
-    .socials a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.3s ease;
-    }
-
-    .socials a:hover {
-      color: var(--accent);
-    }
-
-    footer {
-      padding: 2.5rem 0;
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--line);
-      background: var(--bg);
-      position: relative;
-      z-index: 4;
-    }
-
-    .btn-top {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      z-index: 900;
-    }
-
-    .btn-top:hover {
-      background: var(--accent);
-      color: #FFF;
-      border-color: var(--accent);
-    }
-
-    /* ========================================================= */
-    /* --- ADAPTATIVIDAD ESPECÍFICA PARA DISPOSITIVOS MÓVILES --- */
-    /* ========================================================= */
-    @media (max-width: 820px) {
-      nav.sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 1.2rem 1rem;
-        gap: 1rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-      }
-
-      .sidebar-brand {
-        border-bottom: none;
-        padding-bottom: 0;
+    /* --- RESPONSIVIDAD (MÓVILES Y TABLETS) --- */
+    @media (max-width: 768px) {
+      .mobile-header {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
       }
 
-      .sidebar-brand .monogram {
-        font-size: 1.8rem;
-        display: inline-block;
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        width: 260px;
       }
 
-      .sidebar-menu {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.4rem;
+      .sidebar.open {
+        transform: translateX(0);
       }
 
-      .sidebar-menu a {
-        font-size: 0.68rem;
-        padding: 0.5rem 0.8rem;
-        background: var(--bg);
-        border: 1px solid var(--line);
-        border-radius: 20px;
-      }
-
-      .sidebar-footer {
-        display: none;
-      }
-
-      .main-wrapper {
+      .main-content {
         margin-left: 0;
-        width: 100%;
+        padding: 80px 20px 40px 20px;
       }
 
-      header.hero-header {
-        height: 85vh;
+      .hero-title {
+        font-size: 2.2rem;
       }
 
-      .hero-overlay {
-        background: linear-gradient(
-          to bottom,
-          rgba(253, 251, 247, 0.95) 0%,
-          rgba(253, 251, 247, 0.75) 50%,
-          rgba(253, 251, 247, 0.3) 100%
-        );
-      }
-
-      .hero-content {
-        padding: 0 1.5rem;
-      }
-
-      .container {
-        padding: 0 1.2rem;
-      }
-
-      .about-card, .comment-form, .contact-card {
-        padding: 1.5rem;
-      }
-
-      .carousel-orbit-wrapper {
-        max-width: 320px;
+      .orbital-container {
         height: 380px;
       }
 
       .orbit-ring {
-        width: 240px;
-        height: 240px;
+        width: 260px;
+        height: 260px;
+      }
+
+      .orbit-center {
+        width: 110px;
+        height: 110px;
       }
 
       .orbit-item {
-        width: 65px;
-        height: 65px;
-        margin-top: -32.5px;
-        margin-left: -32.5px;
-        transform: rotate(calc(var(--i) * 45deg)) translate(120px);
+        width: 55px;
+        height: 55px;
+        font-size: 0.65rem;
       }
-
-      .circle-link {
-        width: 65px;
-        height: 65px;
-        padding: 0.2rem;
-      }
-
-      .circle-icon {
-        font-size: 0.8rem;
-      }
-
-      .circle-title {
-        font-size: 0.55rem;
-      }
-
-      .carousel-orbit-center {
-        width: 75px;
-        height: 75px;
-      }
-
-      .carousel-orbit-center .monogram {
-        font-size: 1.6rem;
-      }
-
-      .carousel-orbit-center span {
-        font-size: 0.5rem;
-      }
-    }
-
-    /* KEYFRAMES */
-    @keyframes rotateOrbit {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes counterRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(-360deg); }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVEGACIÓN -->
-  <nav class="sidebar">
-    <div class="sidebar-brand">
-      <span class="monogram">S Y</span>
-      <span>Índice</span>
-    </div>
+  <!-- ENCABEZADO PARA MÓVIL -->
+  <header class="mobile-header">
+    <h2>S. Y. Moreno León</h2>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
+  </header>
 
-    <div class="sidebar-menu">
-      <a href="#sobre">✦ Autora</a>
-      <a href="#obras">✦ Obras</a>
-      <a href="#comentarios">✦ Mensajes</a>
-      <a href="#contacto">✦ Contacto</a>
+  <!-- BARRA LATERAL / NAVEGACIÓN -->
+  <aside class="sidebar" id="sidebar">
+    <div>
+      <div class="brand">
+        <h1>Silvia Yulmaneli</h1>
+        <p>Moreno León</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#inicio">Inicio</a>
+          </li>
+
+          <!-- Dropdown 1: Biografía -->
+          <li class="nav-item dropdown">
+            <button class="dropdown-btn">
+              Biografía <span class="arrow">▾</span>
+            </button>
+            <ul class="dropdown-content">
+              <li><a href="#semblanza">Semblanza</a></li>
+              <li><a href="#reconocimientos">Reconocimientos</a></li>
+              <li><a href="#trayectoria">Trayectoria</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown 2: Obras -->
+          <li class="nav-item dropdown">
+            <button class="dropdown-btn">
+              Obras <span class="arrow">▾</span>
+            </button>
+            <ul class="dropdown-content">
+              <li><a href="#libros">Libros & Publicaciones</a></li>
+              <li><a href="#antologias">Antologías</a></li>
+              <li><a href="#articulos">Ensayos & Artículos</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown 3: Galería & Medios -->
+          <li class="nav-item dropdown">
+            <button class="dropdown-btn">
+              Galería <span class="arrow">▾</span>
+            </button>
+            <ul class="dropdown-content">
+              <li><a href="#fotografias">Fotografías</a></li>
+              <li><a href="#presentaciones">Presentaciones</a></li>
+              <li><a href="#prensa">Prensa & Entrevistas</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#contacto">Contacto</a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
     <div class="sidebar-footer">
-      <p>© 2026 Silvia Y. Moreno</p>
+      <p>&copy; 2026 Silvia Y. Moreno León.</p>
     </div>
-  </nav>
+  </aside>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <div class="main-wrapper">
-    
-    <!-- HERO HEADER -->
-    <header class="hero-header">
-      <img src="Code_Generated_Image.jpg" alt="Silvia Yulmaneli Moreno León" class="hero-bg">
-      <div class="hero-overlay"></div>
-      
-      <div class="hero-content">
-        <span class="header-script">Escritora & Filósofa</span>
-        <h1>Silvia Yulmaneli Moreno León</h1>
-        <p class="alias">Zolotepec, Estado de México, 1993</p>
-        <p class="tagline">«Explorando los rincones de la memoria, el ensayo filosófico y los matices de la narrativa contemporánea.»</p>
-      </div>
-    </header>
+  <main class="main-content">
 
-    <main>
-      <!-- SOBRE LA AUTORA -->
-      <section id="sobre">
-        <div class="container">
-          <h2>Sobre la Autora</h2>
-          <div class="about-card">
-            <div class="about-text">
-              <p><strong>Silvia Yulmaneli Moreno León</strong> es Licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex). Se ha desarrollado activamente como narradora, ensayista y ponente académica en congresos internacionales de literatura e historia.</p>
-              <p>Es autora de la novela corta <em>Cluster B</em> (Colección Invitación al Incendio, Grafógrafxs) y del libro <em>Rincones</em> (publicado dentro de la colección Jóvenes. Pasión y Libertad por el Fondo Editorial del Estado de México, FOEM). Compiló el poemario <em>Pizarnik: el frenesí hecho poesía</em> y sus textos han aparecido en suplementos y revistas literarias como <em>Grafógrafxs</em> y <em>Pérgola de Humo</em>.</p>
-            </div>
-          </div>
+    <!-- SECCIÓN INICIO / HERO -->
+    <section id="inicio" class="hero">
+      <h1 class="hero-title">Silvia Yulmaneli Moreno León</h1>
+      <p class="hero-subtitle">Escritora, Poeta & Ensayista</p>
+      <p class="hero-text">
+        Espacio dedicado a la exploración literaria, la creación poética y la difusión de proyectos editoriales e investigaciones culturales.
+      </p>
+
+      <!-- CARRUSEL ORBITAL (8 Nodos) -->
+      <div class="orbital-container" id="orbitalContainer">
+        <div class="orbit-ring"></div>
+        <div class="orbit-center">
+          <span>Obras & Universos</span>
         </div>
-      </section>
+        
+        <a href="#libros" class="orbit-item">Poesía</a>
+        <a href="#antologias" class="orbit-item">Narrativa</a>
+        <a href="#articulos" class="orbit-item">Ensayos</a>
+        <a href="#reconocimientos" class="orbit-item">Premios</a>
+        <a href="#presentaciones" class="orbit-item">Recitales</a>
+        <a href="#prensa" class="orbit-item">Prensa</a>
+        <a href="#fotografias" class="orbit-item">Galería</a>
+        <a href="#contacto" class="orbit-item">Contacto</a>
+      </div>
+    </section>
 
-      <!-- OBRAS CON CARRUSEL ORBITAL GIRATORIO -->
-      <section id="obras">
-        <div class="container">
-          <h2>Obras & Publicaciones</h2>
+    <!-- SECCIÓN BIOGRAFÍA / SEMBLANZA -->
+    <section id="biografia">
+      <h2 class="section-title">Biografía & Semblanza</h2>
+      <div id="semblanza" style="margin-top: 25px;">
+        <p>
+          Silvia Yulmaneli Moreno León es una escritora y gestora cultural cuya obra aborda la memoria, la estética de la palabra y la reflexión sobre el entorno contemporáneo. Ha colaborado en múltiples publicaciones literarias y proyectos editoriales independientes.
+        </p>
+      </div>
+
+      <div id="reconocimientos" style="margin-top: 35px;">
+        <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 10px;">Reconocimientos</h3>
+        <p>
+          Su trabajo ha sido distinguido en diversos certámenes de creación literaria y antologías poéticas a nivel regional e internacional.
+        </p>
+      </div>
+
+      <div id="trayectoria" style="margin-top: 35px;">
+        <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 10px;">Trayectoria</h3>
+        <p>
+          Participante activa en talleres literarios, mesas de diálogo, ferias del libro y recitales poéticos centrados en la difusión de nuevas voces literarias.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN OBRAS -->
+    <section id="obras">
+      <h2 class="section-title">Obras y Publicaciones</h2>
+      <div id="libros" style="margin-top: 25px;">
+        <h3 style="font-family: var(--fuente-titulo);">Libros Publicados</h3>
+        <p style="color: var(--texto-suave);">Selección de poemarios y colecciones individuales.</p>
+      </div>
+
+      <div id="antologias" style="margin-top: 30px;">
+        <h3 style="font-family: var(--fuente-titulo);">Antologías</h3>
+        <p style="color: var(--texto-suave);">Compilaciones poéticas y de narrativa en las que participa.</p>
+      </div>
+
+      <div id="articulos" style="margin-top: 30px;">
+        <h3 style="font-family: var(--fuente-titulo);">Ensayos y Crítica</h3>
+        <p style="color: var(--texto-suave);">Reflexiones sobre literatura, arte e investigación cultural.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN GALERÍA -->
+    <section id="galeria">
+      <h2 class="section-title">Galería & Medios</h2>
+      <div id="fotografias" style="margin-top: 25px;">
+        <p style="color: var(--texto-suave);">Fotografías de eventos, presentaciones de libros y lecturas en vivo.</p>
+      </div>
+      <div id="presentaciones" style="margin-top: 25px;">
+        <p style="color: var(--texto-suave);">Registro audiovisual de recitales y ponencias.</p>
+      </div>
+      <div id="prensa" style="margin-top: 25px;">
+        <p style="color: var(--texto-suave);">Reseñas, entrevistas y notas periodísticas.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto">
+      <h2 class="section-title">Contacto</h2>
+      <p style="margin-bottom: 25px; color: var(--texto-suave);">
+        Si deseas ponerte en contacto para lecturas, colaboraciones editoriales o invitaciones a eventos, escribe un mensaje a continuación:
+      </p>
+
+      <form class="contact-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="nombre">Nombre Completo</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT INTEGRADO -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- 1. LÓGICA DE MENÚS DESPLEGABLES (DROPDOWNS) ---
+      const dropdowns = document.querySelectorAll('.dropdown');
+
+      dropdowns.forEach(dropdown => {
+        const btn = dropdown.querySelector('.dropdown-btn');
+
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
           
-          <div class="carousel-orbit-wrapper">
-            <div class="carousel-orbit-center">
-              <div class="monogram">Y</div>
-              <span>Obras</span>
-            </div>
+          // Cerrar los otros dropdowns si se abre uno nuevo
+          dropdowns.forEach(other => {
+            if (other !== dropdown) {
+              other.classList.remove('active');
+            }
+          });
 
-            <div class="orbit-ring">
-              <!-- Círculo 1 -->
-              <div class="orbit-item" style="--i: 0;">
-                <a href="https://grafografxs.uaemex.mx/images/grafografxs/COLECCIN%20INVITACIN%20AL%20INCENDIO/cluster_b.pdf" target="_blank" class="circle-link" data-tooltip="PDF Novela Completa">
-                  <span class="circle-icon">📖</span>
-                  <span class="circle-title">Cluster B</span>
-                </a>
-              </div>
+          // Alternar el estado activo
+          dropdown.classList.toggle('active');
+        });
+      });
 
-              <!-- Círculo 2 -->
-              <div class="orbit-item" style="--i: 1;">
-                <a href="https://foem.edomex.gob.mx/jovenes-pasion-libertad" target="_blank" class="circle-link" data-tooltip="Fondo Editorial FOEM">
-                  <span class="circle-icon">📚</span>
-                  <span class="circle-title">Rincones</span>
-                </a>
-              </div>
+      // --- 2. POSICIONAMIENTO MATEMÁTICO DEL CARRUSEL ORBITAL ---
+      const items = document.querySelectorAll('.orbit-item');
+      const totalItems = items.length;
 
-              <!-- Círculo 3 -->
-              <div class="orbit-item" style="--i: 2;">
-                <a href="https://grafografxs.uaemex.mx/component/content/article/silvia-yulmaneli-moreno-le%C3%B3n-suministro-de-servicios.html" target="_blank" class="circle-link" data-tooltip="Cuento en Grafógrafxs">
-                  <span class="circle-icon">✍️</span>
-                  <span class="circle-title">Servicios</span>
-                </a>
-              </div>
+      function positionOrbitItems() {
+        const isMobile = window.innerWidth <= 768;
+        const radius = isMobile ? 130 : 180; // Radio del círculo según la pantalla
 
-              <!-- Círculo 4 -->
-              <div class="orbit-item" style="--i: 3;">
-                <a href="https://pergoladehumo.wixsite.com/website/post/voces-y-cantos-de-la-melancol%C3%ADa" target="_blank" class="circle-link" data-tooltip="Ensayo Filosófico">
-                  <span class="circle-icon">🥀</span>
-                  <span class="circle-title">Melancolía</span>
-                </a>
-              </div>
+        items.forEach((item, index) => {
+          // Calcular el ángulo equidistante para cada nodo (en radianes)
+          const angle = (index / totalItems) * (2 * Math.PI) - (Math.PI / 2);
+          
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
 
-              <!-- Círculo 5 -->
-              <div class="orbit-item" style="--i: 4;">
-                <a href="https://www.youtube.com/watch?v=E8DdgVhxZXQ" target="_blank" class="circle-link" data-tooltip="Entrevista Televisiva">
-                  <span class="circle-icon">🎙️</span>
-                  <span class="circle-title">Tertulia</span>
-                </a>
-              </div>
+          // Posicionar cada nodo relativo al centro del contenedor
+          item.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      }
 
-              <!-- Círculo 6 -->
-              <div class="orbit-item" style="--i: 5;">
-                <a href="#sobre" class="circle-link" data-tooltip="Ed. Norte/Sur">
-                  <span class="circle-icon">🖤</span>
-                  <span class="circle-title">Pizarnik</span>
-                </a>
-              </div>
+      positionOrbitItems();
+      window.addEventListener('resize', positionOrbitItems);
 
-              <!-- Círculo 7 -->
-              <div class="orbit-item" style="--i: 6;">
-                <a href="#sobre" class="circle-link" data-tooltip="Ponencia Alemania">
-                  <span class="circle-icon">📜</span>
-                  <span class="circle-title">Rulfo</span>
-                </a>
-              </div>
+      // --- 3. MENÚ RESPONSIVO (MÓVIL) ---
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('sidebar');
 
-              <!-- Círculo 8 -->
-              <div class="orbit-item" style="--i: 7;">
-                <a href="https://grafografxs.uaemex.mx/" target="_blank" class="circle-link" data-tooltip="Editorial Grafógrafxs">
-                  <span class="circle-icon">📜</span>
-                  <span class="circle-title">Ensayos</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
 
-      <!-- MENSAJES -->
-      <section id="comentarios">
-        <div class="container">
-          <h2>Dejar un Mensaje</h2>
-          <form class="comment-form" action="#" method="POST">
-            <div>
-              <label for="nombre">Nombre o Seudónimo</label>
-              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre..." required>
-            </div>
-            <div>
-              <label for="mensaje">Mensaje o comentario de lectura</label>
-              <textarea id="mensaje" name="mensaje" placeholder="Escribe tus palabras para la autora..." required></textarea>
-            </div>
-            <button type="submit">Enviar Comentario</button>
-          </form>
-        </div>
-      </section>
+        // Cerrar sidebar al hacer clic en un enlace en móviles
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+          link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+              sidebar.classList.remove('open');
+            }
+          });
+        });
+      }
 
-      <!-- CONTACTO -->
-      <section id="contacto">
-        <div class="container">
-          <h2>Contacto</h2>
-          <div class="contact-card">
-            <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.85rem;">Para lecturas, presentaciones y colaboraciones literarias:</p>
-            <a href="mailto:yulmaneli.leon@gmail.com" class="contact-email">yulmaneli.leon@gmail.com</a>
-            
-            <div class="socials">
-              <a href="https://grafografxs.uaemex.mx" target="_blank">Grafógrafxs</a>
-              <a href="https://foem.edomex.gob.mx" target="_blank">FOEM Edomex</a>
-              <a href="https://www.instagram.com" target="_blank">Instagram</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <p>© Silvia Yulmaneli Moreno León — Todos los derechos reservados.</p>
-      </div>
-    </footer>
-  </div>
-
-  <a href="#" class="btn-top" title="Subir">↑</a>
-
+    });
+  </script>
 </body>
 </html>
