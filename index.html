@@ -13,8 +13,6 @@
   <style>
     /* --- VARIABLES GLOBALES Y PALETA DE COLORES --- */
     :root {
-      --bg-principal: #faf8f5;     /* Marfil / Crema */
-      --bg-secundario: #f2ebe4;   /* Taupe suave */
       --texto-principal: #3a3231;  /* Café oscuro neutro */
       --texto-suave: #6e625f;      /* Taupe medio */
       --acento-dorado: #b8860b;    /* Dorado antiguo */
@@ -34,7 +32,6 @@
     }
 
     body {
-      background-color: var(--bg-principal);
       color: var(--texto-principal);
       font-family: var(--fuente-cuerpo);
       line-height: 1.7;
@@ -44,10 +41,58 @@
       position: relative;
     }
 
+    /* --- EFECTO HARRIS EN EL FONDO --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('yul.jpeg'); /* Asegúrate de que yul.jpeg esté en la misma carpeta */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -2; /* Detrás de todo */
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Efecto Harris: mezcla de capas RGB */
+      background-image: 
+        url('yul.jpeg'),
+        url('yul.jpeg'),
+        url('yul.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: color-dodge, color-burn, difference; /* O experimenta con exclusion, screen, exclusion */
+      filter: contrast(120%) saturate(130%); /* Ajustes opcionales */
+      z-index: -1; /* Encima de la imagen base, debajo del contenido */
+    }
+
+    /* Ajuste de opacidad para el efecto Harris (transparencia solicitada) */
+    body::after {
+      opacity: 0.6; /* Ajusta este valor según la transparencia que desees para el efecto */
+    }
+
+    /* Opcional: una capa de color base para suavizar si la imagen es muy intensa */
+    /*
+    body::before {
+      background-color: rgba(250, 248, 245, 0.8); /* Color crema con opacidad */
+      z-index: -3;
+    }
+    */
+
     /* --- NAVEGACIÓN Y PANEL LATERAL --- */
     .sidebar {
       width: var(--sidebar-width);
-      background-color: var(--bg-secundario);
+      background-color: rgba(242, 235, 228, 0.9); /* Taupe suave con transparencia */
       border-right: 1px solid rgba(212, 175, 55, 0.3);
       padding: 40px 25px;
       position: fixed;
@@ -171,7 +216,7 @@
       left: 0;
       right: 0;
       height: 60px;
-      background-color: var(--bg-secundario);
+      background-color: rgba(242, 235, 228, 0.9); /* Con transparencia */
       border-bottom: 1px solid var(--borde-dorado);
       padding: 0 20px;
       align-items: center;
@@ -206,6 +251,10 @@
       scroll-margin-top: 80px;
       position: relative;
       z-index: 2;
+      /* Fondo semi-transparente para el contenido si la imagen de fondo es muy ruidosa */
+      background-color: rgba(250, 248, 245, 0.7); 
+      padding: 20px;
+      border-radius: 8px;
     }
 
     .section-title {
@@ -231,6 +280,7 @@
     .hero {
       text-align: center;
       padding: 40px 0;
+      background: none; /* Sin fondo extra en hero */
     }
 
     .hero-title {
@@ -279,7 +329,7 @@
       width: 140px;
       height: 140px;
       border-radius: 50%;
-      background-color: var(--bg-secundario);
+      background-color: rgba(242, 235, 228, 0.9); /* Con transparencia */
       border: 2px solid var(--borde-dorado);
       display: flex;
       flex-direction: column;
@@ -319,7 +369,7 @@
       margin-top: -37.5px;
       margin-left: -37.5px;
       border-radius: 50%;
-      background-color: var(--bg-principal);
+      background-color: rgba(250, 248, 245, 0.9); /* Con transparencia */
       border: 1.5px solid var(--borde-dorado);
       display: flex;
       justify-content: center;
@@ -395,7 +445,7 @@
       margin-top: 15px;
       border: 1px solid var(--borde-dorado);
       border-radius: 6px;
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.9); /* Con transparencia */
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     }
@@ -403,7 +453,7 @@
     .gallery-accordion-btn {
       width: 100%;
       padding: 15px 20px;
-      background-color: var(--bg-secundario);
+      background-color: rgba(242, 235, 228, 0.9); /* Con transparencia */
       border: none;
       display: flex;
       justify-content: space-between;
@@ -433,7 +483,7 @@
     .gallery-accordion-content {
       display: none;
       padding: 25px 20px;
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.9); /* Con transparencia */
       border-top: 1px dashed var(--borde-dorado);
     }
 
@@ -451,7 +501,7 @@
 
     .photo-placeholder {
       aspect-ratio: 4 / 5;
-      background-color: var(--bg-principal);
+      background-color: rgba(250, 248, 245, 0.9); /* Con transparencia */
       border: 2px dashed var(--borde-dorado);
       border-radius: 6px;
       display: flex;
@@ -471,7 +521,7 @@
     .photo-placeholder:hover {
       border-style: solid;
       border-color: var(--acento-dorado);
-      background-color: var(--bg-secundario);
+      background-color: rgba(242, 235, 228, 0.9);
       transform: translateY(-3px);
       box-shadow: 0 6px 15px rgba(0,0,0,0.06);
     }
@@ -490,55 +540,12 @@
       color: var(--texto-principal);
     }
 
-    /* --- CONTENEDOR FOTO YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ --- */
+    /* --- ELIMINADO EL CONTENEDOR FOTO YUL.JPEG ORIGINAL DE CONTACTO --- */
+    /*
     .yul-image-container {
-      position: absolute;
-      right: 0;
-      bottom: -30px;
-      width: 420px;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.08);
-      z-index: 2;
+      ...
     }
-
-    .bg-image-yul {
-      width: 100%;
-      height: auto;
-      display: block;
-      opacity: 0.85;
-      border-radius: 8px;
-    }
-
-    .triangle-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 65px 65px 0;
-      border-color: transparent var(--acento-dorado) transparent transparent;
-      cursor: pointer;
-      z-index: 10;
-      transition: filter 0.3s ease;
-      background: none;
-      padding: 0;
-      outline: none;
-    }
-
-    .triangle-btn:hover {
-      filter: drop-shadow(-2px 2px 4px rgba(0,0,0,0.3)) brightness(1.15);
-    }
-
-    .triangle-btn-icon {
-      position: absolute;
-      top: 10px;
-      right: -55px;
-      color: #ffffff;
-      font-size: 1.1rem;
-      pointer-events: none;
-    }
+    */
 
     /* --- BOTÓN TRIANGULAR AZUL FIJO EN EL LATERAL DERECHO --- */
     .right-sidebar-blue-triangle {
@@ -614,7 +621,7 @@
     .btn-submit {
       padding: 12px 25px;
       background-color: var(--texto-principal);
-      color: var(--bg-principal);
+      color: rgba(250, 248, 245, 0.9); /* Marfil con transparencia */
       border: none;
       border-radius: 4px;
       font-family: var(--fuente-titulo);
@@ -778,7 +785,7 @@
       background-color: #2b3a4a;
     }
 
-    /* ESTILOS CARRUSEL DE IMÁGENES (BOTÓN CAFÉ EN YUL.JPEG) */
+    /* ESTILOS CARRUSEL DE IMÁGENES (BOTÓN CAFÉ: 44.jpg - 49.jpg) */
     .photo-slide-frame {
       width: 100%;
       height: 420px;
@@ -846,7 +853,7 @@
     /* --- RESPONSIVIDAD --- */
     @media (max-width: 768px) {
       .mobile-header { display: flex; }
-      .sidebar { transform: translateX(-100%); transition: transform 0.3s ease-in-out; width: 260px; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s ease-in-out; width: 260px; background-color: rgba(242, 235, 228, 0.98); }
       .sidebar.open { transform: translateX(0); }
       .main-content { margin-left: 0; padding: 80px 20px 40px 20px; }
       .bio-container { flex-direction: column; }
@@ -856,7 +863,6 @@
       .orbit-ring, .orbit-track { width: 260px; height: 260px; }
       .orbit-center { width: 110px; height: 110px; }
       .orbit-item { width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; font-size: 0.65rem; }
-      .yul-image-container { width: 260px; bottom: -10px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
       .modal-nav-btn.prev { left: 5px; }
       .modal-nav-btn.next { right: 5px; }
@@ -1021,7 +1027,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ -->
+    <!-- SECCIÓN CONTACTO -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
       <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
@@ -1041,14 +1047,8 @@
         </div>
         <button type="submit" class="btn-submit">Enviar Mensaje</button>
       </form>
-
-      <div class="yul-image-container">
-        <!-- BOTÓN TRIANGULAR CAFÉ (ALINEADO A LA FOTO) -->
-        <button class="triangle-btn" id="openPhotoCarouselBtn" title="Abrir carrusel de imágenes">
-          <span class="triangle-btn-icon">📷</span>
-        </button>
-        <img src="yul.jpeg" alt="Imagen decorativa Yul" class="bg-image-yul">
-      </div>
+      
+      <!-- FOTO YUL.JPEG ELIMINADA DE AQUÍ, AHORA ES FONDO DE PÁGINA -->
     </section>
 
   </main>
@@ -1098,206 +1098,190 @@
 
         <button class="modal-nav-btn next" id="nextPhotoBtn">&#10095;</button>
       </div>
-
+      
       <div class="photo-thumbnails-strip" id="photoThumbnailsStrip"></div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT INTEGRADO -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // --- LÓGICA DEL MENÚ MÓVIL Y DROPDOWNS ---
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
 
-      // --- 1. MENÚS DESPLEGABLES DEL SIDEBAR ---
-      const dropdowns = document.querySelectorAll('.dropdown');
-      dropdowns.forEach(dropdown => {
-        const btn = dropdown.querySelector('.dropdown-btn');
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          dropdowns.forEach(other => { if (other !== dropdown) other.classList.remove('active'); });
-          dropdown.classList.toggle('active');
-        });
-      });
-
-      // --- 2. ACORDEÓN DESPLEGABLE DE GALERÍA DE EVENTOS ---
-      const galleryBtn = document.getElementById('galleryAccordionBtn');
-      const galleryAccordion = galleryBtn ? galleryBtn.closest('.gallery-accordion') : null;
-      if (galleryBtn && galleryAccordion) {
-        galleryBtn.addEventListener('click', () => {
-          galleryAccordion.classList.toggle('open');
-        });
-      }
-
-      // --- 3. POSICIONAMIENTO ORBITAL ---
-      const items = document.querySelectorAll('.orbit-item');
-      function positionOrbitItems() {
-        const radius = window.innerWidth <= 768 ? 130 : 180;
-        items.forEach((item, index) => {
-          const angle = (index / items.length) * (2 * Math.PI) - (Math.PI / 2);
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          item.style.transform = `translate(${x}px, ${y}px)`;
-        });
-      }
-      positionOrbitItems();
-      window.addEventListener('resize', positionOrbitItems);
-
-      // --- 4. MENÚ RESPONSIVO (MÓVIL) ---
-      const menuToggle = document.getElementById('menuToggle');
-      const sidebar = document.getElementById('sidebar');
-      if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-        document.querySelectorAll('.sidebar nav a').forEach(link => {
-          link.addEventListener('click', () => { if (window.innerWidth <= 768) sidebar.classList.remove('open'); });
-        });
-      }
-
-      // --- 5. CARRUSEL DE VÍDEOS EN EL BOTÓN TRIANGULAR AZUL ---
-      const videoList = [
-        { title: 'The Cleaners from Venus - Wivenhoe Bells (II)', embedUrl: 'https://www.youtube.com/embed/MAvEHIX-4ic' },
-        { title: 'Interpol - Obstacle 1', embedUrl: 'https://www.youtube.com/watch?v=-u6DvRyyKGU' },
-        { title: 'Interpol - Evil', embedUrl: 'https://www.youtube.com/embed/dkpgz3uQ58U' }
-      ];
-
-      let currentVideoSlide = 0;
-      const videoModal = document.getElementById('videoCarouselModal');
-      const openVideoBtn = document.getElementById('openVideoCarouselBtn');
-      const closeVideoBtn = document.getElementById('closeVideoCarouselBtn');
-      const prevVideoBtn = document.getElementById('prevVideoBtn');
-      const nextVideoBtn = document.getElementById('nextVideoBtn');
-      const videoFrame = document.getElementById('videoSlideFrame');
-      const videoCounter = document.getElementById('videoSlideCounter');
-      const videoThumbsStrip = document.getElementById('videoThumbnailsStrip');
-
-      videoList.forEach((vObj, index) => {
-        const thumb = document.createElement('div');
-        thumb.classList.add('video-thumb');
-        if (index === 0) thumb.classList.add('active');
-        thumb.textContent = vObj.title;
-        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(true); });
-        videoThumbsStrip.appendChild(thumb);
-      });
-
-      function updateVideoSlide(autoplay = true) {
-        const vObj = videoList[currentVideoSlide];
-        videoCounter.textContent = `Vídeo ${currentVideoSlide + 1} de ${videoList.length} - ${vObj.title}`;
-        
-        const autoplayParam = autoplay ? '?autoplay=1' : '';
-        videoFrame.innerHTML = `
-          <iframe src="${vObj.embedUrl}${autoplayParam}" title="${vObj.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        `;
-
-        const thumbs = videoThumbsStrip.querySelectorAll('.video-thumb');
-        thumbs.forEach((t, i) => {
-          if (i === currentVideoSlide) {
-            t.classList.add('active');
-            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          } else {
-            t.classList.remove('active');
-          }
-        });
-      }
-
-      openVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = 0; // Iniciar en Wivenhoe Bells (II)
-        videoModal.classList.add('active');
-        updateVideoSlide(true); // Se inicia reproducción automática
-      });
-
-      closeVideoBtn.addEventListener('click', () => {
-        videoModal.classList.remove('active');
-        videoFrame.innerHTML = ''; // Detener reproducción al cerrar
-      });
-
-      nextVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = (currentVideoSlide + 1) % videoList.length;
-        updateVideoSlide(true);
-      });
-
-      prevVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = (currentVideoSlide - 1 + videoList.length) % videoList.length;
-        updateVideoSlide(true);
-      });
-
-
-      // --- 6. CARRUSEL DE IMÁGENES (44.jpg - 49.jpg) EN EL BOTÓN TRIANGULAR CAFÉ ---
-      const photoList = [
-        { filename: '44.jpg', alt: 'Imagen 44' },
-        { filename: '45.jpg', alt: 'Imagen 45' },
-        { filename: '46.jpg', alt: 'Imagen 46' },
-        { filename: '47.jpg', alt: 'Imagen 47' },
-        { filename: '48.jpg', alt: 'Imagen 48' },
-        { filename: '49.jpg', alt: 'Imagen 49' }
-      ];
-
-      let currentPhotoSlide = 0;
-      const photoModal = document.getElementById('photoCarouselModal');
-      const openPhotoBtn = document.getElementById('openPhotoCarouselBtn');
-      const closePhotoBtn = document.getElementById('closePhotoCarouselBtn');
-      const prevPhotoBtn = document.getElementById('prevPhotoBtn');
-      const nextPhotoBtn = document.getElementById('nextPhotoBtn');
-      const photoFrame = document.getElementById('photoSlideFrame');
-      const photoCounter = document.getElementById('photoSlideCounter');
-      const photoThumbsStrip = document.getElementById('photoThumbnailsStrip');
-
-      photoList.forEach((imgObj, index) => {
-        const thumb = document.createElement('div');
-        thumb.classList.add('photo-thumb');
-        if (index === 0) thumb.classList.add('active');
-        thumb.innerHTML = `<img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerText='${imgObj.filename}';">`;
-        thumb.addEventListener('click', () => { currentPhotoSlide = index; updatePhotoSlide(); });
-        photoThumbsStrip.appendChild(thumb);
-      });
-
-      function updatePhotoSlide() {
-        const imgObj = photoList[currentPhotoSlide];
-        photoCounter.textContent = `Imagen ${currentPhotoSlide + 1} de ${photoList.length} - ${imgObj.filename}`;
-        photoFrame.innerHTML = `
-          <img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerHTML='<div style=\'color:#aaa; font-family:var(--fuente-cuerpo); text-align:center;\'><div style=\'font-size:2rem; margin-bottom:10px;\'>🖼️</div><p>${imgObj.filename}</p><span style=\'font-size:0.8rem; color:var(--acento-rosa);\'>Asegúrate de tener este archivo en la misma carpeta</span></div>';">
-        `;
-
-        const thumbs = photoThumbsStrip.querySelectorAll('.photo-thumb');
-        thumbs.forEach((t, i) => {
-          if (i === currentPhotoSlide) {
-            t.classList.add('active');
-            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          } else {
-            t.classList.remove('active');
-          }
-        });
-      }
-
-      openPhotoBtn.addEventListener('click', () => {
-        photoModal.classList.add('active');
-        updatePhotoSlide();
-      });
-
-      closePhotoBtn.addEventListener('click', () => {
-        photoModal.classList.remove('active');
-      });
-
-      nextPhotoBtn.addEventListener('click', () => {
-        currentPhotoSlide = (currentPhotoSlide + 1) % photoList.length;
-        updatePhotoSlide();
-      });
-
-      prevPhotoBtn.addEventListener('click', () => {
-        currentPhotoSlide = (currentPhotoSlide - 1 + photoList.length) % photoList.length;
-        updatePhotoSlide();
-      });
-
-
-      // Cierre de modales al hacer clic fuera del contenedor
-      window.addEventListener('click', (e) => {
-        if (e.target === videoModal) {
-          videoModal.classList.remove('active');
-          videoFrame.innerHTML = '';
-        }
-        if (e.target === photoModal) {
-          photoModal.classList.remove('active');
-        }
-      });
-
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
     });
+
+    // Cerrar sidebar al hacer click en un enlace (móvil)
+    const navLinks = document.querySelectorAll('.nav-item > a, .dropdown-content a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+        }
+      });
+    });
+
+    dropdownBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evitar que el click cierre el menú en móvil
+        const currentDropdown = btn.closest('.dropdown');
+        const isOpen = currentDropdown.classList.contains('active');
+
+        // Cerrar otros dropdowns abiertos
+        document.querySelectorAll('.dropdown').forEach(dd => {
+          if (dd !== currentDropdown) dd.classList.remove('active');
+        });
+
+        currentDropdown.classList.toggle('active');
+      });
+    });
+
+    // Cerrar dropdowns al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(dd => dd.classList.remove('active'));
+      }
+    });
+
+    // --- LÓGICA DEL ACORDEÓN DE LA GALERÍA ---
+    const galleryAccordionBtn = document.getElementById('galleryAccordionBtn');
+    const galleryAccordion = galleryAccordionBtn.closest('.gallery-accordion');
+
+    galleryAccordionBtn.addEventListener('click', () => {
+      galleryAccordion.classList.toggle('open');
+    });
+
+
+    // --- DATOS DE LOS CARRUSELES (Ajusta los enlaces y nombres reales) ---
+    const videoData = [
+      { id: 'VIDEO_ID_1', title: 'Ponencia Filosofía UAEMex' }, // Ej: YouTube Video ID
+      { id: 'VIDEO_ID_2', title: 'Lectura de Obra - Novela' },
+      { id: 'VIDEO_ID_3', title: 'Entrevista Cultural - Radio' }
+    ];
+
+    const photoData = [
+      { src: '44.jpg', alt: 'Evento 1' },
+      { src: '45.jpg', alt: 'Presentación de Libro' },
+      { src: '46.jpg', alt: 'Firma de Autógrafos' },
+      { src: '47.jpg', alt: 'Congreso Internacional' },
+      { src: '48.jpg', alt: 'Mesa Redonda' },
+      { src: '49.jpg', alt: 'Mesa Redonda' }
+    ];
+
+    // --- FUNCIONALIDAD GENÉRICA DE CARRUSEL EN MODAL ---
+    function setupCarousel(modalId, openBtnId, closeBtnId, prevBtnId, nextBtnId, slideFrameId, counterId, thumbnailsStripId, data, type) {
+      const modal = document.getElementById(modalId);
+      const openBtn = document.getElementById(openBtnId);
+      const closeBtn = document.getElementById(closeBtnId);
+      const prevBtn = document.getElementById(prevBtnId);
+      const nextBtn = document.getElementById(nextBtnId);
+      const slideFrame = document.getElementById(slideFrameId);
+      const counter = document.getElementById(counterId);
+      const thumbnailsStrip = document.getElementById(thumbnailsStripId);
+      
+      if (!openBtn || !modal) return; // Asegurar que existen los elementos
+
+      let currentIndex = 0;
+
+      function updateSlide(index) {
+        currentIndex = (index + data.length) % data.length; // Ciclo infinito
+        slideFrame.innerHTML = ''; // Limpiar frame actual
+        thumbnailsStrip.innerHTML = ''; // Limpiar miniaturas
+
+        // Actualizar Contador
+        const textType = type === 'video' ? 'Vídeo' : 'Imagen';
+        counter.textContent = `${textType} ${currentIndex + 1} de ${data.length}`;
+
+        // Insertar Contenido Principal (vídeo o foto)
+        if (type === 'video') {
+          // Usar YouTube Embed como ejemplo
+          const videoId = data[currentIndex].id;
+          if (videoId === 'VIDEO_ID_1' || videoId === 'VIDEO_ID_2' || videoId === 'VIDEO_ID_3') {
+              slideFrame.innerHTML = `<div style="color: #666; font-size: 0.9rem; text-align: center; padding: 20px;">
+                                      [ Aquí va el iframe de YouTube ]<br>Reemplaza 'VIDEO_ID' en JS<br>
+                                      ID: ${videoId}<br>Títuo: ${data[currentIndex].title}
+                                    </div>`;
+          } else {
+            slideFrame.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" title="${data[currentIndex].title}" allowfullscreen></iframe>`;
+          }
+        } else if (type === 'photo') {
+          slideFrame.innerHTML = `<img src="${data[currentIndex].src}" alt="${data[currentIndex].alt}">`;
+        }
+
+        // Generar y Actualizar Miniaturas
+        data.forEach((item, i) => {
+          const thumb = document.createElement('div');
+          thumb.classList.add(type === 'video' ? 'video-thumb' : 'photo-thumb');
+          if (i === currentIndex) thumb.classList.add('active');
+          
+          if (type === 'video') {
+            thumb.innerHTML = `<span>${item.title}</span>`;
+          } else {
+            thumb.innerHTML = `<img src="${item.src}" alt="Miniautra ${i + 1}">`;
+          }
+          
+          thumb.addEventListener('click', () => updateSlide(i));
+          thumbnailsStrip.appendChild(thumb);
+        });
+        
+        // Centrar miniatura activa
+        const activeThumb = thumbnailsStrip.querySelector('.active');
+        if (activeThumb) {
+          activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+
+      // Eventos
+      openBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+        updateSlide(0); // Empezar en la primera
+        document.body.style.overflow = 'hidden'; // Bloquear scroll de página
+      });
+
+      function closeModal() {
+        modal.classList.remove('active');
+        slideFrame.innerHTML = ''; // Detener vídeos al cerrar
+        document.body.style.overflow = ''; // Restaurar scroll
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(); // Cerrar al hacer click en el overlay
+      });
+
+      // Navegación
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); updateSlide(currentIndex - 1); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); updateSlide(currentIndex + 1); });
+
+      // Soporte de teclado
+      document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('active')) {
+          if (e.key === 'ArrowLeft') updateSlide(currentIndex - 1);
+          if (e.key === 'ArrowRight') updateSlide(currentIndex + 1);
+          if (e.key === 'Escape') closeModal();
+        }
+      });
+    }
+
+    // --- INICIALIZAR CARRUSELES ---
+    // Vídeos (Botón Azul Fijo)
+    setupCarousel(
+      'videoCarouselModal', 'openVideoCarouselBtn', 'closeVideoCarouselBtn',
+      'prevVideoBtn', 'nextVideoBtn', 'videoSlideFrame', 'videoSlideCounter', 'videoThumbnailsStrip',
+      videoData, 'video'
+    );
+
+    // Imágenes (No hay botón en contacto ahora, pero si añades uno en Galería, usa esta lógica)
+    /*
+    setupCarousel(
+      'photoCarouselModal', 'openPhotoCarouselBtn_GALERIA', 'closePhotoCarouselBtn', // Asigna una ID al botón en la galería
+      'prevPhotoBtn', 'nextPhotoBtn', 'photoSlideFrame', 'photoSlideCounter', 'photoThumbnailsStrip',
+      photoData, 'photo'
+    );
+    */
+
   </script>
 </body>
 </html>
