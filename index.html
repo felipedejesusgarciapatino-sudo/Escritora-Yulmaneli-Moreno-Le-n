@@ -19,6 +19,7 @@
       --texto-suave: #6e625f;      /* Taupe medio */
       --acento-dorado: #b8860b;    /* Dorado antiguo */
       --acento-rosa: #d8a7a1;      /* Rosa empolvado */
+      --acento-azul: #2b6cb0;      /* Azul elegante */
       --borde-dorado: #d4af37;     /* Borde dorado */
       --fuente-titulo: 'Playfair Display', serif;
       --fuente-cuerpo: 'Lora', serif;
@@ -389,7 +390,7 @@
       text-align: justify;
     }
 
-    /* --- COMPONENTE DESPLEGABLE DE GALERÍA DE EVENTOS --- */
+    /* --- GALERÍA DESPLEGABLE --- */
     .gallery-accordion {
       margin-top: 15px;
       border: 1px solid var(--borde-dorado);
@@ -489,7 +490,7 @@
       color: var(--texto-principal);
     }
 
-    /* --- CONTENEDOR CON IMAGEN YUL.JPEG Y BOTÓN TRIANGULAR DE ESQUINA --- */
+    /* --- CONTENEDOR FOTO YUL.JPEG CON BOTÓN TRIANGULAR DE FOTOS --- */
     .yul-image-container {
       position: absolute;
       right: 0;
@@ -509,7 +510,6 @@
       border-radius: 8px;
     }
 
-    /* BOTÓN TRIANGULAR EN LA ESQUINA SUPERIOR DERECHA */
     .triangle-btn {
       position: absolute;
       top: 0;
@@ -521,7 +521,7 @@
       border-color: transparent var(--acento-dorado) transparent transparent;
       cursor: pointer;
       z-index: 10;
-      transition: filter 0.3s ease, transform 0.2s ease;
+      transition: filter 0.3s ease;
       background: none;
       padding: 0;
       outline: none;
@@ -537,6 +537,40 @@
       right: -55px;
       color: #ffffff;
       font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    /* --- BOTÓN TRIANGULAR AZUL FIJO EN EL LATERAL DERECHO DE LA PÁGINA --- */
+    .right-sidebar-blue-triangle {
+      position: fixed;
+      right: 0;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 30px 45px 30px 0;
+      border-color: transparent var(--acento-azul) transparent transparent;
+      cursor: pointer;
+      z-index: 900;
+      background: none;
+      padding: 0;
+      outline: none;
+      filter: drop-shadow(-3px 3px 6px rgba(0,0,0,0.25));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .right-sidebar-blue-triangle:hover {
+      transform: translateY(-50%) scale(1.12);
+      filter: drop-shadow(-4px 4px 10px rgba(43, 108, 176, 0.5));
+    }
+
+    .blue-triangle-icon {
+      position: absolute;
+      top: -9px;
+      right: -38px;
+      color: #ffffff;
+      font-size: 1rem;
       pointer-events: none;
     }
 
@@ -593,8 +627,8 @@
       background-color: var(--acento-dorado);
     }
 
-    /* --- MODAL / CARRUSEL TIPO FACEBOOK (20 FOTOS) --- */
-    .fb-carousel-modal {
+    /* --- MODALES GENERALES --- */
+    .modal-overlay {
       display: none;
       position: fixed;
       top: 0;
@@ -609,12 +643,12 @@
       transition: opacity 0.3s ease;
     }
 
-    .fb-carousel-modal.active {
+    .modal-overlay.active {
       display: flex;
       opacity: 1;
     }
 
-    .fb-carousel-container {
+    .modal-container {
       width: 90%;
       max-width: 900px;
       background-color: #1a1a1a;
@@ -628,7 +662,7 @@
       align-items: center;
     }
 
-    .fb-carousel-header {
+    .modal-header {
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -640,7 +674,7 @@
       font-family: var(--fuente-titulo);
     }
 
-    .fb-carousel-close {
+    .modal-close {
       background: none;
       border: none;
       color: #ffffff;
@@ -649,11 +683,11 @@
       transition: color 0.2s ease;
     }
 
-    .fb-carousel-close:hover {
+    .modal-close:hover {
       color: var(--acento-rosa);
     }
 
-    .fb-carousel-body {
+    .modal-body {
       width: 100%;
       position: relative;
       display: flex;
@@ -662,6 +696,80 @@
       min-height: 380px;
     }
 
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      border: 1px solid var(--borde-dorado);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .modal-nav-btn:hover {
+      background-color: var(--acento-dorado);
+      color: #000;
+    }
+
+    .modal-nav-btn.prev { left: -22px; }
+    .modal-nav-btn.next { right: -22px; }
+
+    /* ESTILOS CARRUSEL DE VIDEOS */
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .video-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-thumbnails-strip {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .video-thumb {
+      flex: 1;
+      max-width: 220px;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #aaa;
+      font-size: 0.8rem;
+      font-family: var(--fuente-cuerpo);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .video-thumb.active {
+      border-color: var(--acento-azul);
+      background-color: #2b3a4a;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(43, 108, 176, 0.5);
+    }
+
+    /* ESTILOS CARRUSEL FOTOS */
     .fb-slide-frame {
       width: 100%;
       height: 380px;
@@ -672,7 +780,6 @@
       border-radius: 6px;
       background-color: #111;
       overflow: hidden;
-      position: relative;
     }
 
     .fb-slide-frame img {
@@ -692,33 +799,6 @@
       margin-bottom: 10px;
       color: var(--acento-dorado);
     }
-
-    .fb-nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.6);
-      color: #ffffff;
-      border: 1px solid var(--borde-dorado);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      z-index: 5;
-    }
-
-    .fb-nav-btn:hover {
-      background-color: var(--acento-dorado);
-      color: #000;
-    }
-
-    .fb-nav-btn.prev { left: -22px; }
-    .fb-nav-btn.next { right: -22px; }
 
     .fb-thumbnails-strip {
       display: flex;
@@ -759,75 +839,25 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- RESPONSIVIDAD (TABLETS Y MÓVILES) --- */
+    /* --- RESPONSIVIDAD --- */
     @media (max-width: 768px) {
-      .mobile-header {
-        display: flex;
-      }
-
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        width: 260px;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: 80px 20px 40px 20px;
-      }
-
-      .bio-container {
-        flex-direction: column;
-      }
-
-      .bio-image-wrapper {
-        width: 100%;
-        max-width: 280px;
-        margin: 0 auto;
-      }
-
-      .hero-title {
-        font-size: 2.2rem;
-      }
-
-      .orbital-container {
-        height: 360px;
-      }
-
-      .orbit-ring, .orbit-track {
-        width: 260px;
-        height: 260px;
-      }
-
-      .orbit-center {
-        width: 110px;
-        height: 110px;
-      }
-
-      .orbit-item {
-        width: 60px;
-        height: 60px;
-        margin-top: -30px;
-        margin-left: -30px;
-        font-size: 0.65rem;
-      }
-
-      .yul-image-container {
-        width: 260px;
-        bottom: -10px;
-      }
-
-      .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 12px;
-      }
-      
-      .fb-nav-btn.prev { left: 5px; }
-      .fb-nav-btn.next { right: 5px; }
+      .mobile-header { display: flex; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s ease-in-out; width: 260px; }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; padding: 80px 20px 40px 20px; }
+      .bio-container { flex-direction: column; }
+      .bio-image-wrapper { width: 100%; max-width: 280px; margin: 0 auto; }
+      .hero-title { font-size: 2.2rem; }
+      .orbital-container { height: 360px; }
+      .orbit-ring, .orbit-track { width: 260px; height: 260px; }
+      .orbit-center { width: 110px; height: 110px; }
+      .orbit-item { width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; font-size: 0.65rem; }
+      .yul-image-container { width: 260px; bottom: -10px; }
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+      .modal-nav-btn.prev { left: 5px; }
+      .modal-nav-btn.next { right: 5px; }
+      .right-sidebar-blue-triangle { border-width: 22px 32px 22px 0; }
+      .blue-triangle-icon { right: -28px; font-size: 0.85rem; top: -7px; }
     }
   </style>
 </head>
@@ -839,6 +869,11 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
   </header>
 
+  <!-- BOTÓN TRIANGULAR AZUL DE REPRODUCCIÓN (LATERAL DERECHO) -->
+  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" title="Reproducir videos musicales">
+    <span class="blue-triangle-icon">▶</span>
+  </button>
+
   <!-- BARRA LATERAL / NAVEGACIÓN -->
   <aside class="sidebar" id="sidebar">
     <div>
@@ -849,15 +884,10 @@
 
       <nav class="sidebar-nav">
         <ul class="nav-list">
-          <li class="nav-item">
-            <a href="#inicio">Inicio</a>
-          </li>
+          <li class="nav-item"><a href="#inicio">Inicio</a></li>
 
-          <!-- Dropdown 1: Biografía -->
           <li class="nav-item dropdown">
-            <button class="dropdown-btn">
-              Biografía <span class="arrow">▾</span>
-            </button>
+            <button class="dropdown-btn">Biografía <span class="arrow">▾</span></button>
             <ul class="dropdown-content">
               <li><a href="#semblanza">Semblanza</a></li>
               <li><a href="#reconocimientos">Reconocimientos</a></li>
@@ -865,11 +895,8 @@
             </ul>
           </li>
 
-          <!-- Dropdown 2: Obras -->
           <li class="nav-item dropdown">
-            <button class="dropdown-btn">
-              Obras <span class="arrow">▾</span>
-            </button>
+            <button class="dropdown-btn">Obras <span class="arrow">▾</span></button>
             <ul class="dropdown-content">
               <li><a href="#libros">Libros & Publicaciones</a></li>
               <li><a href="#antologias">Antologías</a></li>
@@ -877,11 +904,8 @@
             </ul>
           </li>
 
-          <!-- Dropdown 3: Galería & Medios -->
           <li class="nav-item dropdown">
-            <button class="dropdown-btn">
-              Galería <span class="arrow">▾</span>
-            </button>
+            <button class="dropdown-btn">Galería <span class="arrow">▾</span></button>
             <ul class="dropdown-content">
               <li><a href="#fotografias">Fotografías</a></li>
               <li><a href="#presentaciones">Presentaciones</a></li>
@@ -889,9 +913,7 @@
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="#contacto">Contacto</a>
-          </li>
+          <li class="nav-item"><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -915,10 +937,7 @@
       <!-- CARRUSEL ORBITAL ANIMADO -->
       <div class="orbital-container" id="orbitalContainer">
         <div class="orbit-ring"></div>
-        <div class="orbit-center">
-          <span>Obras & Universos</span>
-        </div>
-        
+        <div class="orbit-center"><span>Obras & Universos</span></div>
         <div class="orbit-track" id="orbitTrack">
           <a href="#libros" class="orbit-item"><span>Filosofía</span></a>
           <a href="#antologias" class="orbit-item"><span>Narrativa</span></a>
@@ -932,40 +951,26 @@
       </div>
     </section>
 
-    <!-- SECCIÓN BIOGRAFÍA / SEMBLANZA -->
+    <!-- SECCIÓN BIOGRAFÍA -->
     <section id="biografia">
       <h2 class="section-title">Biografía & Semblanza</h2>
-
       <div class="bio-container">
         <div class="bio-image-wrapper">
           <img src="yu.jpeg" alt="Silvia Yulmaneli Moreno León" class="bio-image">
         </div>
-
         <div class="bio-text-wrapper">
           <div id="semblanza">
-            <p>
-              <strong>Silvia Yulmaneli Moreno León</strong>, originaria de Zolotepec, Estado de México (1993), es licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex).
-            </p>
-            <p>
-              Su trayectoria profesional destaca por su labor como narradora, ensayista y ponente en congresos internacionales de historia y literatura.
-            </p>
-            <p>
-              Es autora de la novela corta <em>Cluster B</em> y del volumen <em>Rincones</em>, además de haber compilado el poemario sobre Alejandra Pizarnik y colaborado con textos en revistas culturales de renombre como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.
-            </p>
+            <p><strong>Silvia Yulmaneli Moreno León</strong>, originaria de Zolotepec, Estado de México (1993), es licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex).</p>
+            <p>Su trayectoria profesional destaca por su labor como narradora, ensayista y ponente en congresos internacionales de historia y literatura.</p>
+            <p>Es autora de la novela corta <em>Cluster B</em> y del volumen <em>Rincones</em>, además de haber compilado el poemario sobre Alejandra Pizarnik y colaborado con textos en revistas culturales como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.</p>
           </div>
-
           <div id="reconocimientos" style="margin-top: 25px;">
             <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Participación & Ponencias</h3>
-            <p>
-              Ha participado de manera constante en congresos nacionales e internacionales de historia, filosofía y literatura, así como en mesas de discusión sobre crítica y narrativa contemporánea.
-            </p>
+            <p>Ha participado en congresos nacionales e internacionales de historia, filosofía y literatura.</p>
           </div>
-
           <div id="trayectoria" style="margin-top: 25px;">
             <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Trayectoria Editorial</h3>
-            <p>
-              Además de sus libros publicados, contribuye frecuentemente con ensayos y artículos en revistas digitales e impresas, promoviendo el diálogo filosófico y la narrativa hispanoamericana.
-            </p>
+            <p>Contribuye frecuentemente con ensayos y artículos en revistas digitales e impresas.</p>
           </div>
         </div>
       </div>
@@ -976,72 +981,46 @@
       <h2 class="section-title">Obras y Publicaciones</h2>
       <div id="libros" style="margin-top: 25px;">
         <h3 style="font-family: var(--fuente-titulo);">Libros Publicados</h3>
-        <p style="color: var(--texto-suave);">
-          Incluye la novela corta <em>Cluster B</em> y la obra <em>Rincones</em>.
-        </p>
+        <p style="color: var(--texto-suave);">Incluye la novela corta <em>Cluster B</em> y la obra <em>Rincones</em>.</p>
       </div>
-
       <div id="antologias" style="margin-top: 30px;">
         <h3 style="font-family: var(--fuente-titulo);">Compilaciones y Ediciones</h3>
         <p style="color: var(--texto-suave);">Compilación del volumen sobre Alejandra Pizarnik y antologías colectivas.</p>
       </div>
-
       <div id="articulos" style="margin-top: 30px;">
         <h3 style="font-family: var(--fuente-titulo);">Ensayos & Artículos</h3>
-        <p style="color: var(--texto-suave);">Publicaciones filosóficas y literarias en revistas como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.</p>
+        <p style="color: var(--texto-suave);">Publicaciones en revistas como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.</p>
       </div>
     </section>
 
     <!-- SECCIÓN GALERÍA -->
     <section id="galeria">
       <h2 class="section-title">Galería & Medios</h2>
-      
       <div id="fotografias" style="margin-top: 25px;">
-        <p style="color: var(--texto-suave); margin-bottom: 15px;">
-          Registro fotográfico de eventos, lecturas y congresos académicos en los que ha participado la autora.
-        </p>
-
-        <!-- DROPDOWN / ACORDEÓN DESPLEGABLE DE GALERÍA -->
+        <p style="color: var(--texto-suave); margin-bottom: 15px;">Registro fotográfico de eventos y presentaciones.</p>
         <div class="gallery-accordion">
           <button class="gallery-accordion-btn" id="galleryAccordionBtn">
-            <span> Ver Galería de Eventos & Lecturas</span>
+            <span>📷 Ver Galería de Eventos & Lecturas</span>
             <span class="accordion-icon">▾</span>
           </button>
-          
           <div class="gallery-accordion-content">
-            <p style="font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 15px;">
-              Haz clic o añade tus imágenes dentro de los siguientes contenedores vacíos:
-            </p>
-            
             <div class="photo-grid">
-              <div class="photo-placeholder"><div class="icon"></div><p>Congreso Internacional</p><span>Imagen 1</span></div>
-              <div class="photo-placeholder"><div class="icon"></div><p>Lectura de Poesía</p><span>Imagen 2</span></div>
-              <div class="photo-placeholder"><div class="icon"></div><p>Ponencia UAEMex</p><span>Imagen 3</span></div>
-              <div class="photo-placeholder"><div class="icon"></div><p>Presentación Novela</p><span>Imagen 4</span></div>
-              <div class="photo-placeholder"><div class="icon"></div><p>Firma de Libros</p><span>Imagen 5</span></div>
-              <div class="photo-placeholder"><div class="icon"></div><p>Mesa de Creadoras</p><span>Imagen 6</span></div>
+              <div class="photo-placeholder"><div class="icon">🖼️</div><p>Congreso Internacional</p><span>Imagen 1</span></div>
+              <div class="photo-placeholder"><div class="icon">📖</div><p>Lectura de Poesía</p><span>Imagen 2</span></div>
+              <div class="photo-placeholder"><div class="icon">🏛️</div><p>Ponencia UAEMex</p><span>Imagen 3</span></div>
+              <div class="photo-placeholder"><div class="icon">🎙️</div><p>Presentación Novela</p><span>Imagen 4</span></div>
+              <div class="photo-placeholder"><div class="icon">✒️</div><p>Firma de Libros</p><span>Imagen 5</span></div>
+              <div class="photo-placeholder"><div class="icon">👥</div><p>Mesa de Creadoras</p><span>Imagen 6</span></div>
             </div>
           </div>
         </div>
       </div>
-
-      <div id="presentaciones" style="margin-top: 35px;">
-        <h3 style="font-family: var(--fuente-titulo); font-size: 1.2rem; color: var(--texto-principal);">Presentaciones</h3>
-        <p style="color: var(--texto-suave);">Presentaciones de libros y conferencias filosóficas.</p>
-      </div>
-
-      <div id="prensa" style="margin-top: 25px;">
-        <h3 style="font-family: var(--fuente-titulo); font-size: 1.2rem; color: var(--texto-principal);">Prensa</h3>
-        <p style="color: var(--texto-suave);">Entrevistas, artículos de prensa y colaboraciones en medios.</p>
-      </div>
     </section>
 
-    <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR -->
+    <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR DE FOTOS -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
-      <p style="margin-bottom: 25px; color: var(--texto-suave);">
-        Para ponencias, invitaciones a congresos, colaboraciones editoriales o mensajes directos:
-      </p>
+      <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
 
       <form class="contact-form" action="#" method="POST">
         <div class="form-group">
@@ -1059,10 +1038,9 @@
         <button type="submit" class="btn-submit">Enviar Mensaje</button>
       </form>
 
-      <!-- CONTENEDOR FOTO YUL.JPEG + BOTÓN TRIANGULAR DE ESQUINA -->
       <div class="yul-image-container">
         <button class="triangle-btn" id="openCarouselBtn" title="Abrir carrusel de fotos">
-          <span class="triangle-btn-icon"></span>
+          <span class="triangle-btn-icon">📷</span>
         </button>
         <img src="yul.jpeg" alt="Imagen decorativa Yul" class="bg-image-yul">
       </div>
@@ -1070,31 +1048,49 @@
 
   </main>
 
-  <!-- MODAL CARRUSEL ESTILO FACEBOOK CON 20 ESPACIOS DE FOTOGRAFÍA -->
-  <div class="fb-carousel-modal" id="fbCarouselModal">
-    <div class="fb-carousel-container">
-      <div class="fb-carousel-header">
+  <!-- MODAL CARRUSEL DE FOTOS (20 ESPACIOS) -->
+  <div class="modal-overlay" id="fbCarouselModal">
+    <div class="modal-container">
+      <div class="modal-header">
         <div>
           <h3 style="font-size: 1.1rem; color: var(--acento-dorado);">Galería Fotográfica de la Autora</h3>
           <span id="fbSlideCounter" style="font-size: 0.85rem; color: #aaa;">Foto 1 de 20</span>
         </div>
-        <button class="fb-carousel-close" id="closeCarouselBtn">&times;</button>
+        <button class="modal-close" id="closeCarouselBtn">&times;</button>
       </div>
 
-      <div class="fb-carousel-body">
-        <button class="fb-nav-btn prev" id="prevSlideBtn">&#10094;</button>
+      <div class="modal-body">
+        <button class="modal-nav-btn prev" id="prevSlideBtn">&#10094;</button>
+        <div class="fb-slide-frame" id="fbSlideFrame"></div>
+        <button class="modal-nav-btn next" id="nextSlideBtn">&#10095;</button>
+      </div>
 
-        <div class="fb-slide-frame" id="fbSlideFrame">
-          <!-- El contenido de la imagen activa se genera por JavaScript -->
+      <div class="fb-thumbnails-strip" id="fbThumbnailsStrip"></div>
+    </div>
+  </div>
+
+  <!-- MODAL CARRUSEL DE VIDEOS DE YOUTUBE (3 VIDEOS) -->
+  <div class="modal-overlay" id="videoCarouselModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.1rem; color: #63b3ed;">Reproductor Musical en Carrusel</h3>
+          <span id="videoSlideCounter" style="font-size: 0.85rem; color: #aaa;">Video 1 de 3</span>
+        </div>
+        <button class="modal-close" id="closeVideoCarouselBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <button class="modal-nav-btn prev" id="prevVideoBtn">&#10094;</button>
+
+        <div class="video-frame" id="videoFrame">
+          <!-- iframe de YouTube insertado con JS -->
         </div>
 
-        <button class="fb-nav-btn next" id="nextSlideBtn">&#10095;</button>
+        <button class="modal-nav-btn next" id="nextVideoBtn">&#10095;</button>
       </div>
 
-      <!-- TIRA DE 20 MINIATURAS (THUMBNAILS) -->
-      <div class="fb-thumbnails-strip" id="fbThumbnailsStrip">
-        <!-- Generado dinámicamente -->
-      </div>
+      <div class="video-thumbnails-strip" id="videoThumbnailsStrip"></div>
     </div>
   </div>
 
@@ -1104,121 +1100,92 @@
 
       // --- 1. MENÚS DESPLEGABLES DEL SIDEBAR ---
       const dropdowns = document.querySelectorAll('.dropdown');
-
       dropdowns.forEach(dropdown => {
         const btn = dropdown.querySelector('.dropdown-btn');
-
         btn.addEventListener('click', (e) => {
           e.preventDefault();
-          dropdowns.forEach(other => {
-            if (other !== dropdown) {
-              other.classList.remove('active');
-            }
-          });
+          dropdowns.forEach(other => { if (other !== dropdown) other.classList.remove('active'); });
           dropdown.classList.toggle('active');
         });
       });
 
-      // --- 2. ACORDEÓN DESPLEGABLE EN PÁGINA (GALERÍA DE EVENTOS) ---
+      // --- 2. ACORDEÓN DESPLEGABLE DE GALERÍA DE EVENTOS ---
       const galleryBtn = document.getElementById('galleryAccordionBtn');
       const galleryAccordion = galleryBtn ? galleryBtn.closest('.gallery-accordion') : null;
-
       if (galleryBtn && galleryAccordion) {
         galleryBtn.addEventListener('click', () => {
           galleryAccordion.classList.toggle('open');
         });
       }
 
-      // --- 3. POSICIONAMIENTO MATEMÁTICO DE LOS NODOS ORBITALES ---
+      // --- 3. POSICIONAMIENTO ORBITAL ---
       const items = document.querySelectorAll('.orbit-item');
-      const totalItems = items.length;
-
       function positionOrbitItems() {
-        const isMobile = window.innerWidth <= 768;
-        const radius = isMobile ? 130 : 180;
-
+        const radius = window.innerWidth <= 768 ? 130 : 180;
         items.forEach((item, index) => {
-          const angle = (index / totalItems) * (2 * Math.PI) - (Math.PI / 2);
+          const angle = (index / items.length) * (2 * Math.PI) - (Math.PI / 2);
           const x = Math.cos(angle) * radius;
           const y = Math.sin(angle) * radius;
-
           item.style.transform = `translate(${x}px, ${y}px)`;
         });
       }
-
       positionOrbitItems();
       window.addEventListener('resize', positionOrbitItems);
 
       // --- 4. MENÚ RESPONSIVO (MÓVIL) ---
       const menuToggle = document.getElementById('menuToggle');
       const sidebar = document.getElementById('sidebar');
-
       if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', () => {
-          sidebar.classList.toggle('open');
-        });
-
+        menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
         document.querySelectorAll('.sidebar nav a').forEach(link => {
-          link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-              sidebar.classList.remove('open');
-            }
-          });
+          link.addEventListener('click', () => { if (window.innerWidth <= 768) sidebar.classList.remove('open'); });
         });
       }
 
-      // --- 5. CARRUSEL TIPO FACEBOOK CON 20 ESPACIOS PARA FOTOS ---
-      // Si ya tienes los archivos subidos al repositorio, solo reemplaza 'null' con la ruta relativa (ej: 'foto1.jpg')
+      // --- 5. CARRUSEL FOTOGRÁFICO DE 20 ESPACIOS ---
       const photoArray = Array.from({ length: 20 }, (_, i) => ({
         id: i + 1,
-        src: null, // Reemplazar con "foto" + (i+1) + ".jpg" cuando estén subidas
+        src: null,
         title: `Fotografía ${i + 1}`,
         description: `Espacio de imagen #${i + 1} listo en el repositorio.`
       }));
 
-      let currentSlide = 0;
-      const modal = document.getElementById('fbCarouselModal');
-      const openBtn = document.getElementById('openCarouselBtn');
-      const closeBtn = document.getElementById('closeCarouselBtn');
-      const prevBtn = document.getElementById('prevSlideBtn');
-      const nextBtn = document.getElementById('nextSlideBtn');
-      const slideFrame = document.getElementById('fbSlideFrame');
-      const slideCounter = document.getElementById('fbSlideCounter');
-      const thumbsStrip = document.getElementById('fbThumbnailsStrip');
+      let currentPhotoSlide = 0;
+      const photoModal = document.getElementById('fbCarouselModal');
+      const openPhotoBtn = document.getElementById('openCarouselBtn');
+      const closePhotoBtn = document.getElementById('closeCarouselBtn');
+      const prevPhotoBtn = document.getElementById('prevSlideBtn');
+      const nextPhotoBtn = document.getElementById('nextSlideBtn');
+      const photoFrame = document.getElementById('fbSlideFrame');
+      const photoCounter = document.getElementById('fbSlideCounter');
+      const photoThumbsStrip = document.getElementById('fbThumbnailsStrip');
 
-      // Crear las 20 miniaturas
       photoArray.forEach((photo, index) => {
         const thumb = document.createElement('div');
         thumb.classList.add('fb-thumb');
         if (index === 0) thumb.classList.add('active');
         thumb.textContent = index + 1;
-        thumb.addEventListener('click', () => goToSlide(index));
-        thumbsStrip.appendChild(thumb);
+        thumb.addEventListener('click', () => { currentPhotoSlide = index; updatePhotoSlide(); });
+        photoThumbsStrip.appendChild(thumb);
       });
 
-      function updateSlide() {
-        const photo = photoArray[currentSlide];
-        slideCounter.textContent = `Foto ${currentSlide + 1} de 20`;
-
+      function updatePhotoSlide() {
+        const photo = photoArray[currentPhotoSlide];
+        photoCounter.textContent = `Foto ${currentPhotoSlide + 1} de 20`;
         if (photo.src) {
-          slideFrame.innerHTML = `<img src="${photo.src}" alt="${photo.title}">`;
+          photoFrame.innerHTML = `<img src="${photo.src}" alt="${photo.title}">`;
         } else {
-          slideFrame.innerHTML = `
+          photoFrame.innerHTML = `
             <div class="fb-placeholder-content">
-              <div class="icon"></div>
+              <div class="icon">📷</div>
               <h4 style="color: var(--acento-dorado); font-family: var(--fuente-titulo);">${photo.title}</h4>
               <p style="font-size: 0.85rem; margin-top: 5px;">${photo.description}</p>
-              <span style="display:inline-block; margin-top:10px; font-size: 0.75rem; border: 1px dashed var(--borde-dorado); padding: 3px 8px; border-radius:3px;">
-                Espacio reservado (añade la ruta en photoArray)
-              </span>
             </div>
           `;
         }
-
-        // Actualizar miniaturas activas
-        const thumbs = thumbsStrip.querySelectorAll('.fb-thumb');
+        const thumbs = photoThumbsStrip.querySelectorAll('.fb-thumb');
         thumbs.forEach((t, i) => {
-          if (i === currentSlide) {
+          if (i === currentPhotoSlide) {
             t.classList.add('active');
             t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
           } else {
@@ -1227,37 +1194,85 @@
         });
       }
 
-      function goToSlide(index) {
-        currentSlide = index;
-        updateSlide();
-      }
+      openPhotoBtn.addEventListener('click', () => { photoModal.classList.add('active'); updatePhotoSlide(); });
+      closePhotoBtn.addEventListener('click', () => photoModal.classList.remove('active'));
+      nextPhotoBtn.addEventListener('click', () => { currentPhotoSlide = (currentPhotoSlide + 1) % photoArray.length; updatePhotoSlide(); });
+      prevPhotoBtn.addEventListener('click', () => { currentPhotoSlide = (currentPhotoSlide - 1 + photoArray.length) % photoArray.length; updatePhotoSlide(); });
 
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % photoArray.length;
-        updateSlide();
-      }
+      // --- 6. CARRUSEL DE VIDEOS DE YOUTUBE (3 VIDEOS) ---
+      const videoList = [
+        { title: 'The Cleaners from Venus', name: 'Wivenhoe Bells (II)', embedId: 'MAvEHIX-4ic' },
+        { title: 'Interpol', name: 'Evil', embedId: 'dkpgz3uQ58U' },
+        { title: 'Interpol', name: 'All The Rage Back Home', embedId: '-u6DvRyyKGU' }
+      ];
 
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + photoArray.length) % photoArray.length;
-        updateSlide();
-      }
+      let currentVideoSlide = 0;
+      const videoModal = document.getElementById('videoCarouselModal');
+      const openVideoBtn = document.getElementById('openVideoCarouselBtn');
+      const closeVideoBtn = document.getElementById('closeVideoCarouselBtn');
+      const prevVideoBtn = document.getElementById('prevVideoBtn');
+      const nextVideoBtn = document.getElementById('nextVideoBtn');
+      const videoFrame = document.getElementById('videoFrame');
+      const videoCounter = document.getElementById('videoSlideCounter');
+      const videoThumbsStrip = document.getElementById('videoThumbnailsStrip');
 
-      openBtn.addEventListener('click', () => {
-        modal.classList.add('active');
-        updateSlide();
+      videoList.forEach((vid, index) => {
+        const thumb = document.createElement('div');
+        thumb.classList.add('video-thumb');
+        if (index === 0) thumb.classList.add('active');
+        thumb.innerHTML = `<strong>${vid.title}</strong><br><span style="font-size:0.75rem;">${vid.name}</span>`;
+        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(); });
+        videoThumbsStrip.appendChild(thumb);
       });
 
-      closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
+      function updateVideoSlide() {
+        const vid = videoList[currentVideoSlide];
+        videoCounter.textContent = `Video ${currentVideoSlide + 1} de 3 - ${vid.title}`;
+        videoFrame.innerHTML = `
+          <iframe 
+            src="https://www.youtube.com/embed/${vid.embedId}?autoplay=1" 
+            title="${vid.title} - ${vid.name}" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        `;
+
+        const thumbs = videoThumbsStrip.querySelectorAll('.video-thumb');
+        thumbs.forEach((t, i) => {
+          if (i === currentVideoSlide) {
+            t.classList.add('active');
+          } else {
+            t.classList.remove('active');
+          }
+        });
+      }
+
+      openVideoBtn.addEventListener('click', () => {
+        videoModal.classList.add('active');
+        updateVideoSlide();
       });
 
-      nextBtn.addEventListener('click', nextSlide);
-      prevBtn.addEventListener('click', prevSlide);
+      closeVideoBtn.addEventListener('click', () => {
+        videoModal.classList.remove('active');
+        videoFrame.innerHTML = ''; // Detiene la reproducción al cerrar
+      });
 
-      // Cerrar al hacer clic fuera del contenedor
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('active');
+      nextVideoBtn.addEventListener('click', () => {
+        currentVideoSlide = (currentVideoSlide + 1) % videoList.length;
+        updateVideoSlide();
+      });
+
+      prevVideoBtn.addEventListener('click', () => {
+        currentVideoSlide = (currentVideoSlide - 1 + videoList.length) % videoList.length;
+        updateVideoSlide();
+      });
+
+      // Cierre de modales al pulsar fuera del contenido
+      window.addEventListener('click', (e) => {
+        if (e.target === photoModal) photoModal.classList.remove('active');
+        if (e.target === videoModal) {
+          videoModal.classList.remove('active');
+          videoFrame.innerHTML = '';
         }
       });
 
