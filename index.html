@@ -723,53 +723,67 @@
     .modal-nav-btn.prev { left: -22px; }
     .modal-nav-btn.next { right: -22px; }
 
-    /* ESTILOS CARRUSEL DE VIDEOS */
-    .video-frame {
+    /* ESTILOS CARRUSEL DE IMÁGENES */
+    .image-slide-frame {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      background-color: #000;
+      height: 420px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px dashed rgba(212, 175, 55, 0.5);
       border-radius: 6px;
+      background-color: #111;
       overflow: hidden;
-      border: 1px solid rgba(212, 175, 55, 0.3);
     }
 
-    .video-frame iframe {
+    .image-slide-frame img {
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: contain;
     }
 
-    .video-thumbnails-strip {
+    .image-thumbnails-strip {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-top: 15px;
+      overflow-x: auto;
       width: 100%;
-      justify-content: center;
+      padding: 10px 5px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--acento-azul) #222;
     }
 
-    .video-thumb {
-      flex: 1;
-      max-width: 220px;
-      padding: 10px;
+    .image-thumb {
+      flex: 0 0 65px;
+      height: 65px;
       border-radius: 4px;
       border: 1px solid #444;
-      background-color: #222;
+      background-color: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #aaa;
       font-size: 0.8rem;
-      font-family: var(--fuente-cuerpo);
-      text-align: center;
       cursor: pointer;
       transition: all 0.2s ease;
+      user-select: none;
+      overflow: hidden;
     }
 
-    .video-thumb.active {
+    .image-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-thumb.active {
       border-color: var(--acento-azul);
-      background-color: #2b3a4a;
+      box-shadow: 0 0 8px var(--acento-azul);
       color: #fff;
-      box-shadow: 0 0 10px rgba(43, 108, 176, 0.5);
+      background-color: #2b3a4a;
     }
 
-    /* ESTILOS CARRUSEL FOTOS */
+    /* ESTILOS CARRUSEL FOTOS CÁMARA (20 ESPACIOS) */
     .fb-slide-frame {
       width: 100%;
       height: 380px;
@@ -869,8 +883,8 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
   </header>
 
-  <!-- BOTÓN TRIANGULAR AZUL DE REPRODUCCIÓN (LATERAL DERECHO) -->
-  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" title="Reproducir videos musicales">
+  <!-- BOTÓN TRIANGULAR AZUL DE GALERÍA DE IMÁGENES (LATERAL DERECHO) -->
+  <button class="right-sidebar-blue-triangle" id="openImageCarouselBtn" title="Abrir carrusel de imágenes">
     <span class="blue-triangle-icon">▶</span>
   </button>
 
@@ -1048,7 +1062,7 @@
 
   </main>
 
-  <!-- MODAL CARRUSEL DE FOTOS (20 ESPACIOS) -->
+  <!-- MODAL CARRUSEL DE FOTOS GENERAL (20 ESPACIOS) -->
   <div class="modal-overlay" id="fbCarouselModal">
     <div class="modal-container">
       <div class="modal-header">
@@ -1069,28 +1083,28 @@
     </div>
   </div>
 
-  <!-- MODAL CARRUSEL DE VIDEOS DE YOUTUBE (3 VIDEOS) -->
-  <div class="modal-overlay" id="videoCarouselModal">
+  <!-- MODAL CARRUSEL DE IMÁGENES (BOTÓN AZUL: 44.jpg - 49.jpg) -->
+  <div class="modal-overlay" id="imageCarouselModal">
     <div class="modal-container">
       <div class="modal-header">
         <div>
-          <h3 style="font-size: 1.1rem; color: #63b3ed;">Reproductor Musical en Carrusel</h3>
-          <span id="videoSlideCounter" style="font-size: 0.85rem; color: #aaa;">Video 1 de 3</span>
+          <h3 style="font-size: 1.1rem; color: #63b3ed;">Carrusel de Imágenes</h3>
+          <span id="imageSlideCounter" style="font-size: 0.85rem; color: #aaa;">Imagen 1 de 6</span>
         </div>
-        <button class="modal-close" id="closeVideoCarouselBtn">&times;</button>
+        <button class="modal-close" id="closeImageCarouselBtn">&times;</button>
       </div>
 
       <div class="modal-body">
-        <button class="modal-nav-btn prev" id="prevVideoBtn">&#10094;</button>
+        <button class="modal-nav-btn prev" id="prevImageBtn">&#10094;</button>
 
-        <div class="video-frame" id="videoFrame">
-          <!-- iframe de YouTube insertado con JS -->
+        <div class="image-slide-frame" id="imageSlideFrame">
+          <!-- La imagen actual se inserta dinámicamente con JS -->
         </div>
 
-        <button class="modal-nav-btn next" id="nextVideoBtn">&#10095;</button>
+        <button class="modal-nav-btn next" id="nextImageBtn">&#10095;</button>
       </div>
 
-      <div class="video-thumbnails-strip" id="videoThumbnailsStrip"></div>
+      <div class="image-thumbnails-strip" id="imageThumbnailsStrip"></div>
     </div>
   </div>
 
@@ -1142,7 +1156,7 @@
         });
       }
 
-      // --- 5. CARRUSEL FOTOGRÁFICO DE 20 ESPACIOS ---
+      // --- 5. CARRUSEL FOTOGRÁFICO DE 20 ESPACIOS (BOTÓN CAMARA EN YUL.JPEG) ---
       const photoArray = Array.from({ length: 20 }, (_, i) => ({
         id: i + 1,
         src: null,
@@ -1199,81 +1213,76 @@
       nextPhotoBtn.addEventListener('click', () => { currentPhotoSlide = (currentPhotoSlide + 1) % photoArray.length; updatePhotoSlide(); });
       prevPhotoBtn.addEventListener('click', () => { currentPhotoSlide = (currentPhotoSlide - 1 + photoArray.length) % photoArray.length; updatePhotoSlide(); });
 
-      // --- 6. CARRUSEL DE VIDEOS DE YOUTUBE (3 VIDEOS) ---
-      const videoList = [
-        { title: 'The Cleaners from Venus', name: 'Wivenhoe Bells (II)', embedId: 'MAvEHIX-4ic' },
-        { title: 'Interpol', name: 'Evil', embedId: 'dkpgz3uQ58U' },
-        { title: 'Interpol', name: 'All The Rage Back Home', embedId: '-u6DvRyyKGU' }
+      // --- 6. CARRUSEL DE IMÁGENES (44.jpg - 49.jpg) PARA EL BOTÓN TRIANGULAR AZUL ---
+      const imageList = [
+        { filename: '44.jpg', alt: 'Imagen 44' },
+        { filename: '45.jpg', alt: 'Imagen 45' },
+        { filename: '46.jpg', alt: 'Imagen 46' },
+        { filename: '47.jpg', alt: 'Imagen 47' },
+        { filename: '48.jpg', alt: 'Imagen 48' },
+        { filename: '49.jpg', alt: 'Imagen 49' }
       ];
 
-      let currentVideoSlide = 0;
-      const videoModal = document.getElementById('videoCarouselModal');
-      const openVideoBtn = document.getElementById('openVideoCarouselBtn');
-      const closeVideoBtn = document.getElementById('closeVideoCarouselBtn');
-      const prevVideoBtn = document.getElementById('prevVideoBtn');
-      const nextVideoBtn = document.getElementById('nextVideoBtn');
-      const videoFrame = document.getElementById('videoFrame');
-      const videoCounter = document.getElementById('videoSlideCounter');
-      const videoThumbsStrip = document.getElementById('videoThumbnailsStrip');
+      let currentImageSlide = 0;
+      const imageModal = document.getElementById('imageCarouselModal');
+      const openImageBtn = document.getElementById('openImageCarouselBtn');
+      const closeImageBtn = document.getElementById('closeImageCarouselBtn');
+      const prevImageBtn = document.getElementById('prevImageBtn');
+      const nextImageBtn = document.getElementById('nextImageBtn');
+      const imageFrame = document.getElementById('imageSlideFrame');
+      const imageCounter = document.getElementById('imageSlideCounter');
+      const imageThumbsStrip = document.getElementById('imageThumbnailsStrip');
 
-      videoList.forEach((vid, index) => {
+      imageList.forEach((imgObj, index) => {
         const thumb = document.createElement('div');
-        thumb.classList.add('video-thumb');
+        thumb.classList.add('image-thumb');
         if (index === 0) thumb.classList.add('active');
-        thumb.innerHTML = `<strong>${vid.title}</strong><br><span style="font-size:0.75rem;">${vid.name}</span>`;
-        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(); });
-        videoThumbsStrip.appendChild(thumb);
+        thumb.innerHTML = `<img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerText='${imgObj.filename}';">`;
+        thumb.addEventListener('click', () => { currentImageSlide = index; updateImageSlide(); });
+        imageThumbsStrip.appendChild(thumb);
       });
 
-      function updateVideoSlide() {
-        const vid = videoList[currentVideoSlide];
-        videoCounter.textContent = `Video ${currentVideoSlide + 1} de 3 - ${vid.title}`;
-        videoFrame.innerHTML = `
-          <iframe 
-            src="https://www.youtube.com/embed/${vid.embedId}?autoplay=1" 
-            title="${vid.title} - ${vid.name}" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-          </iframe>
+      function updateImageSlide() {
+        const imgObj = imageList[currentImageSlide];
+        imageCounter.textContent = `Imagen ${currentImageSlide + 1} de ${imageList.length} - ${imgObj.filename}`;
+        imageFrame.innerHTML = `
+          <img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerHTML='<div style=\'color:#aaa; font-family:var(--fuente-cuerpo); text-align:center;\'><div style=\'font-size:2rem; margin-bottom:10px;\'>🖼️</div><p>${imgObj.filename}</p><span style=\'font-size:0.8rem; color:var(--acento-rosa);\'>Asegúrate de tener este archivo en la misma carpeta</span></div>';">
         `;
 
-        const thumbs = videoThumbsStrip.querySelectorAll('.video-thumb');
+        const thumbs = imageThumbsStrip.querySelectorAll('.image-thumb');
         thumbs.forEach((t, i) => {
-          if (i === currentVideoSlide) {
+          if (i === currentImageSlide) {
             t.classList.add('active');
+            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
           } else {
             t.classList.remove('active');
           }
         });
       }
 
-      openVideoBtn.addEventListener('click', () => {
-        videoModal.classList.add('active');
-        updateVideoSlide();
+      openImageBtn.addEventListener('click', () => {
+        imageModal.classList.add('active');
+        updateImageSlide();
       });
 
-      closeVideoBtn.addEventListener('click', () => {
-        videoModal.classList.remove('active');
-        videoFrame.innerHTML = ''; // Detiene la reproducción al cerrar
+      closeImageBtn.addEventListener('click', () => {
+        imageModal.classList.remove('active');
       });
 
-      nextVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = (currentVideoSlide + 1) % videoList.length;
-        updateVideoSlide();
+      nextImageBtn.addEventListener('click', () => {
+        currentImageSlide = (currentImageSlide + 1) % imageList.length;
+        updateImageSlide();
       });
 
-      prevVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = (currentVideoSlide - 1 + videoList.length) % videoList.length;
-        updateVideoSlide();
+      prevImageBtn.addEventListener('click', () => {
+        currentImageSlide = (currentImageSlide - 1 + imageList.length) % imageList.length;
+        updateImageSlide();
       });
 
-      // Cierre de modales al pulsar fuera del contenido
+      // Cierre de modales al hacer clic fuera del contenido
       window.addEventListener('click', (e) => {
         if (e.target === photoModal) photoModal.classList.remove('active');
-        if (e.target === videoModal) {
-          videoModal.classList.remove('active');
-          videoFrame.innerHTML = '';
-        }
+        if (e.target === imageModal) imageModal.classList.remove('active');
       });
 
     });
