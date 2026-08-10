@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Silvia Yulmaneli Moreno León | Escritora & Creativa</title>
+  <title>Silvia Yulmaneli Moreno León | Filósofa & Narradora</title>
   
   <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
       position: relative;
     }
 
-    /* --- NAVEGACIÓN Y PANEL LATERAL (DESKTOP) --- */
+    /* --- NAVEGACIÓN Y PANEL LATERAL --- */
     .sidebar {
       width: var(--sidebar-width);
       background-color: var(--bg-secundario);
@@ -117,7 +117,6 @@
       transition: transform 0.3s ease;
     }
 
-    /* --- DROPDOWN (SUBMENÚS) --- */
     .dropdown {
       position: relative;
     }
@@ -163,7 +162,7 @@
       margin-top: 30px;
     }
 
-    /* --- BOTÓN HAMBURGUESA MÓVIL --- */
+    /* --- ENCABEZADO MÓVIL --- */
     .mobile-header {
       display: none;
       position: fixed;
@@ -227,35 +226,10 @@
       background-color: var(--borde-dorado);
     }
 
-    /* --- SECCIÓN BIOGRAFÍA (CON IMAGEN YU.JPEG) --- */
-    .bio-container {
-      display: flex;
-      gap: 30px;
-      align-items: flex-start;
-      margin-top: 25px;
-    }
-
-    .bio-image-wrapper {
-      flex: 0 0 260px;
-    }
-
-    .bio-image {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--borde-dorado);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      object-fit: cover;
-    }
-
-    .bio-text-wrapper {
-      flex: 1;
-    }
-
     /* --- SECCIÓN HERO --- */
     .hero {
       text-align: center;
-      padding: 60px 0;
+      padding: 40px 0;
     }
 
     .hero-title {
@@ -279,7 +253,7 @@
       font-size: 1.1rem;
     }
 
-    /* --- CARRUSEL ORBITAL --- */
+    /* --- CARRUSEL ORBITAL EN ROTACIÓN --- */
     .orbital-container {
       position: relative;
       width: 100%;
@@ -313,7 +287,7 @@
       text-align: center;
       padding: 15px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-      z-index: 5;
+      z-index: 10;
     }
 
     .orbit-center span {
@@ -323,10 +297,28 @@
       font-weight: 600;
     }
 
+    /* Pista que gira continuamente */
+    .orbit-track {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      animation: orbitRotate 30s linear infinite;
+    }
+
+    .orbital-container:hover .orbit-track {
+      animation-play-state: paused;
+    }
+
+    /* Nodos individuales */
     .orbit-item {
       position: absolute;
-      width: 70px;
-      height: 70px;
+      top: 50%;
+      left: 50%;
+      width: 75px;
+      height: 75px;
+      margin-top: -37.5px;
+      margin-left: -37.5px;
       border-radius: 50%;
       background-color: var(--bg-principal);
       border: 1.5px solid var(--borde-dorado);
@@ -339,16 +331,64 @@
       color: var(--texto-principal);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
       cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
       text-decoration: none;
       padding: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .orbit-item span {
+      display: block;
+      animation: counterRotate 30s linear infinite;
+    }
+
+    .orbital-container:hover .orbit-item span {
+      animation-play-state: paused;
     }
 
     .orbit-item:hover {
-      transform: scale(1.2);
       background-color: var(--acento-rosa);
       color: #ffffff;
       border-color: var(--acento-rosa);
+    }
+
+    @keyframes orbitRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes counterRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    /* --- SECCIÓN BIOGRAFÍA (CON YU.JPEG) --- */
+    .bio-container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      margin-top: 25px;
+    }
+
+    .bio-image-wrapper {
+      flex: 0 0 260px;
+    }
+
+    .bio-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--borde-dorado);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      object-fit: cover;
+    }
+
+    .bio-text-wrapper {
+      flex: 1;
+    }
+
+    .bio-text-wrapper p {
+      margin-bottom: 15px;
+      text-align: justify;
     }
 
     /* --- FORMULARIO Y CONTACTO --- */
@@ -356,6 +396,8 @@
       display: grid;
       gap: 20px;
       max-width: 600px;
+      position: relative;
+      z-index: 2;
     }
 
     .form-group {
@@ -372,7 +414,7 @@
     .form-group input, .form-group textarea {
       padding: 12px;
       border: 1px solid var(--borde-dorado);
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.85); /* Ligera transparencia para integrarse */
       border-radius: 4px;
       font-family: var(--fuente-cuerpo);
       color: var(--texto-principal);
@@ -382,6 +424,7 @@
 
     .form-group input:focus, .form-group textarea:focus {
       border-color: var(--acento-dorado);
+      background-color: #ffffff;
       box-shadow: 0 0 5px rgba(184, 134, 11, 0.2);
     }
 
@@ -401,27 +444,28 @@
       background-color: var(--acento-dorado);
     }
 
-    /* --- IMAGEN YUL.JPEG (DECORATIVA, DIFUMINADA Y CON TRANSPARENCIA) --- */
+    /* --- IMAGEN YUL.JPEG (ACLARADA Y MÁS NÍTIDA) --- */
     .bg-image-yul {
       position: absolute;
-      right: -20px;
-      bottom: -40px;
-      width: 480px;
+      right: 0;
+      bottom: -30px;
+      width: 420px;
       height: auto;
-      opacity: 0.18;
-      filter: blur(5px);
+      opacity: 0.65;             /* Aumentado para mayor visibilidad y claridad */
+      filter: blur(0px);          /* Sin desenfoque para mantener nitidez */
+      border-radius: 8px;
+      box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.05);
       pointer-events: none;
       z-index: 1;
       user-select: none;
     }
 
-    /* --- ANIMACIÓN --- */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-5px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- RESPONSIVIDAD (MÓVILES Y TABLETS) --- */
+    /* --- RESPONSIVIDAD (TABLETS Y MÓVILES) --- */
     @media (max-width: 768px) {
       .mobile-header {
         display: flex;
@@ -457,10 +501,10 @@
       }
 
       .orbital-container {
-        height: 380px;
+        height: 360px;
       }
 
-      .orbit-ring {
+      .orbit-ring, .orbit-track {
         width: 260px;
         height: 260px;
       }
@@ -471,22 +515,24 @@
       }
 
       .orbit-item {
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
         font-size: 0.65rem;
       }
 
       .bg-image-yul {
-        width: 280px;
-        right: -10px;
-        bottom: -20px;
+        width: 260px;
+        opacity: 0.45;
+        bottom: -10px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ENCABEZADO PARA MÓVIL -->
+  <!-- ENCABEZADO MÓVIL -->
   <header class="mobile-header">
     <h2>S. Y. Moreno León</h2>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
@@ -560,35 +606,36 @@
     <!-- SECCIÓN INICIO / HERO -->
     <section id="inicio" class="hero">
       <h1 class="hero-title">Silvia Yulmaneli Moreno León</h1>
-      <p class="hero-subtitle">Escritora, Poeta & Ensayista</p>
+      <p class="hero-subtitle">Filósofa, Ensayista & Narradora</p>
       <p class="hero-text">
-        Espacio dedicado a la exploración literaria, la creación poética y la difusión de proyectos editoriales e investigaciones culturales.
+        Espacio dedicado al pensamiento filosófico, la creación narrativa y la difusión de investigaciones culturales y proyectos editoriales.
       </p>
 
-      <!-- CARRUSEL ORBITAL (8 Nodos) -->
+      <!-- CARRUSEL ORBITAL ANIMADO -->
       <div class="orbital-container" id="orbitalContainer">
         <div class="orbit-ring"></div>
         <div class="orbit-center">
           <span>Obras & Universos</span>
         </div>
         
-        <a href="#libros" class="orbit-item">Poesía</a>
-        <a href="#antologias" class="orbit-item">Narrativa</a>
-        <a href="#articulos" class="orbit-item">Ensayos</a>
-        <a href="#reconocimientos" class="orbit-item">Premios</a>
-        <a href="#presentaciones" class="orbit-item">Recitales</a>
-        <a href="#prensa" class="orbit-item">Prensa</a>
-        <a href="#fotografias" class="orbit-item">Galería</a>
-        <a href="#contacto" class="orbit-item">Contacto</a>
+        <div class="orbit-track" id="orbitTrack">
+          <a href="#libros" class="orbit-item"><span>Filosofía</span></a>
+          <a href="#antologias" class="orbit-item"><span>Narrativa</span></a>
+          <a href="#articulos" class="orbit-item"><span>Ensayos</span></a>
+          <a href="#reconocimientos" class="orbit-item"><span>Congresos</span></a>
+          <a href="#presentaciones" class="orbit-item"><span>Ponencias</span></a>
+          <a href="#prensa" class="orbit-item"><span>Prensa</span></a>
+          <a href="#fotografias" class="orbit-item"><span>Galería</span></a>
+          <a href="#contacto" class="orbit-item"><span>Contacto</span></a>
+        </div>
       </div>
     </section>
 
-    <!-- SECCIÓN BIOGRAFÍA / SEMBLANZA (INCLUYE YU.JPEG) -->
+    <!-- SECCIÓN BIOGRAFÍA / SEMBLANZA -->
     <section id="biografia">
       <h2 class="section-title">Biografía & Semblanza</h2>
 
       <div class="bio-container">
-        <!-- Imagen de Biografía (yu.jpeg) -->
         <div class="bio-image-wrapper">
           <img src="yu.jpeg" alt="Silvia Yulmaneli Moreno León" class="bio-image">
         </div>
@@ -596,21 +643,27 @@
         <div class="bio-text-wrapper">
           <div id="semblanza">
             <p>
-              Silvia Yulmaneli Moreno León es una escritora y gestora cultural cuya obra aborda la memoria, la estética de la palabra y la reflexión sobre el entorno contemporáneo. Ha colaborado en múltiples publicaciones literarias y proyectos editoriales independientes.
+              <strong>Silvia Yulmaneli Moreno León</strong>, originaria de Zolotepec, Estado de México (1993), es licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex).
+            </p>
+            <p>
+              Su trayectoria profesional destaca por su labor como narradora, ensayista y ponente en congresos internacionales de historia y literatura.
+            </p>
+            <p>
+              Es autora de la novela corta <em>Cluster B</em> y del volumen <em>Rincones</em>, además de haber compilado el poemario sobre Alejandra Pizarnik y colaborado con textos en revistas culturales de renombre como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.
             </p>
           </div>
 
           <div id="reconocimientos" style="margin-top: 25px;">
-            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Reconocimientos</h3>
+            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Participación & Ponencias</h3>
             <p>
-              Su trabajo ha sido distinguido en diversos certámenes de creación literaria y antologías poéticas a nivel regional e internacional.
+              Ha participado de manera constante en congresos nacionales e internacionales de historia, filosofía y literatura, así como en mesas de discusión sobre crítica y narrativa contemporánea.
             </p>
           </div>
 
           <div id="trayectoria" style="margin-top: 25px;">
-            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Trayectoria</h3>
+            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Trayectoria Editorial</h3>
             <p>
-              Participante activa en talleres literarios, mesas de diálogo, ferias del libro y recitales poéticos centrados en la difusión de nuevas voces literarias.
+              Además de sus libros publicados, contribuye frecuentemente con ensayos y artículos en revistas digitales e impresas, promoviendo el diálogo filosófico y la narrativa hispanoamericana.
             </p>
           </div>
         </div>
@@ -622,17 +675,19 @@
       <h2 class="section-title">Obras y Publicaciones</h2>
       <div id="libros" style="margin-top: 25px;">
         <h3 style="font-family: var(--fuente-titulo);">Libros Publicados</h3>
-        <p style="color: var(--texto-suave);">Selección de poemarios y colecciones individuales.</p>
+        <p style="color: var(--texto-suave);">
+          Incluye la novela corta <em>Cluster B</em> y la obra <em>Rincones</em>.
+        </p>
       </div>
 
       <div id="antologias" style="margin-top: 30px;">
-        <h3 style="font-family: var(--fuente-titulo);">Antologías</h3>
-        <p style="color: var(--texto-suave);">Compilaciones poéticas y de narrativa en las que participa.</p>
+        <h3 style="font-family: var(--fuente-titulo);">Compilaciones y Ediciones</h3>
+        <p style="color: var(--texto-suave);">Compilación del volumen sobre Alejandra Pizarnik y antologías colectivas.</p>
       </div>
 
       <div id="articulos" style="margin-top: 30px;">
-        <h3 style="font-family: var(--fuente-titulo);">Ensayos y Crítica</h3>
-        <p style="color: var(--texto-suave);">Reflexiones sobre literatura, arte e investigación cultural.</p>
+        <h3 style="font-family: var(--fuente-titulo);">Ensayos & Artículos</h3>
+        <p style="color: var(--texto-suave);">Publicaciones filosóficas y literarias en revistas como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.</p>
       </div>
     </section>
 
@@ -640,21 +695,21 @@
     <section id="galeria">
       <h2 class="section-title">Galería & Medios</h2>
       <div id="fotografias" style="margin-top: 25px;">
-        <p style="color: var(--texto-suave);">Fotografías de eventos, presentaciones de libros y lecturas en vivo.</p>
+        <p style="color: var(--texto-suave);">Registro fotográfico de eventos, lecturas y congresos.</p>
       </div>
       <div id="presentaciones" style="margin-top: 25px;">
-        <p style="color: var(--texto-suave);">Registro audiovisual de recitales y ponencias.</p>
+        <p style="color: var(--texto-suave);">Presentaciones de libros y conferencias filosóficas.</p>
       </div>
       <div id="prensa" style="margin-top: 25px;">
-        <p style="color: var(--texto-suave);">Reseñas, entrevistas y notas periodísticas.</p>
+        <p style="color: var(--texto-suave);">Entrevistas, artículos de prensa y colaboraciones en medios.</p>
       </div>
     </section>
 
-    <!-- SECCIÓN CONTACTO Y DECORACIÓN INFERIOR (YUL.JPEG) -->
+    <!-- SECCIÓN CONTACTO -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
       <p style="margin-bottom: 25px; color: var(--texto-suave);">
-        Si deseas ponerte en contacto para lecturas, colaboraciones editoriales o invitaciones a eventos, escribe un mensaje a continuación:
+        Para ponencias, invitaciones a congresos, colaboraciones editoriales o mensajes directos:
       </p>
 
       <form class="contact-form" action="#" method="POST">
@@ -673,8 +728,8 @@
         <button type="submit" class="btn-submit">Enviar Mensaje</button>
       </form>
 
-      <!-- Imagen decorativa difuminada y transparente al fondo derecho (yul.jpeg) -->
-      <img src="yul.jpeg" alt="" class="bg-image-yul" aria-hidden="true">
+      <!-- Imagen decorativa aclara e ilustrada en la esquina inferior derecha (yul.jpeg) -->
+      <img src="yul.jpeg" alt="Imagen decorativa Yul" class="bg-image-yul">
     </section>
 
   </main>
@@ -683,7 +738,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      // --- 1. LÓGICA DE MENÚS DESPLEGABLES (DROPDOWNS) ---
+      // --- 1. MENÚS DESPLEGABLES ---
       const dropdowns = document.querySelectorAll('.dropdown');
 
       dropdowns.forEach(dropdown => {
@@ -691,35 +746,28 @@
 
         btn.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          // Cerrar los otros dropdowns si se abre uno nuevo
           dropdowns.forEach(other => {
             if (other !== dropdown) {
               other.classList.remove('active');
             }
           });
-
-          // Alternar el estado activo
           dropdown.classList.toggle('active');
         });
       });
 
-      // --- 2. POSICIONAMIENTO MATEMÁTICO DEL CARRUSEL ORBITAL ---
+      // --- 2. POSICIONAMIENTO MATEMÁTICO DE LOS NODOS ORBITALES ---
       const items = document.querySelectorAll('.orbit-item');
       const totalItems = items.length;
 
       function positionOrbitItems() {
         const isMobile = window.innerWidth <= 768;
-        const radius = isMobile ? 130 : 180; // Radio del círculo según la pantalla
+        const radius = isMobile ? 130 : 180;
 
         items.forEach((item, index) => {
-          // Calcular el ángulo equidistante para cada nodo (en radianes)
           const angle = (index / totalItems) * (2 * Math.PI) - (Math.PI / 2);
-          
           const x = Math.cos(angle) * radius;
           const y = Math.sin(angle) * radius;
 
-          // Posicionar cada nodo relativo al centro del contenedor
           item.style.transform = `translate(${x}px, ${y}px)`;
         });
       }
@@ -736,7 +784,6 @@
           sidebar.classList.toggle('open');
         });
 
-        // Cerrar sidebar al hacer clic en un enlace en móviles
         document.querySelectorAll('.sidebar nav a').forEach(link => {
           link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
