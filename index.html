@@ -490,7 +490,7 @@
       color: var(--texto-principal);
     }
 
-    /* --- CONTENEDOR FOTO YUL.JPEG CON BOTÓN TRIANGULAR DE FOTOS --- */
+    /* --- CONTENEDOR FOTO YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ --- */
     .yul-image-container {
       position: absolute;
       right: 0;
@@ -540,7 +540,7 @@
       pointer-events: none;
     }
 
-    /* --- BOTÓN TRIANGULAR AZUL FIJO EN EL LATERAL DERECHO DE LA PÁGINA --- */
+    /* --- BOTÓN TRIANGULAR AZUL FIJO EN EL LATERAL DERECHO --- */
     .right-sidebar-blue-triangle {
       position: fixed;
       right: 0;
@@ -723,8 +723,8 @@
     .modal-nav-btn.prev { left: -22px; }
     .modal-nav-btn.next { right: -22px; }
 
-    /* ESTILOS CARRUSEL DE IMÁGENES */
-    .image-slide-frame {
+    /* ESTILOS CARRUSEL DE VÍDEOS (BOTÓN AZUL) */
+    .video-slide-frame {
       width: 100%;
       height: 420px;
       display: flex;
@@ -736,13 +736,13 @@
       overflow: hidden;
     }
 
-    .image-slide-frame img {
+    .video-slide-frame iframe {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      border: none;
     }
 
-    .image-thumbnails-strip {
+    .video-thumbnails-strip {
       display: flex;
       gap: 10px;
       margin-top: 15px;
@@ -753,7 +753,62 @@
       scrollbar-color: var(--acento-azul) #222;
     }
 
-    .image-thumb {
+    .video-thumb {
+      flex: 0 0 100px;
+      height: 60px;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background-color: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      text-align: center;
+      padding: 4px;
+    }
+
+    .video-thumb.active {
+      border-color: var(--acento-azul);
+      box-shadow: 0 0 8px var(--acento-azul);
+      color: #fff;
+      background-color: #2b3a4a;
+    }
+
+    /* ESTILOS CARRUSEL DE IMÁGENES (BOTÓN CAFÉ EN YUL.JPEG) */
+    .photo-slide-frame {
+      width: 100%;
+      height: 420px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px dashed rgba(212, 175, 55, 0.5);
+      border-radius: 6px;
+      background-color: #111;
+      overflow: hidden;
+    }
+
+    .photo-slide-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .photo-thumbnails-strip {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      overflow-x: auto;
+      width: 100%;
+      padding: 10px 5px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--acento-dorado) #222;
+    }
+
+    .photo-thumb {
       flex: 0 0 65px;
       height: 65px;
       border-radius: 4px;
@@ -770,78 +825,13 @@
       overflow: hidden;
     }
 
-    .image-thumb img {
+    .photo-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .image-thumb.active {
-      border-color: var(--acento-azul);
-      box-shadow: 0 0 8px var(--acento-azul);
-      color: #fff;
-      background-color: #2b3a4a;
-    }
-
-    /* ESTILOS CARRUSEL FOTOS CÁMARA (20 ESPACIOS) */
-    .fb-slide-frame {
-      width: 100%;
-      height: 380px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px dashed rgba(212, 175, 55, 0.5);
-      border-radius: 6px;
-      background-color: #111;
-      overflow: hidden;
-    }
-
-    .fb-slide-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .fb-placeholder-content {
-      text-align: center;
-      color: #aaa;
-      font-family: var(--fuente-cuerpo);
-    }
-
-    .fb-placeholder-content .icon {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: var(--acento-dorado);
-    }
-
-    .fb-thumbnails-strip {
-      display: flex;
-      gap: 8px;
-      margin-top: 15px;
-      overflow-x: auto;
-      width: 100%;
-      padding: 10px 5px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--acento-dorado) #222;
-    }
-
-    .fb-thumb {
-      flex: 0 0 50px;
-      height: 50px;
-      border-radius: 4px;
-      border: 1px solid #444;
-      background-color: #2a2a2a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-
-    .fb-thumb.active {
+    .photo-thumb.active {
       border-color: var(--acento-dorado);
       box-shadow: 0 0 8px var(--acento-dorado);
       color: #fff;
@@ -883,8 +873,8 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
   </header>
 
-  <!-- BOTÓN TRIANGULAR AZUL DE GALERÍA DE IMÁGENES (LATERAL DERECHO) -->
-  <button class="right-sidebar-blue-triangle" id="openImageCarouselBtn" title="Abrir carrusel de imágenes">
+  <!-- BOTÓN TRIANGULAR AZUL DE VÍDEOS (LATERAL DERECHO) -->
+  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" title="Abrir carrusel de vídeos">
     <span class="blue-triangle-icon">▶</span>
   </button>
 
@@ -1031,7 +1021,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR DE FOTOS -->
+    <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
       <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
@@ -1053,7 +1043,8 @@
       </form>
 
       <div class="yul-image-container">
-        <button class="triangle-btn" id="openCarouselBtn" title="Abrir carrusel de fotos">
+        <!-- BOTÓN TRIANGULAR CAFÉ (ALINEADO A LA FOTO) -->
+        <button class="triangle-btn" id="openPhotoCarouselBtn" title="Abrir carrusel de imágenes">
           <span class="triangle-btn-icon">📷</span>
         </button>
         <img src="yul.jpeg" alt="Imagen decorativa Yul" class="bg-image-yul">
@@ -1062,49 +1053,53 @@
 
   </main>
 
-  <!-- MODAL CARRUSEL DE FOTOS GENERAL (20 ESPACIOS) -->
-  <div class="modal-overlay" id="fbCarouselModal">
+  <!-- MODAL CARRUSEL DE VÍDEOS (BOTÓN TRIANGULAR AZUL) -->
+  <div class="modal-overlay" id="videoCarouselModal">
     <div class="modal-container">
       <div class="modal-header">
         <div>
-          <h3 style="font-size: 1.1rem; color: var(--acento-dorado);">Galería Fotográfica de la Autora</h3>
-          <span id="fbSlideCounter" style="font-size: 0.85rem; color: #aaa;">Foto 1 de 20</span>
+          <h3 style="font-size: 1.1rem; color: #63b3ed;">Carrusel de Vídeos</h3>
+          <span id="videoSlideCounter" style="font-size: 0.85rem; color: #aaa;">Vídeo 1 de 2</span>
         </div>
-        <button class="modal-close" id="closeCarouselBtn">&times;</button>
+        <button class="modal-close" id="closeVideoCarouselBtn">&times;</button>
       </div>
 
       <div class="modal-body">
-        <button class="modal-nav-btn prev" id="prevSlideBtn">&#10094;</button>
-        <div class="fb-slide-frame" id="fbSlideFrame"></div>
-        <button class="modal-nav-btn next" id="nextSlideBtn">&#10095;</button>
+        <button class="modal-nav-btn prev" id="prevVideoBtn">&#10094;</button>
+
+        <div class="video-slide-frame" id="videoSlideFrame">
+          <!-- El iframe del vídeo se inserta dinámicamente -->
+        </div>
+
+        <button class="modal-nav-btn next" id="nextVideoBtn">&#10095;</button>
       </div>
 
-      <div class="fb-thumbnails-strip" id="fbThumbnailsStrip"></div>
+      <div class="video-thumbnails-strip" id="videoThumbnailsStrip"></div>
     </div>
   </div>
 
-  <!-- MODAL CARRUSEL DE IMÁGENES (BOTÓN AZUL: 44.jpg - 49.jpg) -->
-  <div class="modal-overlay" id="imageCarouselModal">
+  <!-- MODAL CARRUSEL DE IMÁGENES (BOTÓN CAFÉ: 44.jpg - 49.jpg) -->
+  <div class="modal-overlay" id="photoCarouselModal">
     <div class="modal-container">
       <div class="modal-header">
         <div>
-          <h3 style="font-size: 1.1rem; color: #63b3ed;">Carrusel de Imágenes</h3>
-          <span id="imageSlideCounter" style="font-size: 0.85rem; color: #aaa;">Imagen 1 de 6</span>
+          <h3 style="font-size: 1.1rem; color: var(--acento-dorado);">Galería de Imágenes</h3>
+          <span id="photoSlideCounter" style="font-size: 0.85rem; color: #aaa;">Imagen 1 de 6</span>
         </div>
-        <button class="modal-close" id="closeImageCarouselBtn">&times;</button>
+        <button class="modal-close" id="closePhotoCarouselBtn">&times;</button>
       </div>
 
       <div class="modal-body">
-        <button class="modal-nav-btn prev" id="prevImageBtn">&#10094;</button>
+        <button class="modal-nav-btn prev" id="prevPhotoBtn">&#10094;</button>
 
-        <div class="image-slide-frame" id="imageSlideFrame">
+        <div class="photo-slide-frame" id="photoSlideFrame">
           <!-- La imagen actual se inserta dinámicamente con JS -->
         </div>
 
-        <button class="modal-nav-btn next" id="nextImageBtn">&#10095;</button>
+        <button class="modal-nav-btn next" id="nextPhotoBtn">&#10095;</button>
       </div>
 
-      <div class="image-thumbnails-strip" id="imageThumbnailsStrip"></div>
+      <div class="photo-thumbnails-strip" id="photoThumbnailsStrip"></div>
     </div>
   </div>
 
@@ -1156,48 +1151,107 @@
         });
       }
 
-      // --- 5. CARRUSEL FOTOGRÁFICO DE 20 ESPACIOS (BOTÓN CAMARA EN YUL.JPEG) ---
-      const photoArray = Array.from({ length: 20 }, (_, i) => ({
-        id: i + 1,
-        src: null,
-        title: `Fotografía ${i + 1}`,
-        description: `Espacio de imagen #${i + 1} listo en el repositorio.`
-      }));
+      // --- 5. CARRUSEL DE VÍDEOS EN EL BOTÓN TRIANGULAR AZUL ---
+      const videoList = [
+        { title: 'Interpol - Obstacle 1', embedUrl: 'https://www.youtube.com/embed/haW_ruZ_Be8' },
+        { title: 'Interpol - Evil', embedUrl: 'https://www.youtube.com/embed/eqfiHfDmUrw' }
+      ];
+
+      let currentVideoSlide = 0;
+      const videoModal = document.getElementById('videoCarouselModal');
+      const openVideoBtn = document.getElementById('openVideoCarouselBtn');
+      const closeVideoBtn = document.getElementById('closeVideoCarouselBtn');
+      const prevVideoBtn = document.getElementById('prevVideoBtn');
+      const nextVideoBtn = document.getElementById('nextVideoBtn');
+      const videoFrame = document.getElementById('videoSlideFrame');
+      const videoCounter = document.getElementById('videoSlideCounter');
+      const videoThumbsStrip = document.getElementById('videoThumbnailsStrip');
+
+      videoList.forEach((vObj, index) => {
+        const thumb = document.createElement('div');
+        thumb.classList.add('video-thumb');
+        if (index === 0) thumb.classList.add('active');
+        thumb.textContent = vObj.title;
+        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(); });
+        videoThumbsStrip.appendChild(thumb);
+      });
+
+      function updateVideoSlide() {
+        const vObj = videoList[currentVideoSlide];
+        videoCounter.textContent = `Vídeo ${currentVideoSlide + 1} de ${videoList.length} - ${vObj.title}`;
+        videoFrame.innerHTML = `
+          <iframe src="${vObj.embedUrl}" title="${vObj.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+
+        const thumbs = videoThumbsStrip.querySelectorAll('.video-thumb');
+        thumbs.forEach((t, i) => {
+          if (i === currentVideoSlide) {
+            t.classList.add('active');
+            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            t.classList.remove('active');
+          }
+        });
+      }
+
+      openVideoBtn.addEventListener('click', () => {
+        videoModal.classList.add('active');
+        updateVideoSlide();
+      });
+
+      closeVideoBtn.addEventListener('click', () => {
+        videoModal.classList.remove('active');
+        videoFrame.innerHTML = ''; // Detener la reproducción al cerrar
+      });
+
+      nextVideoBtn.addEventListener('click', () => {
+        currentVideoSlide = (currentVideoSlide + 1) % videoList.length;
+        updateVideoSlide();
+      });
+
+      prevVideoBtn.addEventListener('click', () => {
+        currentVideoSlide = (currentVideoSlide - 1 + videoList.length) % videoList.length;
+        updateVideoSlide();
+      });
+
+
+      // --- 6. CARRUSEL DE IMÁGENES (44.jpg - 49.jpg) EN EL BOTÓN TRIANGULAR CAFÉ ---
+      const photoList = [
+        { filename: '44.jpg', alt: 'Imagen 44' },
+        { filename: '45.jpg', alt: 'Imagen 45' },
+        { filename: '46.jpg', alt: 'Imagen 46' },
+        { filename: '47.jpg', alt: 'Imagen 47' },
+        { filename: '48.jpg', alt: 'Imagen 48' },
+        { filename: '49.jpg', alt: 'Imagen 49' }
+      ];
 
       let currentPhotoSlide = 0;
-      const photoModal = document.getElementById('fbCarouselModal');
-      const openPhotoBtn = document.getElementById('openCarouselBtn');
-      const closePhotoBtn = document.getElementById('closeCarouselBtn');
-      const prevPhotoBtn = document.getElementById('prevSlideBtn');
-      const nextPhotoBtn = document.getElementById('nextSlideBtn');
-      const photoFrame = document.getElementById('fbSlideFrame');
-      const photoCounter = document.getElementById('fbSlideCounter');
-      const photoThumbsStrip = document.getElementById('fbThumbnailsStrip');
+      const photoModal = document.getElementById('photoCarouselModal');
+      const openPhotoBtn = document.getElementById('openPhotoCarouselBtn');
+      const closePhotoBtn = document.getElementById('closePhotoCarouselBtn');
+      const prevPhotoBtn = document.getElementById('prevPhotoBtn');
+      const nextPhotoBtn = document.getElementById('nextPhotoBtn');
+      const photoFrame = document.getElementById('photoSlideFrame');
+      const photoCounter = document.getElementById('photoSlideCounter');
+      const photoThumbsStrip = document.getElementById('photoThumbnailsStrip');
 
-      photoArray.forEach((photo, index) => {
+      photoList.forEach((imgObj, index) => {
         const thumb = document.createElement('div');
-        thumb.classList.add('fb-thumb');
+        thumb.classList.add('photo-thumb');
         if (index === 0) thumb.classList.add('active');
-        thumb.textContent = index + 1;
+        thumb.innerHTML = `<img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerText='${imgObj.filename}';">`;
         thumb.addEventListener('click', () => { currentPhotoSlide = index; updatePhotoSlide(); });
         photoThumbsStrip.appendChild(thumb);
       });
 
       function updatePhotoSlide() {
-        const photo = photoArray[currentPhotoSlide];
-        photoCounter.textContent = `Foto ${currentPhotoSlide + 1} de 20`;
-        if (photo.src) {
-          photoFrame.innerHTML = `<img src="${photo.src}" alt="${photo.title}">`;
-        } else {
-          photoFrame.innerHTML = `
-            <div class="fb-placeholder-content">
-              <div class="icon">📷</div>
-              <h4 style="color: var(--acento-dorado); font-family: var(--fuente-titulo);">${photo.title}</h4>
-              <p style="font-size: 0.85rem; margin-top: 5px;">${photo.description}</p>
-            </div>
-          `;
-        }
-        const thumbs = photoThumbsStrip.querySelectorAll('.fb-thumb');
+        const imgObj = photoList[currentPhotoSlide];
+        photoCounter.textContent = `Imagen ${currentPhotoSlide + 1} de ${photoList.length} - ${imgObj.filename}`;
+        photoFrame.innerHTML = `
+          <img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerHTML='<div style=\'color:#aaa; font-family:var(--fuente-cuerpo); text-align:center;\'><div style=\'font-size:2rem; margin-bottom:10px;\'>🖼️</div><p>${imgObj.filename}</p><span style=\'font-size:0.8rem; color:var(--acento-rosa);\'>Asegúrate de tener este archivo en la misma carpeta</span></div>';">
+        `;
+
+        const thumbs = photoThumbsStrip.querySelectorAll('.photo-thumb');
         thumbs.forEach((t, i) => {
           if (i === currentPhotoSlide) {
             t.classList.add('active');
@@ -1208,81 +1262,35 @@
         });
       }
 
-      openPhotoBtn.addEventListener('click', () => { photoModal.classList.add('active'); updatePhotoSlide(); });
-      closePhotoBtn.addEventListener('click', () => photoModal.classList.remove('active'));
-      nextPhotoBtn.addEventListener('click', () => { currentPhotoSlide = (currentPhotoSlide + 1) % photoArray.length; updatePhotoSlide(); });
-      prevPhotoBtn.addEventListener('click', () => { currentPhotoSlide = (currentPhotoSlide - 1 + photoArray.length) % photoArray.length; updatePhotoSlide(); });
-
-      // --- 6. CARRUSEL DE IMÁGENES (44.jpg - 49.jpg) PARA EL BOTÓN TRIANGULAR AZUL ---
-      const imageList = [
-        { filename: '44.jpg', alt: 'Imagen 44' },
-        { filename: '45.jpg', alt: 'Imagen 45' },
-        { filename: '46.jpg', alt: 'Imagen 46' },
-        { filename: '47.jpg', alt: 'Imagen 47' },
-        { filename: '48.jpg', alt: 'Imagen 48' },
-        { filename: '49.jpg', alt: 'Imagen 49' }
-      ];
-
-      let currentImageSlide = 0;
-      const imageModal = document.getElementById('imageCarouselModal');
-      const openImageBtn = document.getElementById('openImageCarouselBtn');
-      const closeImageBtn = document.getElementById('closeImageCarouselBtn');
-      const prevImageBtn = document.getElementById('prevImageBtn');
-      const nextImageBtn = document.getElementById('nextImageBtn');
-      const imageFrame = document.getElementById('imageSlideFrame');
-      const imageCounter = document.getElementById('imageSlideCounter');
-      const imageThumbsStrip = document.getElementById('imageThumbnailsStrip');
-
-      imageList.forEach((imgObj, index) => {
-        const thumb = document.createElement('div');
-        thumb.classList.add('image-thumb');
-        if (index === 0) thumb.classList.add('active');
-        thumb.innerHTML = `<img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerText='${imgObj.filename}';">`;
-        thumb.addEventListener('click', () => { currentImageSlide = index; updateImageSlide(); });
-        imageThumbsStrip.appendChild(thumb);
+      openPhotoBtn.addEventListener('click', () => {
+        photoModal.classList.add('active');
+        updatePhotoSlide();
       });
 
-      function updateImageSlide() {
-        const imgObj = imageList[currentImageSlide];
-        imageCounter.textContent = `Imagen ${currentImageSlide + 1} de ${imageList.length} - ${imgObj.filename}`;
-        imageFrame.innerHTML = `
-          <img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerHTML='<div style=\'color:#aaa; font-family:var(--fuente-cuerpo); text-align:center;\'><div style=\'font-size:2rem; margin-bottom:10px;\'>🖼️</div><p>${imgObj.filename}</p><span style=\'font-size:0.8rem; color:var(--acento-rosa);\'>Asegúrate de tener este archivo en la misma carpeta</span></div>';">
-        `;
-
-        const thumbs = imageThumbsStrip.querySelectorAll('.image-thumb');
-        thumbs.forEach((t, i) => {
-          if (i === currentImageSlide) {
-            t.classList.add('active');
-            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          } else {
-            t.classList.remove('active');
-          }
-        });
-      }
-
-      openImageBtn.addEventListener('click', () => {
-        imageModal.classList.add('active');
-        updateImageSlide();
+      closePhotoBtn.addEventListener('click', () => {
+        photoModal.classList.remove('active');
       });
 
-      closeImageBtn.addEventListener('click', () => {
-        imageModal.classList.remove('active');
+      nextPhotoBtn.addEventListener('click', () => {
+        currentPhotoSlide = (currentPhotoSlide + 1) % photoList.length;
+        updatePhotoSlide();
       });
 
-      nextImageBtn.addEventListener('click', () => {
-        currentImageSlide = (currentImageSlide + 1) % imageList.length;
-        updateImageSlide();
+      prevPhotoBtn.addEventListener('click', () => {
+        currentPhotoSlide = (currentPhotoSlide - 1 + photoList.length) % photoList.length;
+        updatePhotoSlide();
       });
 
-      prevImageBtn.addEventListener('click', () => {
-        currentImageSlide = (currentImageSlide - 1 + imageList.length) % imageList.length;
-        updateImageSlide();
-      });
 
-      // Cierre de modales al hacer clic fuera del contenido
+      // Cierre de modales al hacer clic fuera del contenedor
       window.addEventListener('click', (e) => {
-        if (e.target === photoModal) photoModal.classList.remove('active');
-        if (e.target === imageModal) imageModal.classList.remove('active');
+        if (e.target === videoModal) {
+          videoModal.classList.remove('active');
+          videoFrame.innerHTML = '';
+        }
+        if (e.target === photoModal) {
+          photoModal.classList.remove('active');
+        }
       });
 
     });
