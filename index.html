@@ -966,7 +966,7 @@
           <div id="semblanza">
             <p><strong>Silvia Yulmaneli Moreno León</strong>, originaria de Zolotepec, Estado de México (1993), es licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex).</p>
             <p>Su trayectoria profesional destaca por su labor como narradora, ensayista y ponente en congresos internacionales de historia y literatura.</p>
-            <p>Es autora de la novela corta <em>Cluster B</em> y del volumen <em>Rincones</em>, además de haber compilado el poemario sobre Alejandra Pizarnik y colaborado con textos en revistas culturales como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.</p>
+            <p>Es autora de la novela corta <em>Cluster B</em> y del volumen <em>Rincones</em>, además de haber compilado el poemario sobre Alejandra Pizarnik y colaborado con textos en revistas culturales como <em>Pergola de Humo</em> y <em>Grafógrafxs</em>.</p>
           </div>
           <div id="reconocimientos" style="margin-top: 25px;">
             <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Participación & Ponencias</h3>
@@ -1155,7 +1155,7 @@
       const videoList = [
         { title: 'The Cleaners from Venus - Wivenhoe Bells (II)', embedUrl: 'https://www.youtube.com/embed/MAvEHIX-4ic' },
         { title: 'Interpol - Obstacle 1', embedUrl: 'https://www.youtube.com/embed/haW_ruZ_Be8' },
-        { title: 'Interpol - Evil', embedUrl: 'https://www.youtube.com/embed/eqfiHfDmUrw' }
+        { title: 'Interpol - Evil', embedUrl: 'https://www.youtube.com/embed/dkpgz3uQ58U' }
       ];
 
       let currentVideoSlide = 0;
@@ -1173,15 +1173,17 @@
         thumb.classList.add('video-thumb');
         if (index === 0) thumb.classList.add('active');
         thumb.textContent = vObj.title;
-        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(); });
+        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(true); });
         videoThumbsStrip.appendChild(thumb);
       });
 
-      function updateVideoSlide() {
+      function updateVideoSlide(autoplay = true) {
         const vObj = videoList[currentVideoSlide];
         videoCounter.textContent = `Vídeo ${currentVideoSlide + 1} de ${videoList.length} - ${vObj.title}`;
+        
+        const autoplayParam = autoplay ? '?autoplay=1' : '';
         videoFrame.innerHTML = `
-          <iframe src="${vObj.embedUrl}" title="${vObj.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="${vObj.embedUrl}${autoplayParam}" title="${vObj.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         `;
 
         const thumbs = videoThumbsStrip.querySelectorAll('.video-thumb');
@@ -1196,8 +1198,9 @@
       }
 
       openVideoBtn.addEventListener('click', () => {
+        currentVideoSlide = 0; // Iniciar en Wivenhoe Bells (II)
         videoModal.classList.add('active');
-        updateVideoSlide();
+        updateVideoSlide(true); // Se inicia reproducción automática
       });
 
       closeVideoBtn.addEventListener('click', () => {
@@ -1207,12 +1210,12 @@
 
       nextVideoBtn.addEventListener('click', () => {
         currentVideoSlide = (currentVideoSlide + 1) % videoList.length;
-        updateVideoSlide();
+        updateVideoSlide(true);
       });
 
       prevVideoBtn.addEventListener('click', () => {
         currentVideoSlide = (currentVideoSlide - 1 + videoList.length) % videoList.length;
-        updateVideoSlide();
+        updateVideoSlide(true);
       });
 
 
