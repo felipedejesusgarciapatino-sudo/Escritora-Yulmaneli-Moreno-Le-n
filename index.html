@@ -490,12 +490,25 @@
       color: var(--texto-principal);
     }
 
-    /* --- CONTENEDOR FOTO YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ --- */
+    /* --- CONTENEDOR FOTO YUL.JPEG Y SECCIÓN CONTACTO --- */
+    .contact-wrapper {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .contact-form {
+      flex: 1;
+      display: grid;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
     .yul-image-container {
-      position: absolute;
-      right: 0;
-      bottom: -30px;
-      width: 420px;
+      position: relative;
+      width: 320px;
+      flex-shrink: 0;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.08);
@@ -575,14 +588,6 @@
     }
 
     /* --- FORMULARIO --- */
-    .contact-form {
-      display: grid;
-      gap: 20px;
-      max-width: 600px;
-      position: relative;
-      z-index: 2;
-    }
-
     .form-group {
       display: flex;
       flex-direction: column;
@@ -844,6 +849,17 @@
     }
 
     /* --- RESPONSIVIDAD --- */
+    @media (max-width: 900px) {
+      .contact-wrapper {
+        flex-direction: column;
+      }
+      .yul-image-container {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+    }
+
     @media (max-width: 768px) {
       .mobile-header { display: flex; }
       .sidebar { transform: translateX(-100%); transition: transform 0.3s ease-in-out; width: 260px; }
@@ -856,7 +872,6 @@
       .orbit-ring, .orbit-track { width: 260px; height: 260px; }
       .orbit-center { width: 110px; height: 110px; }
       .orbit-item { width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; font-size: 0.65rem; }
-      .yul-image-container { width: 260px; bottom: -10px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
       .modal-nav-btn.prev { left: 5px; }
       .modal-nav-btn.next { right: 5px; }
@@ -1002,7 +1017,7 @@
       <h2 class="section-title">Galería & Medios</h2>
       <div id="fotografias" style="margin-top: 25px;">
         <p style="color: var(--texto-suave); margin-bottom: 15px;">Registro fotográfico de eventos y presentaciones.</p>
-        <div class="gallery-accordion">
+        <div class="gallery-accordion" id="galleryAccordion">
           <button class="gallery-accordion-btn" id="galleryAccordionBtn">
             <span>📷 Ver Galería de Eventos & Lecturas</span>
             <span class="accordion-icon">▾</span>
@@ -1021,33 +1036,35 @@
       </div>
     </section>
 
-    <!-- SECCIÓN CONTACTO Y YUL.JPEG CON BOTÓN TRIANGULAR CAFÉ -->
+    <!-- SECCIÓN CONTACTO -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
       <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
 
-      <form class="contact-form" action="#" method="POST">
-        <div class="form-group">
-          <label for="nombre">Nombre Completo</label>
-          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
-        </div>
-        <div class="form-group">
-          <label for="email">Correo Electrónico</label>
-          <input type="email" id="email" name="email" required placeholder="tu@email.com">
-        </div>
-        <div class="form-group">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Enviar Mensaje</button>
-      </form>
+      <div class="contact-wrapper">
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar Mensaje</button>
+        </form>
 
-      <div class="yul-image-container">
-        <!-- BOTÓN TRIANGULAR CAFÉ (ALINEADO A LA FOTO) -->
-        <button class="triangle-btn" id="openPhotoCarouselBtn" title="Abrir carrusel de imágenes">
-          <span class="triangle-btn-icon">📷</span>
-        </button>
-        <img src="yul.jpeg" alt="Imagen decorativa Yul" class="bg-image-yul">
+        <div class="yul-image-container">
+          <!-- BOTÓN TRIANGULAR CAFÉ -->
+          <button class="triangle-btn" id="openPhotoCarouselBtn" title="Abrir carrusel de imágenes">
+            <span class="triangle-btn-icon">📷</span>
+          </button>
+          <img src="yul.jpeg" alt="Imagen decorativa Yul" class="bg-image-yul">
+        </div>
       </div>
     </section>
 
@@ -1103,200 +1120,175 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT INTEGRADO -->
+  <!-- LÓGICA DE JAVASCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Menú lateral móvil
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('sidebar');
 
-      // --- 1. MENÚS DESPLEGABLES DEL SIDEBAR ---
-      const dropdowns = document.querySelectorAll('.dropdown');
-      dropdowns.forEach(dropdown => {
-        const btn = dropdown.querySelector('.dropdown-btn');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+
+      // 2. Desplegables de navegación (Dropdowns)
+      const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+      dropdownBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
-          dropdowns.forEach(other => { if (other !== dropdown) other.classList.remove('active'); });
-          dropdown.classList.toggle('active');
+          const parent = btn.parentElement;
+          parent.classList.toggle('active');
         });
       });
 
-      // --- 2. ACORDEÓN DESPLEGABLE DE GALERÍA DE EVENTOS ---
-      const galleryBtn = document.getElementById('galleryAccordionBtn');
-      const galleryAccordion = galleryBtn ? galleryBtn.closest('.gallery-accordion') : null;
-      if (galleryBtn && galleryAccordion) {
-        galleryBtn.addEventListener('click', () => {
+      // 3. Acordeón de la galería
+      const galleryAccordionBtn = document.getElementById('galleryAccordionBtn');
+      const galleryAccordion = document.getElementById('galleryAccordion');
+
+      if (galleryAccordionBtn && galleryAccordion) {
+        galleryAccordionBtn.addEventListener('click', () => {
           galleryAccordion.classList.toggle('open');
         });
       }
 
-      // --- 3. POSICIONAMIENTO ORBITAL ---
-      const items = document.querySelectorAll('.orbit-item');
-      function positionOrbitItems() {
-        const radius = window.innerWidth <= 768 ? 130 : 180;
-        items.forEach((item, index) => {
-          const angle = (index / items.length) * (2 * Math.PI) - (Math.PI / 2);
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          item.style.transform = `translate(${x}px, ${y}px)`;
-        });
-      }
-      positionOrbitItems();
-      window.addEventListener('resize', positionOrbitItems);
+      // 4. Distribución orbital en el carrusel
+      const orbitItems = document.querySelectorAll('.orbit-item');
+      const totalItems = orbitItems.length;
+      const radius = 180; // Radio del círculo en px
 
-      // --- 4. MENÚ RESPONSIVO (MÓVIL) ---
-      const menuToggle = document.getElementById('menuToggle');
-      const sidebar = document.getElementById('sidebar');
-      if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-        document.querySelectorAll('.sidebar nav a').forEach(link => {
-          link.addEventListener('click', () => { if (window.innerWidth <= 768) sidebar.classList.remove('open'); });
-        });
-      }
+      orbitItems.forEach((item, index) => {
+        const angle = (index / totalItems) * (2 * Math.PI);
+        const x = radius * Math.cos(angle);
+        const y = radius * Math.sin(angle);
+        item.style.transform = `translate(${x}px, ${y}px)`;
+      });
 
-      // --- 5. CARRUSEL DE VÍDEOS EN EL BOTÓN TRIANGULAR AZUL ---
-      const videoList = [
-        { title: 'The Cleaners from Venus - Wivenhoe Bells (II)', embedUrl: 'https://www.youtube.com/embed/MAvEHIX-4ic' },
-        { title: 'Interpol - Obstacle 1', embedUrl: 'https://www.youtube.com/embed/haW_ruZ_Be8' },
-        { title: 'Interpol - Evil', embedUrl: 'https://www.youtube.com/embed/dkpgz3uQ58U' }
+      // 5. Carrusel de Vídeos (Botón Azul)
+      const videos = [
+        { title: 'Ponencia 1', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+        { title: 'Entrevista 2', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+        { title: 'Lectura 3', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
       ];
+      let currentVideoIndex = 0;
 
-      let currentVideoSlide = 0;
       const videoModal = document.getElementById('videoCarouselModal');
       const openVideoBtn = document.getElementById('openVideoCarouselBtn');
       const closeVideoBtn = document.getElementById('closeVideoCarouselBtn');
-      const prevVideoBtn = document.getElementById('prevVideoBtn');
-      const nextVideoBtn = document.getElementById('nextVideoBtn');
       const videoFrame = document.getElementById('videoSlideFrame');
       const videoCounter = document.getElementById('videoSlideCounter');
-      const videoThumbsStrip = document.getElementById('videoThumbnailsStrip');
+      const videoStrip = document.getElementById('videoThumbnailsStrip');
+      const prevVideoBtn = document.getElementById('prevVideoBtn');
+      const nextVideoBtn = document.getElementById('nextVideoBtn');
 
-      videoList.forEach((vObj, index) => {
-        const thumb = document.createElement('div');
-        thumb.classList.add('video-thumb');
-        if (index === 0) thumb.classList.add('active');
-        thumb.textContent = vObj.title;
-        thumb.addEventListener('click', () => { currentVideoSlide = index; updateVideoSlide(true); });
-        videoThumbsStrip.appendChild(thumb);
-      });
+      function updateVideoSlide() {
+        videoFrame.innerHTML = `<iframe src="${videos[currentVideoIndex].src}" allowfullscreen></iframe>`;
+        videoCounter.textContent = `Vídeo ${currentVideoIndex + 1} de ${videos.length}`;
+        renderVideoThumbs();
+      }
 
-      function updateVideoSlide(autoplay = true) {
-        const vObj = videoList[currentVideoSlide];
-        videoCounter.textContent = `Vídeo ${currentVideoSlide + 1} de ${videoList.length} - ${vObj.title}`;
-        
-        const autoplayParam = autoplay ? '?autoplay=1' : '';
-        videoFrame.innerHTML = `
-          <iframe src="${vObj.embedUrl}${autoplayParam}" title="${vObj.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        `;
-
-        const thumbs = videoThumbsStrip.querySelectorAll('.video-thumb');
-        thumbs.forEach((t, i) => {
-          if (i === currentVideoSlide) {
-            t.classList.add('active');
-            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          } else {
-            t.classList.remove('active');
-          }
+      function renderVideoThumbs() {
+        videoStrip.innerHTML = '';
+        videos.forEach((vid, idx) => {
+          const thumb = document.createElement('div');
+          thumb.className = `video-thumb ${idx === currentVideoIndex ? 'active' : ''}`;
+          thumb.textContent = vid.title;
+          thumb.addEventListener('click', () => {
+            currentVideoIndex = idx;
+            updateVideoSlide();
+          });
+          videoStrip.appendChild(thumb);
         });
       }
 
-      openVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = 0; // Iniciar en Wivenhoe Bells (II)
-        videoModal.classList.add('active');
-        updateVideoSlide(true); // Se inicia reproducción automática
-      });
+      if (openVideoBtn && videoModal) {
+        openVideoBtn.addEventListener('click', () => {
+          videoModal.classList.add('active');
+          updateVideoSlide();
+        });
+      }
 
-      closeVideoBtn.addEventListener('click', () => {
-        videoModal.classList.remove('active');
-        videoFrame.innerHTML = ''; // Detener reproducción al cerrar
-      });
+      if (closeVideoBtn) {
+        closeVideoBtn.addEventListener('click', () => {
+          videoModal.classList.remove('active');
+          videoFrame.innerHTML = ''; // Detiene el vídeo
+        });
+      }
 
-      nextVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = (currentVideoSlide + 1) % videoList.length;
-        updateVideoSlide(true);
-      });
+      if (prevVideoBtn) {
+        prevVideoBtn.addEventListener('click', () => {
+          currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+          updateVideoSlide();
+        });
+      }
 
-      prevVideoBtn.addEventListener('click', () => {
-        currentVideoSlide = (currentVideoSlide - 1 + videoList.length) % videoList.length;
-        updateVideoSlide(true);
-      });
+      if (nextVideoBtn) {
+        nextVideoBtn.addEventListener('click', () => {
+          currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+          updateVideoSlide();
+        });
+      }
 
+      // 6. Carrusel de Imágenes (Botón Café: 44.jpg - 49.jpg)
+      const photoImages = ['44.jpg', '45.jpg', '46.jpg', '47.jpg', '48.jpg', '49.jpg'];
+      let currentPhotoIndex = 0;
 
-      // --- 6. CARRUSEL DE IMÁGENES (44.jpg - 49.jpg) EN EL BOTÓN TRIANGULAR CAFÉ ---
-      const photoList = [
-        { filename: '44.jpg', alt: 'Imagen 44' },
-        { filename: '45.jpg', alt: 'Imagen 45' },
-        { filename: '46.jpg', alt: 'Imagen 46' },
-        { filename: '47.jpg', alt: 'Imagen 47' },
-        { filename: '48.jpg', alt: 'Imagen 48' },
-        { filename: '49.jpg', alt: 'Imagen 49' }
-      ];
-
-      let currentPhotoSlide = 0;
       const photoModal = document.getElementById('photoCarouselModal');
       const openPhotoBtn = document.getElementById('openPhotoCarouselBtn');
       const closePhotoBtn = document.getElementById('closePhotoCarouselBtn');
-      const prevPhotoBtn = document.getElementById('prevPhotoBtn');
-      const nextPhotoBtn = document.getElementById('nextPhotoBtn');
       const photoFrame = document.getElementById('photoSlideFrame');
       const photoCounter = document.getElementById('photoSlideCounter');
-      const photoThumbsStrip = document.getElementById('photoThumbnailsStrip');
-
-      photoList.forEach((imgObj, index) => {
-        const thumb = document.createElement('div');
-        thumb.classList.add('photo-thumb');
-        if (index === 0) thumb.classList.add('active');
-        thumb.innerHTML = `<img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerText='${imgObj.filename}';">`;
-        thumb.addEventListener('click', () => { currentPhotoSlide = index; updatePhotoSlide(); });
-        photoThumbsStrip.appendChild(thumb);
-      });
+      const photoStrip = document.getElementById('photoThumbnailsStrip');
+      const prevPhotoBtn = document.getElementById('prevPhotoBtn');
+      const nextPhotoBtn = document.getElementById('nextPhotoBtn');
 
       function updatePhotoSlide() {
-        const imgObj = photoList[currentPhotoSlide];
-        photoCounter.textContent = `Imagen ${currentPhotoSlide + 1} de ${photoList.length} - ${imgObj.filename}`;
-        photoFrame.innerHTML = `
-          <img src="${imgObj.filename}" alt="${imgObj.alt}" onerror="this.onerror=null; this.parentNode.innerHTML='<div style=\'color:#aaa; font-family:var(--fuente-cuerpo); text-align:center;\'><div style=\'font-size:2rem; margin-bottom:10px;\'>🖼️</div><p>${imgObj.filename}</p><span style=\'font-size:0.8rem; color:var(--acento-rosa);\'>Asegúrate de tener este archivo en la misma carpeta</span></div>';">
-        `;
+        photoFrame.innerHTML = `<img src="${photoImages[currentPhotoIndex]}" alt="Foto ${currentPhotoIndex + 1}">`;
+        photoCounter.textContent = `Imagen ${currentPhotoIndex + 1} de ${photoImages.length}`;
+        renderPhotoThumbs();
+      }
 
-        const thumbs = photoThumbsStrip.querySelectorAll('.photo-thumb');
-        thumbs.forEach((t, i) => {
-          if (i === currentPhotoSlide) {
-            t.classList.add('active');
-            t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          } else {
-            t.classList.remove('active');
-          }
+      function renderPhotoThumbs() {
+        photoStrip.innerHTML = '';
+        photoImages.forEach((src, idx) => {
+          const thumb = document.createElement('div');
+          thumb.className = `photo-thumb ${idx === currentPhotoIndex ? 'active' : ''}`;
+          thumb.innerHTML = `<img src="${src}" alt="Thumb ${idx + 1}">`;
+          thumb.addEventListener('click', () => {
+            currentPhotoIndex = idx;
+            updatePhotoSlide();
+          });
+          photoStrip.appendChild(thumb);
         });
       }
 
-      openPhotoBtn.addEventListener('click', () => {
-        photoModal.classList.add('active');
-        updatePhotoSlide();
-      });
+      if (openPhotoBtn && photoModal) {
+        openPhotoBtn.addEventListener('click', () => {
+          photoModal.classList.add('active');
+          updatePhotoSlide();
+        });
+      }
 
-      closePhotoBtn.addEventListener('click', () => {
-        photoModal.classList.remove('active');
-      });
-
-      nextPhotoBtn.addEventListener('click', () => {
-        currentPhotoSlide = (currentPhotoSlide + 1) % photoList.length;
-        updatePhotoSlide();
-      });
-
-      prevPhotoBtn.addEventListener('click', () => {
-        currentPhotoSlide = (currentPhotoSlide - 1 + photoList.length) % photoList.length;
-        updatePhotoSlide();
-      });
-
-
-      // Cierre de modales al hacer clic fuera del contenedor
-      window.addEventListener('click', (e) => {
-        if (e.target === videoModal) {
-          videoModal.classList.remove('active');
-          videoFrame.innerHTML = '';
-        }
-        if (e.target === photoModal) {
+      if (closePhotoBtn) {
+        closePhotoBtn.addEventListener('click', () => {
           photoModal.classList.remove('active');
-        }
-      });
+        });
+      }
 
+      if (prevPhotoBtn) {
+        prevPhotoBtn.addEventListener('click', () => {
+          currentPhotoIndex = (currentPhotoIndex - 1 + photoImages.length) % photoImages.length;
+          updatePhotoSlide();
+        });
+      }
+
+      if (nextPhotoBtn) {
+        nextPhotoBtn.addEventListener('click', () => {
+          currentPhotoIndex = (currentPhotoIndex + 1) % photoImages.length;
+          updatePhotoSlide();
+        });
+      }
     });
   </script>
 </body>
