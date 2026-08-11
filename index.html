@@ -568,4 +568,796 @@
     /* BOTÓN TRIANGULAR AZUL FIJO */
     .right-sidebar-blue-triangle {
       position: fixed;
-      right: 0
+      right: 0;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 30px 45px 30px 0;
+      border-color: transparent var(--acento-azul) transparent transparent;
+      cursor: pointer;
+      z-index: 900;
+      background: none;
+      padding: 0;
+      outline: none;
+      filter: drop-shadow(-3px 3px 6px rgba(0,0,0,0.25));
+      transition: transform 0.2s ease;
+    }
+
+    .right-sidebar-blue-triangle:hover {
+      transform: translateY(-50%) scale(1.12);
+    }
+
+    .blue-triangle-icon {
+      position: absolute;
+      top: -9px;
+      right: -38px;
+      color: #ffffff;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* --- FORMULARIO --- */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-family: var(--fuente-titulo);
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px;
+      border: 1px solid var(--borde-dorado);
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 4px;
+      font-family: var(--fuente-cuerpo);
+      color: var(--texto-principal);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--acento-dorado);
+      background-color: #ffffff;
+    }
+
+    .btn-submit {
+      padding: 12px 25px;
+      background-color: var(--texto-principal);
+      color: var(--bg-principal);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--fuente-titulo);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      align-self: start;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--acento-dorado);
+    }
+
+    /* --- MODAL REPRODUCTOR YOUTUBE --- */
+    .youtube-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .youtube-modal.active {
+      display: flex;
+    }
+
+    .youtube-modal-container {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .youtube-modal-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .close-youtube-btn {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    /* --- MODAL ESTILO INSTAGRAM STORIES --- */
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-modal.active {
+      display: flex;
+    }
+
+    .story-carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .story-progress-bar {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      gap: 4px;
+      z-index: 10;
+    }
+
+    .progress-segment {
+      height: 2px;
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.35);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-segment-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #ffffff;
+      transition: width 0.05s linear;
+    }
+
+    .story-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0) 15%,
+        rgba(0,0,0,0) 75%,
+        rgba(0,0,0,0.6) 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .story-slides {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav-left,
+    .nav-right {
+      position: absolute;
+      top: 0;
+      bottom: 60px;
+      width: 50%;
+      z-index: 5;
+      cursor: pointer;
+    }
+
+    .nav-left { left: 0; }
+    .nav-right { right: 0; }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 20;
+      background: none;
+      border: none;
+    }
+
+    .story-actions {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 10;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-enamore {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-family: var(--fuente-cuerpo);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-enamore.active {
+      background: rgba(225, 29, 72, 0.85);
+      border-color: #e11d48;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- RESPONSIVIDAD --- */
+    @media (max-width: 900px) {
+      .contact-wrapper {
+        flex-direction: column;
+      }
+      .yul-image-container {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-header {
+        display: flex;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 80px 20px 40px 20px;
+      }
+
+      .bio-container {
+        flex-direction: column;
+      }
+
+      .bio-image-wrapper {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .orbital-wrapper {
+        height: 360px;
+      }
+
+      .orbit-ring,
+      .orbit-track {
+        width: 260px;
+        height: 260px;
+      }
+
+      .orbit-center {
+        width: 110px;
+        height: 110px;
+      }
+
+      .orbit-item {
+        width: 55px;
+        height: 55px;
+        margin-top: -27.5px;
+        margin-left: -27.5px;
+        font-size: 0.65rem;
+      }
+
+      .orbit-item:nth-child(1) { transform: rotate(0deg) translate(130px) rotate(0deg); }
+      .orbit-item:nth-child(2) { transform: rotate(45deg) translate(130px) rotate(-45deg); }
+      .orbit-item:nth-child(3) { transform: rotate(90deg) translate(130px) rotate(-90deg); }
+      .orbit-item:nth-child(4) { transform: rotate(135deg) translate(130px) rotate(-135deg); }
+      .orbit-item:nth-child(5) { transform: rotate(180deg) translate(130px) rotate(-180deg); }
+      .orbit-item:nth-child(6) { transform: rotate(225deg) translate(130px) rotate(-225deg); }
+      .orbit-item:nth-child(7) { transform: rotate(270deg) translate(130px) rotate(-270deg); }
+      .orbit-item:nth-child(8) { transform: rotate(315deg) translate(130px) rotate(-315deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO MÓVIL -->
+  <header class="mobile-header">
+    <h2>S. Y. Moreno León</h2>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
+  </header>
+
+  <!-- Overlay para cerrar menú en móvil -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- BOTÓN TRIANGULAR AZUL (YouTube) -->
+  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" onclick="openYoutubeModal()" title="Reproducir 'Wivenhoe Bells (II)' - The Cleaners from Venus" aria-label="Reproducir canción">
+    <span class="blue-triangle-icon" id="blueTriangleIcon">▶</span>
+  </button>
+
+  <!-- MODAL DE REPRODUCTOR DE YOUTUBE -->
+  <div class="youtube-modal" id="youtubeModal" role="dialog" aria-modal="true" aria-label="Reproductor de video">
+    <div class="youtube-modal-container">
+      <button class="close-youtube-btn" onclick="closeYoutubeModal()" aria-label="Cerrar video">&times;</button>
+      <iframe id="youtubeIframe" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- BARRA LATERAL -->
+  <aside class="sidebar" id="sidebar">
+    <div>
+      <div class="brand">
+        <h1>Silvia Yulmaneli</h1>
+        <p>Moreno León</p>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#inicio">Inicio</a></li>
+
+          <li class="nav-item dropdown">
+            <button class="dropdown-btn" aria-expanded="false">Biografía <span class="arrow">▾</span></button>
+            <ul class="dropdown-content">
+              <li><a href="#semblanza">Semblanza</a></li>
+              <li><a href="#reconocimientos">Reconocimientos</a></li>
+              <li><a href="#trayectoria">Trayectoria</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <button class="dropdown-btn" aria-expanded="false">Obras <span class="arrow">▾</span></button>
+            <ul class="dropdown-content">
+              <li><a href="#libros">Libros & Publicaciones</a></li>
+              <li><a href="#antologias">Antologías</a></li>
+              <li><a href="#articulos">Ensayos & Artículos</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <button class="dropdown-btn" aria-expanded="false">Galería <span class="arrow">▾</span></button>
+            <ul class="dropdown-content">
+              <li><a href="#fotografias">Fotografías</a></li>
+              <li><a href="#presentaciones">Presentaciones</a></li>
+              <li><a href="#prensa">Prensa & Entrevistas</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <p>&copy; 2026 Silvia Y. Moreno León.</p>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+
+    <!-- SECCIÓN INICIO / HERO -->
+    <section id="inicio" class="hero">
+      <h1 class="hero-title">Silvia Yulmaneli Moreno León</h1>
+      <p class="hero-subtitle">Filósofa, Ensayista & Narradora</p>
+      <p class="hero-text">
+        Espacio dedicado al pensamiento filosófico, la creación narrativa y la difusión de investigaciones culturales.
+      </p>
+
+      <!-- CARRUSEL GIRATORIO / ORBITAL -->
+      <div class="orbital-wrapper">
+        <div class="orbit-ring"></div>
+        <div class="orbit-center"><span>Obras & Universos</span></div>
+        <div class="orbit-track">
+          <a href="#libros" class="orbit-item"><span>Filosofía</span></a>
+          <a href="#antologias" class="orbit-item"><span>Narrativa</span></a>
+          <a href="#articulos" class="orbit-item"><span>Ensayos</span></a>
+          <a href="#reconocimientos" class="orbit-item"><span>Congresos</span></a>
+          <a href="#presentaciones" class="orbit-item"><span>Ponencias</span></a>
+          <a href="#prensa" class="orbit-item"><span>Prensa</span></a>
+          <a href="#fotografias" class="orbit-item"><span>Galería</span></a>
+          <a href="#contacto" class="orbit-item"><span>Contacto</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN BIOGRAFÍA -->
+    <section id="biografia">
+      <h2 class="section-title">Biografía & Semblanza</h2>
+
+      <div class="bio-container">
+        <div class="bio-image-wrapper">
+          <!-- Cambia por la ruta real de tu imagen -->
+          <img src="yul.jpeg" alt="Silvia Yulmaneli Moreno León" class="bio-image">
+        </div>
+
+        <div class="bio-text-wrapper">
+          <div id="semblanza">
+            <p><strong>Silvia Yulmaneli Moreno León</strong>, originaria de Zolotepec, Estado de México (1993), es licenciada en Filosofía por la Universidad Autónoma del Estado de México (UAEMex).</p>
+            <p>Su trayectoria profesional destaca por su labor como narradora, ensayista y ponente en congresos internacionales de historia y literatura.</p>
+            <p>Es autora de la novela corta <em>Cluster B</em> y del volumen <em>Rincones</em>, además de haber compilado el poemario sobre Alejandra Pizarnik y colaborado con textos en revistas culturales como <em>Pergola de Humo</em> y <em>Grafógrafxs</em>.</p>
+          </div>
+
+          <div id="reconocimientos" style="margin-top: 25px;">
+            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Participación & Ponencias</h3>
+            <p>Ha participado en congresos nacionales e internacionales de historia, filosofía y literatura.</p>
+          </div>
+
+          <div id="trayectoria" style="margin-top: 25px;">
+            <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 8px;">Trayectoria Editorial</h3>
+            <p>Contribuye frecuentemente con ensayos y artículos en revistas digitales e impresas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN OBRAS -->
+    <section id="obras">
+      <h2 class="section-title">Obras y Publicaciones</h2>
+
+      <div id="libros" style="margin-top: 25px;">
+        <h3 style="font-family: var(--fuente-titulo);">Libros Publicados</h3>
+        <p style="color: var(--texto-suave);">Incluye la novela corta <em>Cluster B</em> y la obra <em>Rincones</em>.</p>
+      </div>
+
+      <div id="antologias" style="margin-top: 30px;">
+        <h3 style="font-family: var(--fuente-titulo);">Compilaciones y Ediciones</h3>
+        <p style="color: var(--texto-suave);">Compilación del volumen sobre Alejandra Pizarnik y antologías colectivas.</p>
+      </div>
+
+      <div id="articulos" style="margin-top: 30px;">
+        <h3 style="font-family: var(--fuente-titulo);">Ensayos & Artículos</h3>
+        <p style="color: var(--texto-suave);">Publicaciones en revistas como <em>Pergola de Humo</em> y <em>Grafógrafxs</em>.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN GALERÍA -->
+    <section id="galeria">
+      <h2 class="section-title">Galería & Medios</h2>
+
+      <div id="fotografias" style="margin-top: 25px;">
+        <p style="color: var(--texto-suave); margin-bottom: 15px;">Registro fotográfico de eventos y presentaciones.</p>
+
+        <div class="gallery-accordion" id="galleryAccordion">
+          <button class="gallery-accordion-btn" id="galleryAccordionBtn" aria-expanded="false">
+            <span>📷 Ver Galería de Eventos & Lecturas</span>
+            <span class="accordion-icon">▾</span>
+          </button>
+          <div class="gallery-accordion-content">
+            <div class="photo-grid">
+              <div class="photo-placeholder"><div class="icon">🖼️</div><p>Congreso Internacional</p><span>Imagen 1</span></div>
+              <div class="photo-placeholder"><div class="icon">📖</div><p>Lectura de Poesía</p><span>Imagen 2</span></div>
+              <div class="photo-placeholder"><div class="icon">🏛️</div><p>Ponencia UAEMex</p><span>Imagen 3</span></div>
+              <div class="photo-placeholder"><div class="icon">🎙️</div><p>Presentación Novela</p><span>Imagen 4</span></div>
+              <div class="photo-placeholder"><div class="icon">✒️</div><p>Firma de Libros</p><span>Imagen 5</span></div>
+              <div class="photo-placeholder"><div class="icon">👥</div><p>Mesa de Creadoras</p><span>Imagen 6</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secciones que faltaban -->
+      <div id="presentaciones" style="margin-top: 40px;">
+        <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 10px;">Presentaciones</h3>
+        <p style="color: var(--texto-suave);">Registro de presentaciones de libros, lecturas públicas y eventos literarios.</p>
+      </div>
+
+      <div id="prensa" style="margin-top: 30px;">
+        <h3 style="font-family: var(--fuente-titulo); color: var(--acento-dorado); margin-bottom: 10px;">Prensa & Entrevistas</h3>
+        <p style="color: var(--texto-suave);">Apariciones en medios, entrevistas y cobertura periodística.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto">
+      <h2 class="section-title">Contacto</h2>
+      <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
+
+      <div class="contact-wrapper">
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar Mensaje</button>
+        </form>
+
+        <div class="yul-image-container">
+          <button class="triangle-btn" id="openPhotoCarouselBtn" onclick="openStoryGallery()" title="Abrir historias" aria-label="Abrir galería de historias">
+            <span class="triangle-btn-icon">📷</span>
+          </button>
+          <!-- Cambia por la ruta real de tu imagen -->
+          <img src="yul.jpeg" alt="Imagen decorativa de Silvia Yulmaneli" class="bg-image-yul">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL CARRUSEL DE HISTORIAS (44.jpg a 49.jpg) -->
+  <div class="gallery-modal" id="storyModal" role="dialog" aria-modal="true" aria-label="Galería de historias">
+    <div class="story-carousel-container" id="storyCarousel">
+      <button class="close-btn" onclick="closeStoryGallery()" aria-label="Cerrar galería">&times;</button>
+
+      <div class="story-progress-bar" id="progressBarContainer">
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+      </div>
+
+      <div class="story-overlay"></div>
+      <div class="nav-left" onclick="prevStorySlide()" aria-label="Historia anterior"></div>
+      <div class="nav-right" onclick="nextStorySlide()" aria-label="Siguiente historia"></div>
+
+      <div class="story-slides" id="storySlidesContainer">
+        <div class="slide active"><img src="44.jpg" alt="Fotografía 44"></div>
+        <div class="slide"><img src="45.jpg" alt="Fotografía 45"></div>
+        <div class="slide"><img src="46.jpg" alt="Fotografía 46"></div>
+        <div class="slide"><img src="47.jpg" alt="Fotografía 47"></div>
+        <div class="slide"><img src="48.jpg" alt="Fotografía 48"></div>
+        <div class="slide"><img src="49.jpg" alt="Fotografía 49"></div>
+      </div>
+
+      <div class="story-actions">
+        <button class="btn-enamore" id="btnEnamore" onclick="toggleEnamore()">
+          <span style="font-size:0.95rem;">♥</span>
+          <span id="txtEnamore">Estoy enamoradx</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ====================== NAVEGACIÓN Y MENÚ MÓVIL ====================== */
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    }
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = sidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('active', isOpen);
+      });
+    }
+
+    if (sidebarOverlay) {
+      sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+
+    // Cerrar sidebar al hacer clic en cualquier enlace del menú (móvil)
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeSidebar();
+        }
+      });
+    });
+
+    // Dropdowns
+    document.querySelectorAll('.dropdown-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const dropdown = button.parentElement;
+        const isActive = dropdown.classList.toggle('active');
+        button.setAttribute('aria-expanded', isActive);
+      });
+    });
+
+    /* ====================== ACORDEÓN DE LA GALERÍA ====================== */
+    const galleryAccordionBtn = document.getElementById('galleryAccordionBtn');
+    const galleryAccordion = document.getElementById('galleryAccordion');
+
+    if (galleryAccordionBtn && galleryAccordion) {
+      galleryAccordionBtn.addEventListener('click', () => {
+        const isOpen = galleryAccordion.classList.toggle('open');
+        galleryAccordionBtn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
+    /* ====================== MODAL DE YOUTUBE ====================== */
+    const youtubeModal = document.getElementById('youtubeModal');
+    const youtubeIframe = document.getElementById('youtubeIframe');
+
+    // ID correcto de "Wivenhoe Bells (II)" - The Cleaners from Venus
+    const youtubeVideoId = "MAvEHIX-4ic";
+
+    function openYoutubeModal() {
+      if (youtubeModal && youtubeIframe) {
+        youtubeIframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
+        youtubeModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeYoutubeModal() {
+      if (youtubeModal && youtubeIframe) {
+        youtubeModal.classList.remove('active');
+        youtubeIframe.src = "";
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeYoutubeModal();
+        closeStoryGallery();
+      }
+    });
+
+    /* ====================== CARRUSEL DE HISTORIAS TIPO INSTAGRAM ====================== */
+    const storyModal = document.getElementById('storyModal');
+    const slides = document.querySelectorAll('#storySlidesContainer .slide');
+    const progressFills = document.querySelectorAll('.progress-segment-fill');
+    const totalSlides = slides.length;
+
+    let currentSlide = 0;
+    let storyTimer = null;
+    let progressInterval = null;
+    const slideDuration = 5000; // 5 segundos
+    const updateInterval = 50;
+
+    function openStoryGallery() {
+      if (storyModal) {
+        storyModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        currentSlide = 0;
+        showStorySlide(currentSlide);
+      }
+    }
+
+    function closeStoryGallery() {
+      if (storyModal) {
+        storyModal.classList.remove('active');
+        document.body.style.overflow = '';
+        clearStoryTimers();
+      }
+    }
+
+    function clearStoryTimers() {
+      if (storyTimer) {
+        clearTimeout(storyTimer);
+        storyTimer = null;
+      }
+      if (progressInterval) {
+        clearInterval(progressInterval);
+        progressInterval = null;
+      }
+    }
+
+    function showStorySlide(index) {
+      clearStoryTimers();
+
+      // Actualizar slides
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+
+      // Actualizar barras de progreso
+      progressFills.forEach((fill, i) => {
+        if (i < index) {
+          fill.style.width = '100%';
+        } else {
+          fill.style.width = '0%';
+        }
+      });
+
+      // Animar la barra actual
+      let elapsedTime = 0;
+      const currentFill = progressFills[index];
+
+      progressInterval = setInterval(() => {
+        elapsedTime += updateInterval;
+        const percentage = Math.min((elapsedTime / slideDuration) * 100, 100);
+        if (currentFill) {
+          currentFill.style.width = `${percentage}%`;
+        }
+      }, updateInterval);
+
+      // Pasar a la siguiente historia
+      storyTimer = setTimeout(() => {
+        nextStorySlide();
+      }, slideDuration);
+    }
+
+    function nextStorySlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        showStorySlide(currentSlide);
+      } else {
+        closeStoryGallery();
+      }
+    }
+
+    function prevStorySlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showStorySlide(currentSlide);
+      } else {
+        // Reiniciar la primera
+        showStorySlide(0);
+      }
+    }
+
+    /* ====================== BOTÓN "ME ENAMORÉ" ====================== */
+    function toggleEnamore() {
+      const btn = document.getElementById('btnEnamore');
+      const txt = document.getElementById('txtEnamore');
+      if (btn && txt) {
+        btn.classList.toggle('active');
+        txt.textContent = btn.classList.contains('active') ? '¡Enamoradx!' : 'Estoy enamoradx';
+      }
+    }
+  </script>
+</body>
+</html>
