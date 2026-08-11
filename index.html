@@ -230,7 +230,7 @@
     /* --- SECCIÓN HERO --- */
     .hero {
       text-align: center;
-      padding: 40px 0;
+      padding: 20px 0;
     }
 
     .hero-title {
@@ -254,15 +254,15 @@
       font-size: 1.1rem;
     }
 
-    /* --- CARRUSEL ORBITAL EN ROTACIÓN --- */
-    .orbital-container {
+    /* --- CARRUSEL GIRATORIO / ORBITAL --- */
+    .orbital-wrapper {
       position: relative;
       width: 100%;
       height: 480px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 40px 0;
+      margin: 30px 0;
     }
 
     .orbit-ring {
@@ -271,7 +271,7 @@
       height: 360px;
       border: 1px dashed var(--borde-dorado);
       border-radius: 50%;
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     .orbit-center {
@@ -282,7 +282,6 @@
       background-color: var(--bg-secundario);
       border: 2px solid var(--borde-dorado);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -298,15 +297,16 @@
       font-weight: 600;
     }
 
+    /* Pista que gira 360 grados continuo */
     .orbit-track {
       position: absolute;
       width: 360px;
       height: 360px;
       border-radius: 50%;
-      animation: orbitRotate 30s linear infinite;
+      animation: orbitRotate 35s linear infinite;
     }
 
-    .orbital-container:hover .orbit-track {
+    .orbital-wrapper:hover .orbit-track {
       animation-play-state: paused;
     }
 
@@ -314,10 +314,10 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 75px;
-      height: 75px;
-      margin-top: -37.5px;
-      margin-left: -37.5px;
+      width: 70px;
+      height: 70px;
+      margin-top: -35px;
+      margin-left: -35px;
       border-radius: 50%;
       background-color: var(--bg-principal);
       border: 1.5px solid var(--borde-dorado);
@@ -329,18 +329,28 @@
       font-family: var(--fuente-titulo);
       color: var(--texto-principal);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      cursor: pointer;
       text-decoration: none;
       padding: 5px;
       transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     }
 
+    /* Posicionamiento en el círculo orbital */
+    .orbit-item:nth-child(1) { transform: rotate(0deg) translate(180px) rotate(0deg); }
+    .orbit-item:nth-child(2) { transform: rotate(45deg) translate(180px) rotate(-45deg); }
+    .orbit-item:nth-child(3) { transform: rotate(90deg) translate(180px) rotate(-90deg); }
+    .orbit-item:nth-child(4) { transform: rotate(135deg) translate(180px) rotate(-135deg); }
+    .orbit-item:nth-child(5) { transform: rotate(180deg) translate(180px) rotate(-180deg); }
+    .orbit-item:nth-child(6) { transform: rotate(225deg) translate(180px) rotate(-225deg); }
+    .orbit-item:nth-child(7) { transform: rotate(270deg) translate(180px) rotate(-270deg); }
+    .orbit-item:nth-child(8) { transform: rotate(315deg) translate(180px) rotate(-315deg); }
+
+    /* Contrarrotación del texto interno para mantenerlo siempre horizontal */
     .orbit-item span {
       display: block;
-      animation: counterRotate 30s linear infinite;
+      animation: counterRotate 35s linear infinite;
     }
 
-    .orbital-container:hover .orbit-item span {
+    .orbital-wrapper:hover .orbit-item span {
       animation-play-state: paused;
     }
 
@@ -464,8 +474,6 @@
       font-family: var(--fuente-cuerpo);
       font-size: 0.85rem;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
     }
 
     .photo-placeholder:hover {
@@ -473,21 +481,12 @@
       border-color: var(--acento-dorado);
       background-color: var(--bg-secundario);
       transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.06);
     }
 
     .photo-placeholder .icon {
       font-size: 1.8rem;
       margin-bottom: 8px;
       color: var(--acento-dorado);
-      opacity: 0.7;
-    }
-
-    .photo-placeholder span {
-      font-weight: 600;
-      font-family: var(--fuente-titulo);
-      margin-top: 4px;
-      color: var(--texto-principal);
     }
 
     /* --- CONTENEDOR FOTO YUL.JPEG Y SECCIÓN CONTACTO --- */
@@ -553,7 +552,7 @@
       pointer-events: none;
     }
 
-    /* --- BOTÓN TRIANGULAR AZUL FIJO EN EL LATERAL DERECHO --- */
+    /* BOTÓN TRIANGULAR AZUL FIJO LATERAL DERECHO */
     .right-sidebar-blue-triangle {
       position: fixed;
       right: 0;
@@ -570,12 +569,11 @@
       padding: 0;
       outline: none;
       filter: drop-shadow(-3px 3px 6px rgba(0,0,0,0.25));
-      transition: transform 0.2s ease, filter 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
     .right-sidebar-blue-triangle:hover {
       transform: translateY(-50%) scale(1.12);
-      filter: drop-shadow(-4px 4px 10px rgba(43, 108, 176, 0.5));
     }
 
     .blue-triangle-icon {
@@ -613,7 +611,6 @@
     .form-group input:focus, .form-group textarea:focus {
       border-color: var(--acento-dorado);
       background-color: #ffffff;
-      box-shadow: 0 0 5px rgba(184, 134, 11, 0.2);
     }
 
     .btn-submit {
@@ -632,7 +629,7 @@
       background-color: var(--acento-dorado);
     }
 
-    /* --- MODAL ESTILO INSTAGRAM STORIES (FOTOS 44.jpg A 49.jpg) --- */
+    /* --- MODAL ESTILO INSTAGRAM STORIES --- */
     .gallery-modal {
       display: none;
       position: fixed;
@@ -656,14 +653,6 @@
       overflow: hidden;
       background-color: #000;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    }
-
-    @media (max-width: 480px) {
-      .story-carousel-container {
-        max-width: 100%;
-        height: 100vh;
-        border-radius: 0;
-      }
     }
 
     .story-progress-bar {
@@ -754,10 +743,8 @@
       z-index: 20;
       background: none;
       border: none;
-      font-family: sans-serif;
     }
 
-    /* Botón Estoy Enamoradx */
     .story-actions {
       position: absolute;
       bottom: 16px;
@@ -784,23 +771,9 @@
       transition: all 0.2s ease;
     }
 
-    .btn-enamore:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-
     .btn-enamore.active {
       background: rgba(225, 29, 72, 0.85);
       border-color: #e11d48;
-      color: #ffffff;
-    }
-
-    .heart-icon {
-      font-size: 0.95rem;
-      transition: transform 0.2s ease;
-    }
-
-    .btn-enamore.active .heart-icon {
-      transform: scale(1.2);
     }
 
     @keyframes fadeIn {
@@ -810,14 +783,8 @@
 
     /* --- RESPONSIVIDAD --- */
     @media (max-width: 900px) {
-      .contact-wrapper {
-        flex-direction: column;
-      }
-      .yul-image-container {
-        width: 100%;
-        max-width: 380px;
-        margin: 0 auto;
-      }
+      .contact-wrapper { flex-direction: column; }
+      .yul-image-container { width: 100%; max-width: 380px; margin: 0 auto; }
     }
 
     @media (max-width: 768px) {
@@ -828,13 +795,18 @@
       .bio-container { flex-direction: column; }
       .bio-image-wrapper { width: 100%; max-width: 280px; margin: 0 auto; }
       .hero-title { font-size: 2.2rem; }
-      .orbital-container { height: 360px; }
+      .orbital-wrapper { height: 360px; }
       .orbit-ring, .orbit-track { width: 260px; height: 260px; }
       .orbit-center { width: 110px; height: 110px; }
-      .orbit-item { width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; font-size: 0.65rem; }
-      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
-      .right-sidebar-blue-triangle { border-width: 22px 32px 22px 0; }
-      .blue-triangle-icon { right: -28px; font-size: 0.85rem; top: -7px; }
+      .orbit-item { width: 55px; height: 55px; margin-top: -27.5px; margin-left: -27.5px; font-size: 0.65rem; }
+      .orbit-item:nth-child(1) { transform: rotate(0deg) translate(130px) rotate(0deg); }
+      .orbit-item:nth-child(2) { transform: rotate(45deg) translate(130px) rotate(-45deg); }
+      .orbit-item:nth-child(3) { transform: rotate(90deg) translate(130px) rotate(-90deg); }
+      .orbit-item:nth-child(4) { transform: rotate(135deg) translate(130px) rotate(-135deg); }
+      .orbit-item:nth-child(5) { transform: rotate(180deg) translate(130px) rotate(-180deg); }
+      .orbit-item:nth-child(6) { transform: rotate(225deg) translate(130px) rotate(-225deg); }
+      .orbit-item:nth-child(7) { transform: rotate(270deg) translate(130px) rotate(-270deg); }
+      .orbit-item:nth-child(8) { transform: rotate(315deg) translate(130px) rotate(-315deg); }
     }
   </style>
 </head>
@@ -846,12 +818,12 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
   </header>
 
-  <!-- BOTÓN TRIANGULAR AZUL DE VÍDEOS (LATERAL DERECHO) -->
-  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" title="Abrir carrusel de vídeos">
+  <!-- BOTÓN TRIANGULAR AZUL DE VÍDEOS -->
+  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" title="Abrir vídeo carrusel">
     <span class="blue-triangle-icon">▶</span>
   </button>
 
-  <!-- BARRA LATERAL / NAVEGACIÓN -->
+  <!-- BARRA LATERAL -->
   <aside class="sidebar" id="sidebar">
     <div>
       <div class="brand">
@@ -903,19 +875,19 @@
   <!-- CONTENIDO PRINCIPAL -->
   <main class="main-content">
 
-    <!-- SECCIÓN INICIO / HERO -->
+    <!-- SECCIÓN INICIO / HERO CON CARRUSEL GIRATORIO -->
     <section id="inicio" class="hero">
       <h1 class="hero-title">Silvia Yulmaneli Moreno León</h1>
       <p class="hero-subtitle">Filósofa, Ensayista & Narradora</p>
       <p class="hero-text">
-        Espacio dedicado al pensamiento filosófico, la creación narrativa y la difusión de investigaciones culturales y proyectos editoriales.
+        Espacio dedicado al pensamiento filosófico, la creación narrativa y la difusión de investigaciones culturales.
       </p>
 
-      <!-- CARRUSEL ORBITAL ANIMADO -->
-      <div class="orbital-container" id="orbitalContainer">
+      <!-- CARRUSEL GIRATORIO / ORBITAL -->
+      <div class="orbital-wrapper">
         <div class="orbit-ring"></div>
         <div class="orbit-center"><span>Obras & Universos</span></div>
-        <div class="orbit-track" id="orbitTrack">
+        <div class="orbit-track">
           <a href="#libros" class="orbit-item"><span>Filosofía</span></a>
           <a href="#antologias" class="orbit-item"><span>Narrativa</span></a>
           <a href="#articulos" class="orbit-item"><span>Ensayos</span></a>
@@ -966,7 +938,7 @@
       </div>
       <div id="articulos" style="margin-top: 30px;">
         <h3 style="font-family: var(--fuente-titulo);">Ensayos & Artículos</h3>
-        <p style="color: var(--texto-suave);">Publicaciones en revistas como <em>Pérgola de Humo</em> y <em>Grafógrafxs</em>.</p>
+        <p style="color: var(--texto-suave);">Publicaciones en revistas como <em>Pergola de Humo</em> y <em>Grafógrafxs</em>.</p>
       </div>
     </section>
 
@@ -1017,7 +989,6 @@
         </form>
 
         <div class="yul-image-container">
-          <!-- BOTÓN TRIANGULAR CAFÉ PARA ABRIR HISTORIAS -->
           <button class="triangle-btn" id="openPhotoCarouselBtn" onclick="openStoryGallery()" title="Abrir historias">
             <span class="triangle-btn-icon">📷</span>
           </button>
@@ -1056,10 +1027,9 @@
         <div class="slide"><img src="49.jpg" alt="Fotografía 49"></div>
       </div>
 
-      <!-- Botón interactivo "Estoy enamoradx" -->
       <div class="story-actions">
         <button class="btn-enamore" id="btnEnamore" onclick="toggleEnamore()">
-          <span class="heart-icon">♥</span>
+          <span style="font-size:0.95rem;">♥</span>
           <span id="txtEnamore">Estoy enamoradx</span>
         </button>
       </div>
@@ -1067,7 +1037,7 @@
   </div>
 
   <script>
-    /* --- MENÚ LATERAL EN MÓVIL --- */
+    /* NAVEGACIÓN Y MENÚ MÓVIL */
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
 
@@ -1077,7 +1047,6 @@
       });
     }
 
-    /* --- DESPLEGABLE NAVEGACIÓN --- */
     document.querySelectorAll('.dropdown-btn').forEach(button => {
       button.addEventListener('click', () => {
         const dropdown = button.parentElement;
@@ -1085,7 +1054,6 @@
       });
     });
 
-    /* --- GALERÍA ACORDEÓN --- */
     const galleryAccordionBtn = document.getElementById('galleryAccordionBtn');
     const galleryAccordion = document.getElementById('galleryAccordion');
 
@@ -1095,7 +1063,7 @@
       });
     }
 
-    /* --- LÓGICA DE HISTORIAS EN MODAL --- */
+    /* HISTORIAS ESTILO INSTAGRAM */
     const storyModal = document.getElementById('storyModal');
     const slides = document.querySelectorAll('#storySlidesContainer .slide');
     const segments = document.querySelectorAll('#progressBarContainer .progress-segment');
