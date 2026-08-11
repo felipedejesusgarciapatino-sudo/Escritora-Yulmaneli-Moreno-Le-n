@@ -297,7 +297,6 @@
       font-weight: 600;
     }
 
-    /* Pista que gira 360 grados continuo */
     .orbit-track {
       position: absolute;
       width: 360px;
@@ -334,7 +333,6 @@
       transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     }
 
-    /* Posicionamiento en el círculo orbital */
     .orbit-item:nth-child(1) { transform: rotate(0deg) translate(180px) rotate(0deg); }
     .orbit-item:nth-child(2) { transform: rotate(45deg) translate(180px) rotate(-45deg); }
     .orbit-item:nth-child(3) { transform: rotate(90deg) translate(180px) rotate(-90deg); }
@@ -344,7 +342,6 @@
     .orbit-item:nth-child(7) { transform: rotate(270deg) translate(180px) rotate(-270deg); }
     .orbit-item:nth-child(8) { transform: rotate(315deg) translate(180px) rotate(-315deg); }
 
-    /* Contrarrotación del texto interno para mantenerlo siempre horizontal */
     .orbit-item span {
       display: block;
       animation: counterRotate 35s linear infinite;
@@ -629,6 +626,50 @@
       background-color: var(--acento-dorado);
     }
 
+    /* --- MODAL REPRODUCTOR YOUTUBE --- */
+    .youtube-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .youtube-modal.active {
+      display: flex;
+    }
+
+    .youtube-modal-container {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .youtube-modal-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .close-youtube-btn {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
     /* --- MODAL ESTILO INSTAGRAM STORIES --- */
     .gallery-modal {
       display: none;
@@ -818,10 +859,18 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menú">☰</button>
   </header>
 
-  <!-- BOTÓN TRIANGULAR AZUL DE VÍDEOS -->
-  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" title="Abrir vídeo carrusel">
-    <span class="blue-triangle-icon">▶</span>
+  <!-- BOTÓN TRIANGULAR AZUL CON CONTROL PARA YOUTUBE -->
+  <button class="right-sidebar-blue-triangle" id="openVideoCarouselBtn" onclick="openYoutubeModal()" title="Reproducir 'Wivenhoe Bells (II)' - The Cleaners from Venus">
+    <span class="blue-triangle-icon" id="blueTriangleIcon">▶</span>
   </button>
+
+  <!-- MODAL DE REPRODUCTOR DE YOUTUBE -->
+  <div class="youtube-modal" id="youtubeModal">
+    <div class="youtube-modal-container">
+      <button class="close-youtube-btn" onclick="closeYoutubeModal()">&times;</button>
+      <iframe id="youtubeIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
 
   <!-- BARRA LATERAL -->
   <aside class="sidebar" id="sidebar">
@@ -1063,78 +1112,70 @@
       });
     }
 
-    /* HISTORIAS ESTILO INSTAGRAM */
-    const storyModal = document.getElementById('storyModal');
+    /* REPRODUCTOR YOUTUBE EN BOTÓN TRIANGULAR AZUL */
+    const youtubeModal = document.getElementById('youtubeModal');
+    const youtubeIframe = document.getElementById('youtubeIframe');
+
+    function openYoutubeModal() {
+      if (youtubeModal && youtubeIframe) {
+        youtubeIframe.src = "https://www.youtube.com/embed/MAvEHIX-4ic?autoplay=1";
+        youtubeModal.classList.add('active');
+      }
+    }
+
+    function closeYoutubeModal() {
+      if (youtubeModal && youtubeIframe) {
+        youtubeIframe.src = "";
+        youtubeModal.classList.remove('active');
+      }
+    }
+
+    /* HISTORIAS Y MODAL GALERÍA */
+    let currentSlide = 0;
     const slides = document.querySelectorAll('#storySlidesContainer .slide');
     const segments = document.querySelectorAll('#progressBarContainer .progress-segment');
-    const btnEnamore = document.getElementById('btnEnamore');
-    const txtEnamore = document.getElementById('txtEnamore');
-
-    let currentStoryIndex = 0;
-    let storyTimer = null;
-    const storyDuration = 4000;
+    const storyModal = document.getElementById('storyModal');
 
     function openStoryGallery() {
-      storyModal.classList.add('active');
-      showStorySlide(0);
+      if (storyModal) {
+        storyModal.classList.add('active');
+        showSlide(0);
+      }
     }
 
     function closeStoryGallery() {
-      storyModal.classList.remove('active');
-      if (storyTimer) clearInterval(storyTimer);
+      if (storyModal) {
+        storyModal.classList.remove('active');
+      }
     }
 
-    function showStorySlide(index) {
+    function showSlide(index) {
+      if (index >= slides.length) index = 0;
+      if (index < 0) index = slides.length - 1;
+      
+      currentSlide = index;
+
       slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+        slide.classList.toggle('active', i === currentSlide);
       });
 
       segments.forEach((segment, i) => {
-        const fill = segment.querySelector('.progress-segment-fill');
-        if (i < index) {
-          segment.classList.remove('active');
-          fill.style.transition = 'none';
-          fill.style.width = '100%';
-        } else if (i === index) {
-          segment.classList.add('active');
-          fill.style.transition = 'none';
-          fill.style.width = '0%';
-          setTimeout(() => {
-            fill.style.transition = `width ${storyDuration}ms linear`;
-            fill.style.width = '100%';
-          }, 20);
-        } else {
-          segment.classList.remove('active');
-          fill.style.transition = 'none';
-          fill.style.width = '0%';
-        }
+        segment.classList.toggle('active', i <= currentSlide);
       });
-
-      currentStoryIndex = index;
-      resetStoryAutoPlay();
     }
 
     function nextStorySlide() {
-      let nextIndex = (currentStoryIndex + 1) % slides.length;
-      showStorySlide(nextIndex);
+      showSlide(currentSlide + 1);
     }
 
     function prevStorySlide() {
-      let prevIndex = (currentStoryIndex - 1 + slides.length) % slides.length;
-      showStorySlide(prevIndex);
-    }
-
-    function resetStoryAutoPlay() {
-      if (storyTimer) clearInterval(storyTimer);
-      storyTimer = setInterval(nextStorySlide, storyDuration);
+      showSlide(currentSlide - 1);
     }
 
     function toggleEnamore() {
-      btnEnamore.classList.toggle('active');
-      if (btnEnamore.classList.contains('active')) {
-        txtEnamore.textContent = "Enamoradx";
-      } else {
-        txtEnamore.textContent = "Estoy enamoradx";
+      const btn = document.getElementById('btnEnamore');
+      if (btn) {
+        btn.classList.toggle('active');
       }
     }
   </script>
