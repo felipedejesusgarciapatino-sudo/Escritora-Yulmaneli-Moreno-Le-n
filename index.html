@@ -542,6 +542,25 @@
       border-color: var(--acento-dorado);
       background-color: #ffffff;
     }
+
+    .form-group input[type="file"] {
+      padding: 10px;
+      border: 1px dashed var(--borde-dorado);
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group input[type="file"]:hover {
+      border-color: var(--acento-dorado);
+      background-color: #ffffff;
+    }
+    .form-group small {
+      display: block;
+      color: var(--texto-suave);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
     .btn-submit {
       padding: 12px 25px;
       background-color: var(--texto-principal);
@@ -583,7 +602,6 @@
       border: none;
     }
 
-    /* BOTÓN CERRAR - Fijo en la parte superior de la pantalla */
     .close-youtube-btn {
       position: fixed;
       top: 20px;
@@ -604,7 +622,7 @@
       background: rgba(255, 255, 255, 0.35);
     }
 
-    /* --- MODAL STORIES (tipo Instagram) --- */
+    /* --- MODAL STORIES --- */
     .gallery-modal {
       display: none;
       position: fixed;
@@ -773,7 +791,7 @@
       .orbit-item:nth-child(2) { transform: rotate(45deg) translate(130px) rotate(-45deg); }
       .orbit-item:nth-child(3) { transform: rotate(90deg) translate(130px) rotate(-90deg); }
       .orbit-item:nth-child(4) { transform: rotate(135deg) translate(130px) rotate(-135deg); }
-      .orbit-item:nth-child(5) { transform: rotate(180deg) translate(130px) rotate(-180deg); }
+      .orbit-item:nth-child(5) { transform: rotate(180deg) translate(180px) rotate(-180deg); }
       .orbit-item:nth-child(6) { transform: rotate(225deg) translate(130px) rotate(-225deg); }
       .orbit-item:nth-child(7) { transform: rotate(270deg) translate(130px) rotate(-270deg); }
       .orbit-item:nth-child(8) { transform: rotate(315deg) translate(130px) rotate(-315deg); }
@@ -796,9 +814,7 @@
 
   <!-- MODAL YOUTUBE -->
   <div class="youtube-modal" id="youtubeModal">
-    <!-- Botón Cerrar fijo en la parte superior de la pantalla -->
     <button class="close-youtube-btn" onclick="closeYoutubeModal()">Cerrar</button>
-    
     <div class="youtube-modal-container">
       <iframe id="youtubeIframe" src="" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
@@ -857,7 +873,6 @@
         Espacio dedicado al pensamiento filosófico, la creación narrativa y la difusión de investigaciones culturales.
       </p>
 
-      <!-- CARRUSEL ORBITAL -->
       <div class="orbital-wrapper">
         <div class="orbit-ring"></div>
 
@@ -958,23 +973,46 @@
       </div>
     </section>
 
+    <!-- SECCIÓN CONTACTO CON FORMSUBMIT + ARCHIVO ADJUNTO -->
     <section id="contacto">
       <h2 class="section-title">Contacto</h2>
-      <p style="margin-bottom: 25px; color: var(--texto-suave);">Para ponencias, invitaciones a congresos o colaboraciones:</p>
+      <p style="margin-bottom: 25px; color: var(--texto-suave);">
+        Para ponencias, invitaciones a congresos o colaboraciones:
+      </p>
+
       <div class="contact-wrapper">
-        <form class="contact-form" action="#" method="POST">
+        <form class="contact-form" 
+              action="https://formsubmit.co/syulmanelimorenoleon@gmail.com" 
+              method="POST" 
+              enctype="multipart/form-data">
+
+          <!-- Configuración de FormSubmit -->
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde el sitio web de Silvia Yulmaneli">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
           <div class="form-group">
             <label for="nombre">Nombre Completo</label>
             <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
           </div>
+
           <div class="form-group">
             <label for="email">Correo Electrónico</label>
             <input type="email" id="email" name="email" required placeholder="tu@email.com">
           </div>
+
           <div class="form-group">
             <label for="mensaje">Mensaje</label>
             <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
           </div>
+
+          <!-- Campo para adjuntar cualquier tipo de archivo -->
+          <div class="form-group">
+            <label for="archivo">Adjuntar archivo (opcional)</label>
+            <input type="file" id="archivo" name="attachment" accept="*/*">
+            <small>Puedes adjuntar cualquier tipo de archivo (PDF, Word, imágenes, etc.)</small>
+          </div>
+
           <button type="submit" class="btn-submit">Enviar Mensaje</button>
         </form>
       </div>
