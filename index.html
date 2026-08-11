@@ -555,7 +555,7 @@
     }
     .btn-submit:hover { background-color: var(--acento-dorado); }
 
-    /* --- MODAL YOUTUBE (con botón Cerrar para todos los videos) --- */
+    /* --- MODAL YOUTUBE --- */
     .youtube-modal {
       display: none;
       position: fixed;
@@ -583,21 +583,22 @@
       border: none;
     }
 
+    /* BOTÓN CERRAR - Fijo en la parte superior de la pantalla */
     .close-youtube-btn {
-      position: absolute;
-      top: -52px;
-      right: 0;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      color: #fff;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff;
       font-size: 16px;
       font-family: var(--fuente-titulo);
-      padding: 9px 22px;
+      padding: 10px 22px;
       border-radius: 6px;
       cursor: pointer;
       outline: none;
       transition: background 0.25s ease;
-      z-index: 10;
+      z-index: 10001;
     }
     .close-youtube-btn:hover {
       background: rgba(255, 255, 255, 0.35);
@@ -793,10 +794,12 @@
     <span class="blue-triangle-icon">▶</span>
   </button>
 
-  <!-- MODAL YOUTUBE (botón Cerrar para TODOS los videos) -->
+  <!-- MODAL YOUTUBE -->
   <div class="youtube-modal" id="youtubeModal">
+    <!-- Botón Cerrar fijo en la parte superior de la pantalla -->
+    <button class="close-youtube-btn" onclick="closeYoutubeModal()">Cerrar</button>
+    
     <div class="youtube-modal-container">
-      <button class="close-youtube-btn" onclick="closeYoutubeModal()">Cerrar</button>
       <iframe id="youtubeIframe" src="" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
@@ -858,7 +861,6 @@
       <div class="orbital-wrapper">
         <div class="orbit-ring"></div>
 
-        <!-- BOTÓN CENTRAL CON IMAGEN DEL VIDEO -->
         <button class="orbit-center" onclick="openYoutubeModal('E8DdgVhxXZQ', 1243)" title="Ver video" aria-label="Abrir video">
           <img src="https://img.youtube.com/vi/E8DdgVhxXZQ/hqdefault.jpg" alt="Video">
           <div class="orbit-center-overlay">▶</div>
@@ -940,7 +942,6 @@
           </div>
         </div>
 
-        <!-- BOTÓN PARA ABRIR EL CARRUSEL TIPO INSTAGRAM -->
         <button class="btn-stories" onclick="openStoryGallery()">
           Ver Historias (Carrusel tipo Instagram)
         </button>
@@ -980,7 +981,7 @@
     </section>
   </main>
 
-  <!-- MODAL CARRUSEL TIPO INSTAGRAM (restaurado) -->
+  <!-- MODAL CARRUSEL TIPO INSTAGRAM -->
   <div class="gallery-modal" id="storyModal">
     <div class="story-carousel-container">
       <button class="close-btn" onclick="closeStoryGallery()">&times;</button>
@@ -1056,7 +1057,7 @@
       });
     }
 
-    /* MODAL YOUTUBE - Botón Cerrar para TODOS los videos */
+    /* MODAL YOUTUBE */
     const youtubeModal = document.getElementById('youtubeModal');
     const youtubeIframe = document.getElementById('youtubeIframe');
 
@@ -1087,7 +1088,7 @@
       }
     });
 
-    /* CARRUSEL TIPO INSTAGRAM (restaurado) */
+    /* CARRUSEL TIPO INSTAGRAM */
     const storyModal = document.getElementById('storyModal');
     const slides = document.querySelectorAll('#storySlidesContainer .slide');
     const progressFills = document.querySelectorAll('.progress-segment-fill');
