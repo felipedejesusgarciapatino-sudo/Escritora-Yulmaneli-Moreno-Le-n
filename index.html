@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yulmaneli Moreno León - Sitio Oficial</title>
+  <title>Silvia Yulmaneli Moreno León</title>
   <style>
-    /* Global Styles */
     :root {
-      --bg-color: #0f0f11;
-      --card-bg: #18181c;
-      --text-primary: #f0f0f2;
-      --text-secondary: #a0a0aa;
-      --accent-color: #d4af37; /* Elegant gold accent */
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --bg-color: #0a0a0c;
+      --card-bg: #141418;
+      --accent: #c5a059;
+      --text: #e1e1e6;
+      --text-muted: #a0a0b0;
     }
 
     * {
@@ -23,102 +21,131 @@
 
     body {
       background-color: var(--bg-color);
-      color: var(--text-primary);
-      font-family: var(--font-main);
-      line-height: 1.6;
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.7;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
     }
 
     header {
       text-align: center;
-      margin-bottom: 30px;
+      padding: 40px 0;
     }
 
     h1 {
-      font-size: 2rem;
-      font-weight: 300;
+      font-size: 2.2rem;
+      font-weight: normal;
       letter-spacing: 2px;
-      color: var(--text-primary);
+      color: var(--text);
     }
 
-    .subtitle {
-      color: var(--accent-color);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 5px;
-    }
-
-    /* Container layout */
-    .content-wrapper {
-      width: 100%;
-      max-width: 900px;
+    nav {
+      margin-top: 20px;
       display: flex;
-      flex-direction: column;
-      gap: 40px;
-      align-items: center;
-    }
-
-    /* Bio Section */
-    .bio-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
       gap: 20px;
-      background: var(--card-bg);
-      padding: 24px;
-      border-radius: 12px;
-      width: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .bio-image {
-      width: 140px;
-      height: 140px;
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .bio-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 30px;
+      margin: 30px 0;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .bio-card img {
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--accent-color);
+      border: 1px solid var(--accent);
     }
 
-    .bio-text {
-      text-align: center;
-      color: var(--text-secondary);
+    .bio-card p {
+      color: var(--text-muted);
       font-size: 0.95rem;
-      max-width: 600px;
     }
 
-    /* Yulma's Photo Carousel - Subtle Instagram Story Style */
-    .carousel-section {
+    /* Elemento decorativo yul.jpeg con botón triangular */
+    .decor-container {
+      position: relative;
+      display: inline-block;
+      margin: 40px auto;
+      text-align: center;
       width: 100%;
-      display: flex;
-      flex-direction: column;
+    }
+
+    .decor-image {
+      max-width: 250px;
+      border-radius: 8px;
+    }
+
+    .btn-triangle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 25px solid var(--accent);
+      cursor: pointer;
+      background: none;
+      border-right: none;
+      transition: transform 0.2s;
+    }
+
+    .btn-triangle:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    /* MODAL DE GALERÍA (Estilo Instagram Story) */
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
       align-items: center;
     }
 
-    .carousel-title {
-      font-size: 1.1rem;
-      font-weight: 400;
-      margin-bottom: 15px;
-      color: var(--text-primary);
-      letter-spacing: 1px;
+    .gallery-modal.active {
+      display: flex;
     }
 
-    .yulma-carousel-container {
+    .story-carousel-container {
       position: relative;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       aspect-ratio: 9 / 16;
       border-radius: 16px;
       overflow: hidden;
       background-color: #000;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
 
-    /* Story Progress Bar */
     .story-progress-bar {
       position: absolute;
       top: 12px;
@@ -148,7 +175,6 @@
       width: 100%;
     }
 
-    /* Overlay gradient for subtle depth */
     .story-overlay {
       position: absolute;
       inset: 0;
@@ -163,7 +189,6 @@
       z-index: 2;
     }
 
-    /* Slide Images */
     .story-slides {
       width: 100%;
       height: 100%;
@@ -174,7 +199,7 @@
       position: absolute;
       inset: 0;
       opacity: 0;
-      transition: opacity 0.4s ease-in-out;
+      transition: opacity 0.3s ease;
     }
 
     .slide.active {
@@ -185,11 +210,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    /* Touch / Click Navigation Regions */
-    .nav-region {
+    .nav-left, .nav-right {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -198,113 +221,107 @@
       cursor: pointer;
     }
 
-    .nav-left {
-      left: 0;
-    }
+    .nav-left { left: 0; }
+    .nav-right { right: 0; }
 
-    .nav-right {
-      right: 0;
-    }
-
-    /* Bottom Decorative element */
-    .floating-decor {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      border: 1px solid var(--accent-color);
-      opacity: 0.85;
-      transition: opacity 0.3s ease;
-    }
-
-    .floating-decor:hover {
-      opacity: 1;
-    }
-
-    .floating-decor img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 20;
+      background: none;
+      border: none;
+      font-family: sans-serif;
     }
 
     footer {
-      margin-top: 50px;
       text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.8rem;
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Yulmaneli Moreno León</h1>
-    <div class="subtitle">Escritora &amp; Creadora</div>
+    <h1>Silvia Yulmaneli Moreno León</h1>
+    <nav>
+      <a href="#biografia">Biografía</a>
+      <a href="#obras">Obras</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
-  <div class="content-wrapper">
-    <!-- Bio Section -->
-    <section class="bio-section">
-      <img src="yu.jpeg" alt="Yulmaneli Moreno León" class="bio-image">
-      <p class="bio-text">
-        Espacio oficial de Yulmaneli Moreno León. Muestra de obra literaria, proyectos creativos y archivo visual personal.
+  <div class="container">
+    <section id="biografia" class="bio-card">
+      <img src="yu.jpeg" alt="Yulmaneli Moreno León">
+      <p>
+        Semblanza y trayectoria de Silvia Yulmaneli Moreno León. Espacio de difusión de sus trabajos literarios, producciones y proyectos de creación artística.
       </p>
     </section>
 
-    <!-- Photos Carousel (Instagram Story Inspired Style) -->
-    <section class="carousel-section">
-      <h2 class="carousel-title">Galería Visual</h2>
-      
-      <div class="yulma-carousel-container" id="yulmaCarousel">
-        <!-- Story Indicators -->
-        <div class="story-progress-bar">
-          <div class="progress-segment active"><div class="progress-segment-fill"></div></div>
-          <div class="progress-segment"><div class="progress-segment-fill"></div></div>
-          <div class="progress-segment"><div class="progress-segment-fill"></div></div>
-        </div>
-
-        <!-- Subtle Top/Bottom Gradient -->
-        <div class="story-overlay"></div>
-
-        <!-- Navigation Hitboxes -->
-        <div class="nav-region nav-left" onclick="prevSlide()"></div>
-        <div class="nav-region nav-right" onclick="nextSlide()"></div>
-
-        <!-- Carousel Slides -->
-        <div class="story-slides">
-          <div class="slide active">
-            <img src="yu.jpeg" alt="Yulma - Fotografía 1">
-          </div>
-          <div class="slide">
-            <img src="Code_Generated_Image.jpg" alt="Yulma - Fotografía 2">
-          </div>
-          <div class="slide">
-            <img src="yul.jpeg" alt="Yulma - Fotografía 3">
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Elemento decorativo yul.jpeg con botón para abrir la galería -->
+    <div class="decor-container" id="contacto">
+      <img src="yul.jpeg" alt="Decorativo Yulma" class="decor-image">
+      <button class="btn-triangle" onclick="openGallery()" title="Abrir Galería"></button>
+    </div>
   </div>
 
-  <!-- Decorative Overlay Image -->
-  <div class="floating-decor">
-    <img src="yul.jpeg" alt="Elemento decorativo">
+  <!-- Modal Galería con Estilo Stories de Instagram -->
+  <div class="gallery-modal" id="galleryModal">
+    <div class="story-carousel-container" id="storyCarousel">
+      <button class="close-btn" onclick="closeGallery()">&times;</button>
+      
+      <div class="story-progress-bar">
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+        <div class="progress-segment"><div class="progress-segment-fill"></div></div>
+      </div>
+
+      <div class="story-overlay"></div>
+
+      <div class="nav-left" onclick="prevSlide()"></div>
+      <div class="nav-right" onclick="nextSlide()"></div>
+
+      <div class="story-slides">
+        <div class="slide active">
+          <img src="yu.jpeg" alt="Fotografía 1">
+        </div>
+        <div class="slide">
+          <img src="Code_Generated_Image.jpg" alt="Fotografía 2">
+        </div>
+        <div class="slide">
+          <img src="yul.jpeg" alt="Fotografía 3">
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>
-    <p>&copy; Yulmaneli Moreno León. Todos los derechos reservados.</p>
+    <p>&copy; Silvia Yulmaneli Moreno León. Todos los derechos reservados.</p>
   </footer>
 
   <script>
-    const slides = document.querySelectorAll('#yulmaCarousel .slide');
-    const segments = document.querySelectorAll('#yulmaCarousel .progress-segment');
+    const modal = document.getElementById('galleryModal');
+    const slides = document.querySelectorAll('#storyCarousel .slide');
+    const segments = document.querySelectorAll('#storyCarousel .progress-segment');
     let currentIndex = 0;
     let timer = null;
-    const slideDuration = 4000; // 4 seconds per slide
+    const slideDuration = 4000;
+
+    function openGallery() {
+      modal.classList.add('active');
+      showSlide(0);
+    }
+
+    function closeGallery() {
+      modal.classList.remove('active');
+      if (timer) clearInterval(timer);
+    }
 
     function showSlide(index) {
       slides.forEach((slide, i) => {
@@ -350,9 +367,6 @@
       if (timer) clearInterval(timer);
       timer = setInterval(nextSlide, slideDuration);
     }
-
-    // Initialize carousel on load
-    showSlide(0);
   </script>
 </body>
 </html>
